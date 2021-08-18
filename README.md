@@ -1,2 +1,2 @@
-# tp_ioo_grupo_6
+# Trabjo practico
 Trabajo practico IOO
