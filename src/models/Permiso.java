@@ -9,9 +9,11 @@ public class Permiso extends Base {
         this.acciones = acciones;
     }
 
-    @Override
-    public void update() {}
+    public Boolean update() {
+        return super.update();
+    }
 
-    @Override
-    public void delete() {}
+    public Boolean delete() {
+        return super.delete();
+    }
 }

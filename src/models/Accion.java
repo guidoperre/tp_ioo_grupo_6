@@ -11,14 +11,12 @@ public class Accion extends Base {
     }
     private List<permiso> permisos;
 
-    public Accion(int codigo, List<permiso> permisos) {
-        this.codigo = codigo;
-        this.permisos = permisos;
+
+    public Boolean update() {
+        return super.update();
     }
 
-    @Override
-    public void update() {}
-
-    @Override
-    public void delete() {}
+    public Boolean delete() {
+        return super.delete();
+    }
 }

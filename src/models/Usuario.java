@@ -21,9 +21,11 @@ public class Usuario extends Persona {
         this.rol = rol;
     }
 
-    @Override
-    public void update() {}
+    public Boolean update() {
+        return super.update();
+    }
 
-    @Override
-    public void delete() {}
+    public Boolean delete() {
+        return super.delete();
+    }
 }

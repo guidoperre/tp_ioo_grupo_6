@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sucursal extends Base {
@@ -13,10 +14,43 @@ public class Sucursal extends Base {
         this.peticiones = peticiones;
     }
 
+    public Boolean update() {
+        return super.update();
+    }
 
-    @Override
-    public void update() {}
+    public Boolean delete(Sucursal destino) {
+        if (this.getPeticionesFinalizadas().size() > 0)
+            return false;
+        this.transferirPeticiones(destino);
+        return super.delete();
+    }
 
-    @Override
-    public void delete() {}
+    public void agregarPeticion(Peticion peticion) {
+        this.peticiones.add(peticion);
+    }
+
+    private void transferirPeticiones(Sucursal destino) {
+        for (Peticion peticion: this.peticiones) {
+            if (peticion.isActiva())
+                destino.agregarPeticion(peticion);
+        }
+    }
+
+    private List<Peticion> getPeticionesFinalizadas() {
+        List<Peticion> peticiones = new ArrayList<>();
+        for (Peticion peticion: this.peticiones) {
+            if (!peticion.isActiva())
+                peticiones.add(peticion);
+        }
+        return peticiones;
+    }
+
+    public List<Peticion> getPeticionesCriticas() {
+        List<Peticion> peticiones = new ArrayList<>();
+        for (Peticion peticion: this.peticiones) {
+            if (peticion.isCritica())
+                peticiones.add(peticion);
+        }
+        return peticiones;
+    }
 }

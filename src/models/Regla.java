@@ -19,9 +19,38 @@ public class Regla extends Base {
         this.operador = operador;
     }
 
-    @Override
-    public void update() {}
+    public Boolean update() {
+        return super.update();
+    }
 
-    @Override
-    public void delete() {}
+    public Boolean delete() {
+        return super.delete();
+    }
+
+    public Boolean isValorCritico(float valor) {
+        switch (this.operador) {
+            case mayorigual -> {
+                if (this.max >= valor)
+                    return true;
+            } case mayor -> {
+                if (this.max > valor)
+                    return true;
+            } case menorigual -> {
+                if (this.min <= valor)
+                    return true;
+            } case menor -> {
+                if (this.min < valor)
+                    return true;
+            } case igual -> {
+                if (this.min == valor && this.max == valor)
+                    return true;
+            } case entre -> {
+                if (this.min >= valor && this.max <= valor)
+                    return true;
+            } default -> {
+                return false;
+            }
+        }
+        return false;
+    }
 }

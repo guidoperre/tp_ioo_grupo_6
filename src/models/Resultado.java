@@ -7,15 +7,30 @@ public class Resultado extends Base {
         finalizada
     }
     private estadoEnum estado;
+    private int codigoPractica;
 
     public Resultado(float valor, estadoEnum estado) {
         this.valor = valor;
         this.estado = estado;
     }
 
-    @Override
-    public void update() {}
+    public Boolean update() {
+        return super.update();
+    }
 
-    @Override
-    public void delete() {}
+    public Boolean delete() {
+        return super.delete();
+    }
+
+    public Boolean isActivo () {
+        return this.estado != estadoEnum.finalizada;
+    }
+
+    public float getValor() {
+        return valor;
+    }
+
+    public int getCodigoPractica() {
+        return codigoPractica;
+    }
 }

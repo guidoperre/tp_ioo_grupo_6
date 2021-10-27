@@ -17,9 +17,24 @@ public class Practica extends Base {
         this.valoresReservados = valoresReservados;
     }
 
-    @Override
-    public void update() {}
+    public Boolean update() {
+        return super.update();
+    }
 
-    @Override
-    public void delete() {}
+    public Boolean delete() {
+        return super.delete();
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public Boolean isValorCritico(float valor) {
+        Boolean critico = false;
+        for (Regla regla: this.valoresCriticos) {
+            if (regla.isValorCritico(valor))
+                critico = true;
+        }
+        return critico;
+    }
 }

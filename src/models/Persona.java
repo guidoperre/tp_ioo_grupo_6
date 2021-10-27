@@ -13,9 +13,15 @@ public class Persona extends Base {
         this.mail = mail;
     }
 
-    @Override
-    public void update() {}
+    public boolean update(String nombre, int dni, String domicilio, String mail) {
+        this.nombre = nombre;
+        this.dni = dni;
+        this.domicilio = domicilio;
+        this.mail = mail;
+        return super.update();
+    }
 
-    @Override
-    public void delete() {}
+    public Boolean delete() {
+        return super.delete();
+    }
 }

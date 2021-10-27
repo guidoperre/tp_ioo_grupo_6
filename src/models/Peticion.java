@@ -18,11 +18,41 @@ public class Peticion extends Base {
         this.fechaEntrega = fechaEntrega;
         this.practicas = practicas;
         this.resultados = resultados;
+        this.paciente.agregarPeticion(this);
     }
 
-    @Override
-    public void update() {}
+    public Boolean update() {
+        return super.update();
+    }
 
-    @Override
-    public void delete() {}
+    public Boolean delete() {
+        return super.delete();
+    }
+    
+    public Boolean isActiva() {
+        Boolean activa = false;
+        for (Resultado resultado: this.resultados) {
+            if (resultado.isActivo())
+                activa = true;
+        }
+        return activa;
+    }
+
+    private Practica getPratica(int codigo) {
+        for (Practica practica: this.practicas) {
+            if (practica.getCodigo() == codigo)
+                return practica;
+        }
+        return this.practicas.get(0);
+    }
+
+    public Boolean isCritica() {
+        Boolean critico = false;
+        for (Resultado resultado: this.resultados) {
+            if (this.getPratica(resultado.getCodigoPractica()).isValorCritico(resultado.getValor()))
+                critico = true;
+        }
+        return critico;
+    }
+
 }
