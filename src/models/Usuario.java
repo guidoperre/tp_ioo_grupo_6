@@ -28,4 +28,16 @@ public class Usuario extends Persona {
     public Boolean delete() {
         return super.delete();
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public rolEnum getRol() {
+        return rol;
+    }
 }
