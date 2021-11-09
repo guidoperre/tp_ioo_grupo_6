@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Login">
+  <grid id="27dc6" binding="panel" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="230" y="20" width="1280" height="800"/>
+    </constraints>
+    <properties>
+      <autoscrolls value="false"/>
+      <background color="-1"/>
+      <maximumSize width="1280" height="800"/>
+      <minimumSize width="1280" height="800"/>
+      <opaque value="true"/>
+      <preferredSize width="1280" height="800"/>
+    </properties>
+    <border type="none">
+      <color color="-4473925"/>
+    </border>
+    <children>
+      <grid id="6e765" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <maximumSize width="128" height="128"/>
+          <minimumSize width="128" height="128"/>
+          <opaque value="false"/>
+          <preferredSize width="128" height="128"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="beb76" class="javax.swing.JLabel" binding="imageLabel" custom-create="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="5fb9d" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="48" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <opaque value="false"/>
+          <preferredSize width="367" height="37"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="1e29a" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Quicksand" size="26" style="0"/>
+              <foreground color="-16777216"/>
+              <inheritsPopupMenu value="true"/>
+              <opaque value="false"/>
+              <requestFocusEnabled value="false"/>
+              <text value="Bienvenido a Medicina Binaria"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="68212" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="32" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <opaque value="false"/>
+          <preferredSize width="404" height="72"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="7458b" class="javax.swing.JTextField" binding="usernameEt">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="400" height="40"/>
+                <preferred-size width="400" height="40"/>
+                <maximum-size width="400" height="40"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <opaque value="false"/>
+              <preferredSize width="400" height="40"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="3c7c2" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Quicksand" size="18" style="0"/>
+              <foreground color="-16777216"/>
+              <labelFor value="7458b"/>
+              <text value="Usuario"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="d44f8" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="32" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <opaque value="false"/>
+          <preferredSize width="404" height="78"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="5037b" class="javax.swing.JPasswordField" binding="passwordEt">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="400" height="40"/>
+                <preferred-size width="400" height="40"/>
+                <maximum-size width="400" height="40"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <columns value="0"/>
+              <opaque value="false"/>
+              <preferredSize width="400" height="40"/>
+            </properties>
+          </component>
+          <component id="5700f" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Quicksand" size="18" style="0"/>
+              <foreground color="-16777216"/>
+              <text value="Contraseña"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="300ea" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="48" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <opaque value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="397cd" class="javax.swing.JButton" binding="iniciarBtn">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="true"/>
+              <font name="Quicksand" size="22" style="0"/>
+              <foreground color="-1"/>
+              <hideActionText value="false"/>
+              <maximumSize width="400" height="40"/>
+              <opaque value="true"/>
+              <preferredSize width="400" height="40"/>
+              <text value="Iniciar sesión"/>
+              <verticalAlignment value="0"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
