@@ -1,6 +1,3 @@
-import com.sun.scenario.effect.DropShadow;
-import javafx.scene.paint.Color;
-
 import javax.swing.*;
 
 public class Home {
