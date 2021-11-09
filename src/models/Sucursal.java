@@ -7,11 +7,14 @@ public class Sucursal extends Base {
     private String direccion;
     private Usuario responsable;
     private List<Peticion> peticiones;
+    private List<Sucursal> sucursales;
 
     public Sucursal(String direccion, Usuario responsable, List<Peticion> peticiones) {
+        super();
         this.direccion = direccion;
         this.responsable = responsable;
         this.peticiones = peticiones;
+        this.sucursales.add(this);
     }
 
     public Boolean update() {
@@ -22,6 +25,7 @@ public class Sucursal extends Base {
         if (this.getPeticionesFinalizadas().size() > 0)
             return false;
         this.transferirPeticiones(destino);
+        this.deleteSucursalPorId(this.getId());
         return super.delete();
     }
 
@@ -52,5 +56,17 @@ public class Sucursal extends Base {
                 peticiones.add(peticion);
         }
         return peticiones;
+    }
+
+    public Sucursal deleteSucursalPorId(Integer id) {
+        for (Sucursal sucursal: new ArrayList<Sucursal>(sucursales)) {
+            if (sucursal.getId() == id)
+                sucursales.remove(sucursal);
+        }
+        return null;
+    }
+
+    public List<Sucursal> getSucursales() {
+        return sucursales;
     }
 }

@@ -10,6 +10,7 @@ public class Resultado extends Base {
     private int codigoPractica;
 
     public Resultado(float valor, estadoEnum estado) {
+        super();
         this.valor = valor;
         this.estado = estado;
     }

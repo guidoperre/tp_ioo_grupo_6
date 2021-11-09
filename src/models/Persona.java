@@ -7,6 +7,7 @@ public class Persona extends Base {
     private String mail;
 
     public Persona(String nombre, int dni, String domicilio, String mail) {
+        super();
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;

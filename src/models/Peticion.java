@@ -12,6 +12,7 @@ public class Peticion extends Base {
     private List<Resultado> resultados;
 
     public Peticion(Paciente paciente, String obraSocial, Date fechaCarga, Date fechaEntrega, List<Practica> practicas, List<Resultado> resultados) {
+        super();
         this.paciente = paciente;
         this.obraSocial = obraSocial;
         this.fechaCarga = fechaCarga;

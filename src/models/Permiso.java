@@ -6,6 +6,7 @@ public class Permiso extends Base {
     private List<Accion> acciones;
 
     public Permiso(List<Accion> acciones) {
+        super();
         this.acciones = acciones;
     }
 

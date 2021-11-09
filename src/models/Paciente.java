@@ -11,11 +11,13 @@ public class Paciente extends Persona {
     }
     private sexoEnum sexo;
     private List<Peticion> peticiones;
+    private List<Paciente> pacientes;
 
     public Paciente(String nombre, int dni, String domicilio, String mail, int edad, sexoEnum sexo) {
         super(nombre, dni, domicilio, mail);
         this.edad = edad;
         this.sexo = sexo;
+        this.pacientes.add(this);
     }
 
     public boolean update(String nombre, int dni, String domicilio, String mail, int edad, sexoEnum sexo) {
@@ -27,6 +29,7 @@ public class Paciente extends Persona {
     public Boolean delete() {
         if (this.getPeticionesFinalizadas().size() > 0)
             return false;
+        this.deletePacientePorId(this.getId());
         return super.delete();
     }
 
@@ -41,5 +44,17 @@ public class Paciente extends Persona {
                 peticiones.add(peticion);
         }
         return peticiones;
+    }
+
+    public Paciente deletePacientePorId(Integer id) {
+        for (Paciente paciente: new ArrayList<Paciente>(pacientes)) {
+            if (paciente.getId() == id)
+                pacientes.remove(paciente);
+        }
+        return null;
+    }
+
+    public List<Paciente> getPacientes() {
+        return pacientes;
     }
 }

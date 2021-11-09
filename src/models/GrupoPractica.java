@@ -7,6 +7,7 @@ public class GrupoPractica extends Base {
     private List<Practica> practicas;
 
     public GrupoPractica(String nombre, List<Practica> practicas) {
+        super();
         this.nombre = nombre;
         this.practicas = practicas;
     }

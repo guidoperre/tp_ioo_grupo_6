@@ -14,6 +14,7 @@ public class Regla extends Base {
     private operadorEnum operador;
 
     public Regla(float min, float max, operadorEnum operador) {
+        super();
         this.min = min;
         this.max = max;
         this.operador = operador;

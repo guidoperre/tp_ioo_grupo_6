@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Practica extends Base {
@@ -8,13 +9,16 @@ public class Practica extends Base {
     private String nombre;
     private List<Regla> valoresCriticos;
     private List<Regla> valoresReservados;
+    private List<Practica> practicas;
 
     public Practica(int codigo, Boolean activo, String nombre, List<Regla> valoresCriticos, List<Regla> valoresReservados) {
+        super();
         this.codigo = codigo;
         this.activo = activo;
         this.nombre = nombre;
         this.valoresCriticos = valoresCriticos;
         this.valoresReservados = valoresReservados;
+        this.practicas.add(this);
     }
 
     public Boolean update() {
@@ -22,11 +26,16 @@ public class Practica extends Base {
     }
 
     public Boolean delete() {
+        this.deletePracticaPorId(this.getId());
         return super.delete();
     }
 
     public int getCodigo() {
         return codigo;
+    }
+
+    public List<Practica> getPracticas() {
+        return practicas;
     }
 
     public Boolean isValorCritico(float valor) {
@@ -36,5 +45,13 @@ public class Practica extends Base {
                 critico = true;
         }
         return critico;
+    }
+
+    public Practica deletePracticaPorId(Integer id) {
+        for (Practica practica: new ArrayList<Practica>(practicas)) {
+            if (practica.getId() == id)
+                practicas.remove(practica);
+        }
+        return null;
     }
 }
