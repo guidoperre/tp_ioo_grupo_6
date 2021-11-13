@@ -4,7 +4,6 @@ import ui.pacientes.models.Paciente;
 import models.SexoEnum;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class PacientesList{
