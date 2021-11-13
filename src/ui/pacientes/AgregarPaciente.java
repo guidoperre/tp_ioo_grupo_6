@@ -15,16 +15,22 @@ public class AgregarPaciente {
     private JLabel backButton;
     private JPanel panel;
     private JTextField textField1;
-    private JButton button1;
+    private JButton addButton;
     private JComboBox<SexoEnum> comboBox1;
+    private JButton deleteButton;
+
+    private Paciente paciente = null;
 
     public AgregarPaciente() {
         init();
     }
 
     public AgregarPaciente(Paciente paciente) {
+        this.paciente = paciente;
         init();
         title.setText("Editar paciente");
+        addButton.setText("Editar");
+        deleteButton.setVisible(true);
     }
 
     // Inicializa la ventana
