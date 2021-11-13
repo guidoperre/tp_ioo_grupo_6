@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PacientesList{
+    private final JFrame frame = new JFrame("Pacientes");
 
     private JLabel title;
     private JLabel backButton;
@@ -15,12 +16,11 @@ public class PacientesList{
     private JPanel listPanel;
 
     public PacientesList() {
-
+        init();
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
-
+    // Inicializa la ventana
+    public void init() {
         frame.setContentPane(new PacientesList().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1280, 800);

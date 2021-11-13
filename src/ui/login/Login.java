@@ -1,6 +1,7 @@
 package ui.login;
 
 import models.Usuario;
+import ui.home.Home;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -8,13 +9,14 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 
 public class Login {
+    private final JFrame frame = new JFrame("Login");
+
     private JPanel panel;
     private JLabel imageLabel;
     private JTextField usernameEt;
     private JPasswordField passwordEt;
     private JButton iniciarBtn;
     private JLabel errorLbl;
-    private JFrame frame = new JFrame("Login");
 
     public Login() {
         // Inicializar
@@ -40,26 +42,22 @@ public class Login {
     }
 
     private void login() {
-        iniciarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                errorLbl.setText("");
-                String username = usernameEt.getText();
-                String password = String.valueOf(passwordEt.getPassword());
+        iniciarBtn.addActionListener(e -> {
+            errorLbl.setText("");
+            String username = usernameEt.getText();
+            String password = String.valueOf(passwordEt.getPassword());
 
-                if (username.length() < 1 || password.length() < 1) {
-                    errorLbl.setText("Por favor complete todos los datos");
+            if (username.length() < 1 || password.length() < 1) {
+                errorLbl.setText("Por favor complete todos los datos");
+            } else {
+                Usuario user = Usuario.login(username, password);
+                if (user == null) {
+                    errorLbl.setText("Credenciales incorrectas");
                 } else {
-                    Usuario user = Usuario.login(username, password);
-                    if (user == null) {
-                        errorLbl.setText("Credenciales incorrectas");
-                    } else {
-                        Home home = new Home();
-                        frame.setVisible(false);
-                    }
+                    Home home = new Home();
+                    frame.setVisible(false);
                 }
             }
         });
     }
-
 }
