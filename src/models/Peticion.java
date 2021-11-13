@@ -1,5 +1,7 @@
 package models;
 
+import ui.pacientes.models.Paciente;
+
 import java.util.Date;
 import java.util.List;
 

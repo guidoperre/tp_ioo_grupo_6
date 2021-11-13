@@ -1,3 +1,5 @@
+package ui.home;
+
 import javax.swing.*;
 
 public class Home {

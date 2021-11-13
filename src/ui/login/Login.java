@@ -1,3 +1,5 @@
+package ui.login;
+
 import javax.swing.*;
 
 public class Login {

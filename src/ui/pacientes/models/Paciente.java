@@ -1,4 +1,7 @@
-package models;
+package ui.pacientes.models;
+
+import models.Persona;
+import models.SexoEnum;
 
 public class Paciente extends Persona {
 

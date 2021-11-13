@@ -1,4 +1,6 @@
-import models.Paciente;
+package ui.pacientes;
+
+import ui.pacientes.models.Paciente;
 
 import javax.swing.*;
 import java.awt.*;
