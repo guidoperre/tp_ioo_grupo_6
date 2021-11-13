@@ -101,7 +101,7 @@
           </grid>
         </children>
       </grid>
-      <grid id="7e219" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="7e219" binding="listPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="true">
@@ -114,29 +114,7 @@
           <background color="-1"/>
         </properties>
         <border type="none"/>
-        <children>
-          <component id="28e91" class="javax.swing.JList" binding="pacientesList" custom-create="true">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-              </grid>
-            </constraints>
-            <properties>
-              <layoutOrientation value="0"/>
-              <model>
-                <item value="asdasd"/>
-                <item value="asd"/>
-                <item value="asd"/>
-                <item value="asd"/>
-                <item value="asd"/>
-                <item value="as"/>
-                <item value="das"/>
-                <item value="dsa"/>
-              </model>
-              <selectionMode value="0"/>
-            </properties>
-          </component>
-        </children>
+        <children/>
       </grid>
     </children>
   </grid>

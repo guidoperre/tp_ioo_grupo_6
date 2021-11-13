@@ -19,7 +19,6 @@ public class Peticion extends Base {
         this.fechaEntrega = fechaEntrega;
         this.practicas = practicas;
         this.resultados = resultados;
-        this.paciente.agregarPeticion(this);
     }
 
     public Boolean update() {

@@ -12,7 +12,7 @@ public class PacientesList{
     private JLabel backButton;
     private JLabel addPaciente;
     private JPanel panel;
-    private JList<Paciente> pacientesList;
+    private JPanel listPanel;
 
     public PacientesList() {
 
@@ -36,79 +36,65 @@ public class PacientesList{
     }
 
     private void createPacientesList() {
-        //TODO: Traer pacientes cuando este implementado
-        PacienteModel pacientes = createPacientes();
-        pacientesList = new JList<>(pacientes);
-        pacientesList.setCellRenderer(new PacienteViewHolder());
+        listPanel = new JPanel();
+        ListModel<Paciente> pacientes = getPacientes();
+
+        JList<Paciente> list = new JList<>();
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setLayoutOrientation(JList.VERTICAL);
+        list.setCellRenderer(new PacienteViewHolder());
+        list.setModel(pacientes);
+        list.setSize(300,300);
+
+        listPanel.add(list);
     }
 
-    private PacienteModel createPacientes() {
-        PacienteModel pacientes = new PacienteModel();
-        pacientes.addPaciente(
-                new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO)
-        );
-        pacientes.addPaciente(
-                new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO)
-        );
-        pacientes.addPaciente(
-                new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO)
-        );
-        pacientes.addPaciente(
-                new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO)
-        );
-        pacientes.addPaciente(
-                new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO)
-        );
-        pacientes.addPaciente(
-                new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO)
-        );
-        pacientes.addPaciente(
-                new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO)
-        );
+    //TODO: Traer pacientes cuando este implementado
+    private ListModel<Paciente> getPacientes() {
+        DefaultListModel<Paciente> pacientes = new DefaultListModel<>();
+        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
         return pacientes;
     }
 
-    private static class PacienteModel implements ListModel<Paciente> {
+    static class PacienteViewHolder extends JPanel implements ListCellRenderer<Paciente> {
 
-        private final ArrayList<Paciente> lista = new ArrayList<>();
-
-        @Override
-        public int getSize() {
-            return lista.size();
+        public PacienteViewHolder() {
+            setOpaque(true);
         }
 
-        @Override
-        public Paciente getElementAt(int index) {
-            return lista.get(index);
-        }
-
-        public void addPaciente(Paciente paciente) {
-            lista.add(paciente);
-        }
-
-        @Override
-        public void addListDataListener(ListDataListener l) {
-
-        }
-
-        @Override
-        public void removeListDataListener(ListDataListener l) {
-
-        }
-    }
-
-    private static class PacienteViewHolder extends JTextArea implements ListCellRenderer<Paciente> {
-
-        @Override
         public Component getListCellRendererComponent(
-                JList<? extends Paciente> list,
-                Paciente value,
-                int index,
-                boolean isSelected,
-                boolean cellHasFocus
+            JList<? extends Paciente> list,
+            Paciente value,
+            int index,
+            boolean isSelected,
+            boolean cellHasFocus
         ) {
-            this.
-            return this;
+            JPanel item = new JPanel();
+            JLabel nombre = new JLabel(value.getNombre());
+            JLabel documento = new JLabel(String.valueOf(value.getDni()));
+            JLabel domicilio = new JLabel(value.getDomicilio());
+            String pacienteSexo;
+            if (value.getSexo() == SexoEnum.MASCULINO) {
+                pacienteSexo = "Hombre";
+            } else {
+                pacienteSexo = "Mujer";
+            }
+            JLabel sexo = new JLabel(pacienteSexo);
+            JLabel email = new JLabel(value.getMail());
+            JLabel edad = new JLabel(String.valueOf(value.getEdad()));
+
+            item.add(nombre);
+            item.add(documento);
+            item.add(domicilio);
+            item.add(sexo);
+            item.add(email);
+            item.add(edad);
+
+            return item;
         }
     }
 }
