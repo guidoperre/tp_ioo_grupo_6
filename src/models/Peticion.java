@@ -1,5 +1,7 @@
 package models;
 
+import ui.pacientes.models.Paciente;
+
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +21,6 @@ public class Peticion extends Base {
         this.fechaEntrega = fechaEntrega;
         this.practicas = practicas;
         this.resultados = resultados;
-        this.paciente.agregarPeticion(this);
     }
 
     public Boolean update() {
