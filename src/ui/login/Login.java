@@ -4,6 +4,7 @@ import models.Usuario;
 import ui.home.Home;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -25,10 +26,20 @@ public class Login {
 
     // Inicializa la ventana
     private void init() {
+        //Get the screen size
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1280, 800);
         frame.pack();
+
+        //Calculate the frame location
+        int x = (screenSize.width - frame.getWidth()) / 2;
+        int y = (screenSize.height - frame.getHeight()) / 2;
+
+        frame.setLocation(x, y);
         frame.setVisible(true);
 
         Usuario admin = new Usuario("Admin", 12345678, "Calle 123", "mail@mail.com", "admin", "admin", new Date(), Usuario.rolEnum.administrador);

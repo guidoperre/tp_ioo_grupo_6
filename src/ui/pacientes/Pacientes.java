@@ -25,10 +25,20 @@ public class Pacientes {
 
     // Inicializa la ventana
     public void init() {
+        //Get the screen size
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1280, 800);
         frame.pack();
+
+        //Calculate the frame location
+        int x = (screenSize.width - frame.getWidth()) / 2;
+        int y = (screenSize.height - frame.getHeight()) / 2;
+
+        frame.setLocation(x, y);
         frame.setVisible(true);
     }
 
