@@ -1,6 +1,8 @@
 package models;
 
-public class Persona extends Base {
+public class Persona {
+
+    private Long id;
     private String nombre;
     private int dni;
     private String domicilio;
@@ -14,16 +16,12 @@ public class Persona extends Base {
         this.mail = mail;
     }
 
-    public boolean update(String nombre, int dni, String domicilio, String mail) {
-        this.nombre = nombre;
-        this.dni = dni;
-        this.domicilio = domicilio;
-        this.mail = mail;
-        return super.update();
+    public Long getId() {
+        return id;
     }
 
-    public Boolean delete() {
-        return super.delete();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {

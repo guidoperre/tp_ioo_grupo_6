@@ -3,6 +3,8 @@ package ui.pacientes.models;
 import models.Persona;
 import models.SexoEnum;
 
+import java.util.Objects;
+
 public class Paciente extends Persona {
 
     private int edad;
@@ -12,12 +14,6 @@ public class Paciente extends Persona {
         super(nombre, dni, domicilio, mail);
         this.edad = edad;
         this.sexo = sexo;
-    }
-
-    public boolean update(String nombre, int dni, String domicilio, String mail, int edad, SexoEnum sexo) {
-        this.edad = edad;
-        this.sexo = sexo;
-        return super.update(nombre, dni, domicilio, mail);
     }
 
     public int getEdad() {
@@ -34,5 +30,23 @@ public class Paciente extends Persona {
 
     public void setSexo(SexoEnum sexo) {
         this.sexo = sexo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Paciente paciente = (Paciente) o;
+        return edad == paciente.edad &&
+                sexo == paciente.sexo &&
+                paciente.getNombre().equals(getNombre()) &&
+                paciente.getDni() == getDni() &&
+                paciente.getDomicilio().equals(getDomicilio()) &&
+                paciente.getMail().equals(getMail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(edad, sexo, getNombre(), getDni(), getDomicilio(), getMail());
     }
 }

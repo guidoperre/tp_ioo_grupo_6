@@ -25,27 +25,10 @@ public class Usuario extends Persona {
         this.usuarios.add(this);
     }
 
-    public Boolean update() {
-        return super.update();
-    }
-
-    public Boolean delete() {
-        this.deleteUsuarioPorId(this.getId());
-        return super.delete();
-    }
-
     public static Usuario login(String username, String password) {
         for (Usuario usuario: usuarios) {
             if (usuario.username.equals(username) && usuario.password.equals(password))
                 return usuario;
-        }
-        return null;
-    }
-
-    public Usuario deleteUsuarioPorId(Integer id) {
-        for (Usuario usuario: new ArrayList<Usuario>(usuarios)) {
-            if (usuario.getId() == id)
-                usuarios.remove(usuario);
         }
         return null;
     }
