@@ -118,10 +118,11 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Quicksand" size="16"/>
                       <text value="Nombre y apellido"/>
                     </properties>
                   </component>
-                  <component id="9e1f9" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+                  <component id="9e1f9" class="javax.swing.JTextField" binding="nombreTextField">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <minimum-size width="400" height="-1"/>
@@ -148,10 +149,11 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Quicksand" size="16"/>
                       <text value="DNI"/>
                     </properties>
                   </component>
-                  <component id="5a15c" class="javax.swing.JTextField" default-binding="true">
+                  <component id="5a15c" class="javax.swing.JTextField" binding="dniTextField">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <minimum-size width="400" height="-1"/>
@@ -178,10 +180,11 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Quicksand" size="16"/>
                       <text value="Domicilio"/>
                     </properties>
                   </component>
-                  <component id="4347e" class="javax.swing.JTextField" default-binding="true">
+                  <component id="4347e" class="javax.swing.JTextField" binding="domicilioTextField">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="400" height="-1"/>
@@ -206,10 +209,11 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Quicksand" size="16"/>
                       <text value="Sexo"/>
                     </properties>
                   </component>
-                  <component id="8fde7" class="javax.swing.JComboBox" binding="comboBox1" custom-create="true" default-binding="true">
+                  <component id="8fde7" class="javax.swing.JComboBox" binding="sexoSpinner" custom-create="true">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <minimum-size width="400" height="-1"/>
@@ -236,10 +240,11 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Quicksand" size="16"/>
                       <text value="Fecha de nacimiento"/>
                     </properties>
                   </component>
-                  <component id="af29d" class="javax.swing.JTextField" default-binding="true">
+                  <component id="af29d" class="javax.swing.JTextField" binding="edadTextField">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="400" height="-1"/>
@@ -264,10 +269,11 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Quicksand" size="16"/>
                       <text value="Email"/>
                     </properties>
                   </component>
-                  <component id="84ec4" class="javax.swing.JTextField" default-binding="true">
+                  <component id="84ec4" class="javax.swing.JTextField" binding="emailTextField">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="400" height="-1"/>
@@ -286,6 +292,9 @@
                   </grid>
                 </constraints>
                 <properties>
+                  <background color="-16777216"/>
+                  <font name="Quicksand" size="18"/>
+                  <foreground color="-1"/>
                   <text value="Agregar"/>
                 </properties>
               </component>
@@ -298,6 +307,9 @@
                   </grid>
                 </constraints>
                 <properties>
+                  <background color="-16777216"/>
+                  <font name="Quicksand" size="18"/>
+                  <foreground color="-1"/>
                   <text value="Borrar"/>
                   <visible value="false"/>
                 </properties>

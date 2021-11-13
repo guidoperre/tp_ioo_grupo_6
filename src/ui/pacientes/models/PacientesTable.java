@@ -2,6 +2,7 @@ package ui.pacientes.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PacientesTable {
 
@@ -35,14 +36,9 @@ public class PacientesTable {
     public static void modifyPaciente(Paciente paciente) {
         for (int i = 0; i < pacientes.size(); i++) {
             Paciente aux = pacientes.get(i);
-            if (aux.getId() == paciente.getId()) {
-                aux.setNombre(paciente.getNombre());
-                aux.setDni(paciente.getDni());
-                aux.setDomicilio(paciente.getDomicilio());
-                aux.setEdad(paciente.getEdad());
-                aux.setSexo(paciente.getSexo());
-                aux.setMail(paciente.getMail());
+            if (Objects.equals(aux.getId(), paciente.getId())) {
                 pacientes.remove(i);
+                pacientes.add(paciente);
                 break;
             }
         }
@@ -51,7 +47,7 @@ public class PacientesTable {
     public static void deletePaciente(Paciente paciente) {
         for (int i = 0; i < pacientes.size(); i++) {
             Paciente aux = pacientes.get(i);
-            if (aux.getId() == paciente.getId()) {
+            if (Objects.equals(aux.getId(), paciente.getId())) {
                 pacientes.remove(i);
                 break;
             }
