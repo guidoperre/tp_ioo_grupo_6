@@ -1,8 +1,5 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Paciente extends Persona {
 
     private int edad;
@@ -34,13 +31,5 @@ public class Paciente extends Persona {
 
     public void setSexo(SexoEnum sexo) {
         this.sexo = sexo;
-    }
-
-    @Override
-    public String toString() {
-        return "Paciente{" +
-                "edad=" + edad +
-                ", sexo=" + sexo +
-                '}';
     }
 }

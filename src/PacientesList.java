@@ -2,9 +2,7 @@ import models.Paciente;
 import models.SexoEnum;
 
 import javax.swing.*;
-import javax.swing.event.ListDataListener;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class PacientesList{
 
@@ -52,11 +50,11 @@ public class PacientesList{
     //TODO: Traer pacientes cuando este implementado
     private ListModel<Paciente> getPacientes() {
         DefaultListModel<Paciente> pacientes = new DefaultListModel<>();
-        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        pacientes.addElement(new Paciente("Guido",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
+        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
         return pacientes;
     }
 
@@ -74,25 +72,27 @@ public class PacientesList{
             boolean cellHasFocus
         ) {
             JPanel item = new JPanel();
+            GridLayout mainLayout = new GridLayout(5,2);
+            item.setLayout(mainLayout);
+
+            JLabel icon = new JLabel(new ImageIcon("resources/usuarios.png"));
+            item.add(icon, 0, 0);
+
+
             JLabel nombre = new JLabel(value.getNombre());
             JLabel documento = new JLabel(String.valueOf(value.getDni()));
             JLabel domicilio = new JLabel(value.getDomicilio());
-            String pacienteSexo;
-            if (value.getSexo() == SexoEnum.MASCULINO) {
-                pacienteSexo = "Hombre";
-            } else {
-                pacienteSexo = "Mujer";
-            }
-            JLabel sexo = new JLabel(pacienteSexo);
+            JLabel sexo = new JLabel(value.getSexo().name());
             JLabel email = new JLabel(value.getMail());
             JLabel edad = new JLabel(String.valueOf(value.getEdad()));
 
-            item.add(nombre);
-            item.add(documento);
-            item.add(domicilio);
-            item.add(sexo);
-            item.add(email);
-            item.add(edad);
+            item.add(icon, 1, 0);
+            item.add(nombre, 1, 0);
+            item.add(documento, 1, 0);
+            item.add(domicilio, 1, 0);
+            item.add(sexo, 1, 0);
+            item.add(email, 1, 0);
+            item.add(edad, 1, 0);
 
             return item;
         }
