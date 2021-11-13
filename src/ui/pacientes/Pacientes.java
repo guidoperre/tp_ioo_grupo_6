@@ -2,12 +2,13 @@ package ui.pacientes;
 
 import ui.home.Home;
 import ui.pacientes.models.Paciente;
-import models.SexoEnum;
+import ui.pacientes.models.PacientesTable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class Pacientes {
     private final JFrame frame = new JFrame("Pacientes");
@@ -71,19 +72,31 @@ public class Pacientes {
         list.setCellRenderer(new PacienteViewHolder());
         list.setModel(pacientes);
         list.setSize(300,300);
+        listListener(list);
 
         listPanel.add(list);
     }
 
-    //TODO: Traer pacientes cuando este implementado
+    private void listListener(JList<Paciente> list) {
+        list.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if (me.getClickCount() == 1) {
+                    JList target = (JList) me.getSource();
+                    int index = target.locationToIndex(me.getPoint());
+                    if (index >= 0) {
+                        new AgregarPaciente((Paciente) target.getModel().getElementAt(index));
+                        frame.setVisible(false);
+                    }
+                }
+            }
+        });
+    }
+
     private ListModel<Paciente> getPacientes() {
-        DefaultListModel<Paciente> pacientes = new DefaultListModel<>();
-        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        pacientes.addElement(new Paciente("Guido Perre",42341208, "Siempre viva 742","perreguido@gmail.com", 21, SexoEnum.MASCULINO));
-        return pacientes;
+        List<Paciente> pacientes = PacientesTable.getAllPacientes();
+        DefaultListModel<Paciente> pacientesModel = new DefaultListModel<>();
+        pacientesModel.addAll(pacientes);
+        return pacientesModel;
     }
 
     static class PacienteViewHolder extends JPanel implements ListCellRenderer<Paciente> {

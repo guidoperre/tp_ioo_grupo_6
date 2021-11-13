@@ -1,6 +1,7 @@
 package ui.pacientes.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PacientesTable {
 
@@ -10,6 +11,20 @@ public class PacientesTable {
     public static void init() {
         pacientes = new ArrayList<>();
     }
+
+    public static List<Paciente> getAllPacientes() {
+        return pacientes;
+    }
+
+    public static Paciente getPaciente(String nombre) {
+        for (Paciente p: pacientes) {
+            if (p.getNombre().equals(nombre)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 
     public static void addPaciente(Paciente paciente) {
         paciente.setId(indexCount);

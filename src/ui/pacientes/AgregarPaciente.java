@@ -1,6 +1,7 @@
 package ui.pacientes;
 
 import models.SexoEnum;
+import ui.pacientes.models.Paciente;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -18,6 +19,11 @@ public class AgregarPaciente {
 
     public AgregarPaciente() {
         init();
+    }
+
+    public AgregarPaciente(Paciente paciente) {
+        init();
+        title.setText("Editar paciente");
     }
 
     // Inicializa la ventana
