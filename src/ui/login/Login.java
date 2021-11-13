@@ -19,18 +19,11 @@ public class Login {
     private JLabel errorLbl;
 
     public Login() {
-        // Inicializar
         init();
-
-        // Evento click login
-        login();
+        setLogin();
     }
 
-
-    private void createUIComponents() {
-        imageLabel = new JLabel(new ImageIcon("resources/icon.png"));
-    }
-
+    // Inicializa la ventana
     private void init() {
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +34,11 @@ public class Login {
         Usuario admin = new Usuario("Admin", 12345678, "Calle 123", "mail@mail.com", "admin", "admin", new Date(), Usuario.rolEnum.administrador);
     }
 
-    private void login() {
+    private void createUIComponents() {
+        imageLabel = new JLabel(new ImageIcon("resources/icon.png"));
+    }
+
+    private void setLogin() {
         iniciarBtn.addActionListener(e -> {
             errorLbl.setText("");
             String username = usernameEt.getText();
@@ -54,7 +51,7 @@ public class Login {
                 if (user == null) {
                     errorLbl.setText("Credenciales incorrectas");
                 } else {
-                    Home home = new Home();
+                    new Home();
                     frame.setVisible(false);
                 }
             }

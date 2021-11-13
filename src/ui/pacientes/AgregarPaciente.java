@@ -40,7 +40,7 @@ public class AgregarPaciente {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                PacientesList home = new PacientesList();
+                new Pacientes();
                 frame.setVisible(false);
             }
         });

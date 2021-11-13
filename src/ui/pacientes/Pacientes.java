@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PacientesList{
+public class Pacientes {
     private final JFrame frame = new JFrame("Pacientes");
 
     private JLabel title;
@@ -18,7 +18,7 @@ public class PacientesList{
     private JPanel panel;
     private JPanel listPanel;
 
-    public PacientesList() {
+    public Pacientes() {
         init();
     }
 
@@ -43,7 +43,7 @@ public class PacientesList{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Home home = new Home();
+                new Home();
                 frame.setVisible(false);
             }
         });
@@ -55,7 +55,7 @@ public class PacientesList{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                AgregarPaciente agregarPaciente = new AgregarPaciente();
+                new AgregarPaciente();
                 frame.setVisible(false);
             }
         });

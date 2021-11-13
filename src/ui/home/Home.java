@@ -1,12 +1,15 @@
 package ui.home;
 
 import ui.login.Login;
-import ui.pacientes.PacientesList;
+import ui.pacientes.Pacientes;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Pantalla principal de medicina binaria
+ */
 public class Home {
     private final JFrame frame = new JFrame("Home");
 
@@ -22,8 +25,16 @@ public class Home {
     private JLabel usuariosLogo;
 
     public Home() {
-        // Inicializar
         init();
+    }
+
+    // Inicializa la ventana
+    private void init() {
+        frame.setContentPane(panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1280, 800);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     private void createUIComponents() {
@@ -38,21 +49,13 @@ public class Home {
         setPacientes();
     }
 
-    private void init() {
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
     private void setLogout() {
         exitButton = new JLabel(new ImageIcon("resources/salir.png"));
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame.setVisible(false);
-                Login login = new Login();
+                new Login();
             }
         });
     }
@@ -63,7 +66,7 @@ public class Home {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame.setVisible(false);
-                PacientesList pacientes = new PacientesList();
+                new Pacientes();
             }
         });
     }
