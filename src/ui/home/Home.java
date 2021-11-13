@@ -1,6 +1,8 @@
 package ui.home;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Home {
 
@@ -14,19 +16,15 @@ public class Home {
     private JLabel peticionesLogo;
     private JLabel resultadosLogo;
     private JLabel usuariosLogo;
+    private JFrame frame = new JFrame("Home");
+
 
     public Home() {
+        // Inicializar
+        init();
 
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
-
-        frame.setContentPane(new Home().panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-        frame.setVisible(true);
+        // Evento click botonSalir
+        exit();
     }
 
     private void createUIComponents() {
@@ -38,5 +36,23 @@ public class Home {
         peticionesLogo = new JLabel(new ImageIcon("resources/peticiones.png"));
         resultadosLogo = new JLabel(new ImageIcon("resources/resultados.png"));
         usuariosLogo = new JLabel(new ImageIcon("resources/usuarios.png"));
+    }
+
+    private void init() {
+        frame.setContentPane(panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1280, 800);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private void exit() {
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.setVisible(false);
+                Login login = new Login();
+            }
+        });
     }
 }

@@ -8,13 +8,13 @@ public class Usuario extends Persona {
     private String username;
     private String password;
     private Date fecnac;
-    private enum rolEnum {
+    public enum rolEnum {
         recepcion,
         laboratorio,
         administrador
     }
     private rolEnum rol;
-    private List<Usuario> usuarios;
+    private static List<Usuario> usuarios = new ArrayList<>();
 
     public Usuario(String nombre, int dni, String domicilio, String mail, String username, String password, Date fecnac, rolEnum rol) {
         super(nombre, dni, domicilio, mail);
@@ -34,9 +34,9 @@ public class Usuario extends Persona {
         return super.delete();
     }
 
-    public Usuario login(String username, String password) {
-        for (Usuario usuario: this.usuarios) {
-            if (usuario.username == username && usuario.password == password)
+    public static Usuario login(String username, String password) {
+        for (Usuario usuario: usuarios) {
+            if (usuario.username.equals(username) && usuario.password.equals(password))
                 return usuario;
         }
         return null;
