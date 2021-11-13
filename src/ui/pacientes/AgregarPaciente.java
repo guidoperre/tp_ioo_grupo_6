@@ -5,6 +5,8 @@ import models.SexoEnum;
 import javax.swing.*;
 
 public class AgregarPaciente {
+    JFrame frame = new JFrame("Login");
+
     private JLabel title;
     private JLabel backButton;
     private JPanel panel;
@@ -17,7 +19,7 @@ public class AgregarPaciente {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
+
 
         frame.setContentPane(new AgregarPaciente().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

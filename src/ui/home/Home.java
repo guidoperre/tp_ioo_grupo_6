@@ -1,10 +1,14 @@
 package ui.home;
 
+import ui.login.Login;
+import ui.pacientes.PacientesList;
+
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Home {
+    private final JFrame frame = new JFrame("Home");
 
     private JLabel exitButton;
     private JPanel panel;
@@ -16,26 +20,22 @@ public class Home {
     private JLabel peticionesLogo;
     private JLabel resultadosLogo;
     private JLabel usuariosLogo;
-    private JFrame frame = new JFrame("Home");
-
 
     public Home() {
         // Inicializar
         init();
-
-        // Evento click botonSalir
-        exit();
     }
 
     private void createUIComponents() {
-        exitButton = new JLabel(new ImageIcon("resources/salir.png"));
-
-        pacienteLogo = new JLabel(new ImageIcon("resources/pacientes.png"));
         sucursalesLogo = new JLabel(new ImageIcon("resources/home.png"));
         practicaLogo = new JLabel(new ImageIcon("resources/practicas.png"));
         peticionesLogo = new JLabel(new ImageIcon("resources/peticiones.png"));
         resultadosLogo = new JLabel(new ImageIcon("resources/resultados.png"));
         usuariosLogo = new JLabel(new ImageIcon("resources/usuarios.png"));
+
+        // Evento click botonSalir
+        setLogout();
+        setPacientes();
     }
 
     private void init() {
@@ -46,12 +46,24 @@ public class Home {
         frame.setVisible(true);
     }
 
-    private void exit() {
+    private void setLogout() {
+        exitButton = new JLabel(new ImageIcon("resources/salir.png"));
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame.setVisible(false);
                 Login login = new Login();
+            }
+        });
+    }
+
+    private void setPacientes() {
+        pacienteLogo = new JLabel(new ImageIcon("resources/pacientes.png"));
+        pacienteLogo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.setVisible(false);
+                PacientesList pacientes = new PacientesList();
             }
         });
     }

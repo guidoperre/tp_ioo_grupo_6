@@ -1,10 +1,13 @@
 package ui.pacientes;
 
+import ui.home.Home;
 import ui.pacientes.models.Paciente;
 import models.SexoEnum;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PacientesList{
     private final JFrame frame = new JFrame("Pacientes");
@@ -21,7 +24,7 @@ public class PacientesList{
 
     // Inicializa la ventana
     public void init() {
-        frame.setContentPane(new PacientesList().panel);
+        frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1280, 800);
         frame.pack();
@@ -29,13 +32,36 @@ public class PacientesList{
     }
 
     private void createUIComponents() {
-        backButton = new JLabel(new ImageIcon("resources/atras.png"));
-        addPaciente = new JLabel(new ImageIcon("resources/add.png"));
-
-        createPacientesList();
+        addBackListener();
+        addPacienteListener();
+        showPacientes();
     }
 
-    private void createPacientesList() {
+    private void addBackListener() {
+        backButton = new JLabel(new ImageIcon("resources/atras.png"));
+        backButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Home home = new Home();
+                frame.setVisible(false);
+            }
+        });
+    }
+
+    private void addPacienteListener() {
+        addPaciente = new JLabel(new ImageIcon("resources/add.png"));
+        addPaciente.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                AgregarPaciente agregarPaciente = new AgregarPaciente();
+                frame.setVisible(false);
+            }
+        });
+    }
+
+    private void showPacientes() {
         listPanel = new JPanel();
         ListModel<Paciente> pacientes = getPacientes();
 
