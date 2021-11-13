@@ -17,17 +17,11 @@ public class PacientesItem {
 
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
-
-        frame.setContentPane(new PacientesItem().pacienteItem);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-        frame.setVisible(true);
+    public Component getPanel() {
+        return pacienteItem;
     }
 
-    private void setComponents(Paciente paciente) {
+    public void setComponents(Paciente paciente) {
         nombrePaciente.setText(paciente.getNombre());
         documentoPaciente.setText(String.valueOf(paciente.getDni()));
         domicilioPaciente.setText(paciente.getDomicilio());

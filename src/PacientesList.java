@@ -71,30 +71,9 @@ public class PacientesList{
             boolean isSelected,
             boolean cellHasFocus
         ) {
-            JPanel item = new JPanel();
-            GridLayout mainLayout = new GridLayout(5,2);
-            item.setLayout(mainLayout);
-
-            JLabel icon = new JLabel(new ImageIcon("resources/usuarios.png"));
-            item.add(icon, 0, 0);
-
-
-            JLabel nombre = new JLabel(value.getNombre());
-            JLabel documento = new JLabel(String.valueOf(value.getDni()));
-            JLabel domicilio = new JLabel(value.getDomicilio());
-            JLabel sexo = new JLabel(value.getSexo().name());
-            JLabel email = new JLabel(value.getMail());
-            JLabel edad = new JLabel(String.valueOf(value.getEdad()));
-
-            item.add(icon, 1, 0);
-            item.add(nombre, 1, 0);
-            item.add(documento, 1, 0);
-            item.add(domicilio, 1, 0);
-            item.add(sexo, 1, 0);
-            item.add(email, 1, 0);
-            item.add(edad, 1, 0);
-
-            return item;
+            PacientesItem item = new PacientesItem();
+            item.setComponents(value);
+            return item.getPanel();
         }
     }
 }
