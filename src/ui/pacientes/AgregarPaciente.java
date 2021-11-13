@@ -6,8 +6,6 @@ import ui.pacientes.models.PacientesTable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -80,6 +78,21 @@ public class AgregarPaciente {
         setSexo();
     }
 
+    private Boolean checkFields() {
+        String nombre = nombreTextField.getText();
+        String dni = dniTextField.getText();
+        String domicilio = domicilioTextField.getText();
+        String edad = edadTextField.getText();
+        String email = emailTextField.getText();
+
+        if (!nombre.equals("") && !dni.equals("") && !domicilio.equals("") && !edad.equals("") && !email.equals("")) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(frame, "DEBE COMPLETAR TODOS LOS CAMPOS", "ERROR", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+    }
+
     private void addBackListener() {
         backButton = new JLabel(new ImageIcon("resources/atras.png"));
         backButton.addMouseListener(new MouseAdapter() {
@@ -94,27 +107,29 @@ public class AgregarPaciente {
 
     private void addListener() {
         addButton.addActionListener(e -> {
-            if (paciente != null) {
-                paciente.setNombre(nombreTextField.getText());
-                paciente.setDni(Integer.parseInt(dniTextField.getText()));
-                paciente.setDomicilio(domicilioTextField.getText());
-                paciente.setSexo((SexoEnum) sexoSpinner.getSelectedItem());
-                paciente.setEdad(Integer.parseInt(edadTextField.getText()));
-                paciente.setMail(emailTextField.getText());
-                PacientesTable.modifyPaciente(paciente);
-            } else {
-                PacientesTable.addPaciente(new Paciente(
-                        nombreTextField.getText(),
-                        Integer.parseInt(dniTextField.getText()),
-                        domicilioTextField.getText(),
-                        emailTextField.getText(),
-                        Integer.parseInt(edadTextField.getText()),
-                        (SexoEnum) sexoSpinner.getSelectedItem()
+            if (checkFields()) {
+                if (paciente != null) {
+                    paciente.setNombre(nombreTextField.getText());
+                    paciente.setDni(Integer.parseInt(dniTextField.getText()));
+                    paciente.setDomicilio(domicilioTextField.getText());
+                    paciente.setSexo((SexoEnum) sexoSpinner.getSelectedItem());
+                    paciente.setEdad(Integer.parseInt(edadTextField.getText()));
+                    paciente.setMail(emailTextField.getText());
+                    PacientesTable.modifyPaciente(paciente);
+                } else {
+                    PacientesTable.addPaciente(new Paciente(
+                            nombreTextField.getText(),
+                            Integer.parseInt(dniTextField.getText()),
+                            domicilioTextField.getText(),
+                            emailTextField.getText(),
+                            Integer.parseInt(edadTextField.getText()),
+                            (SexoEnum) sexoSpinner.getSelectedItem()
 
-                ));
+                    ));
+                }
+                new Pacientes();
+                frame.setVisible(false);
             }
-            new Pacientes();
-            frame.setVisible(false);
         });
     }
 
