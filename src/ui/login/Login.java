@@ -5,9 +5,6 @@ import ui.home.Home;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
 
 public class Login {
     private final JFrame frame = new JFrame("Login");
@@ -41,8 +38,6 @@ public class Login {
 
         frame.setLocation(x, y);
         frame.setVisible(true);
-
-        Usuario admin = new Usuario("Admin", 12345678, "Calle 123", "mail@mail.com", "admin", "admin", new Date(), Usuario.rolEnum.administrador);
     }
 
     private void createUIComponents() {
