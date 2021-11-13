@@ -3,9 +3,11 @@ package ui.pacientes;
 import models.SexoEnum;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AgregarPaciente {
-    JFrame frame = new JFrame("Login");
+    private final JFrame frame = new JFrame("Agregar Paciente");
 
     private JLabel title;
     private JLabel backButton;
@@ -15,13 +17,12 @@ public class AgregarPaciente {
     private JComboBox<SexoEnum> comboBox1;
 
     public AgregarPaciente() {
-
+        init();
     }
 
-    public static void main(String[] args) {
-
-
-        frame.setContentPane(new AgregarPaciente().panel);
+    // Inicializa la ventana
+    private void init() {
+        frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1280, 800);
         frame.pack();
@@ -29,9 +30,20 @@ public class AgregarPaciente {
     }
 
     private void createUIComponents() {
-        backButton = new JLabel(new ImageIcon("resources/atras.png"));
-
+        addBackListener();
         setSexo();
+    }
+
+    private void addBackListener() {
+        backButton = new JLabel(new ImageIcon("resources/atras.png"));
+        backButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                PacientesList home = new PacientesList();
+                frame.setVisible(false);
+            }
+        });
     }
 
     private void setSexo() {
