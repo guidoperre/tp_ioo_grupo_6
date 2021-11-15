@@ -1,7 +1,5 @@
 package ui.sucursales.model;
 
-import ui.pacientes.models.Paciente;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

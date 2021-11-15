@@ -81,4 +81,9 @@ public class Sucursal {
         }
         return peticiones;
     }
+
+    @Override
+    public String toString() {
+        return direccion;
+    }
 }
