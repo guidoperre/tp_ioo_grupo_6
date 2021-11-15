@@ -1,6 +1,6 @@
 package ui.peticiones.model;
 
-import models.Practica;
+import ui.practicas.model.Practica;
 import models.Resultado;
 import ui.pacientes.models.Paciente;
 import ui.sucursales.model.Sucursal;
