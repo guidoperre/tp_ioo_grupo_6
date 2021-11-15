@@ -49,4 +49,9 @@ public class Paciente extends Persona {
     public int hashCode() {
         return Objects.hash(edad, sexo, getNombre(), getDni(), getDomicilio(), getMail());
     }
+
+    @Override
+    public String toString() {
+        return getNombre();
+    }
 }

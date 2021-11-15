@@ -1,6 +1,6 @@
 package ui.sucursales.model;
 
-import models.Peticion;
+import ui.peticiones.model.Peticion;
 import ui.usuarios.model.Usuario;
 
 import java.util.ArrayList;
