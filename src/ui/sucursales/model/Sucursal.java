@@ -1,42 +1,66 @@
-package models;
+package ui.sucursales.model;
+
+import models.Peticion;
+import models.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sucursal extends Base {
+public class Sucursal {
+
+    private Long id;
     private String direccion;
     private Usuario responsable;
-    private List<Peticion> peticiones;
-    private List<Sucursal> sucursales;
+    private final List<Peticion> peticiones;
+
+    public Sucursal(String direccion, Usuario responsable) {
+        this.direccion = direccion;
+        this.responsable = responsable;
+        this.peticiones = new ArrayList<>();
+    }
 
     public Sucursal(String direccion, Usuario responsable, List<Peticion> peticiones) {
-        super();
         this.direccion = direccion;
         this.responsable = responsable;
         this.peticiones = peticiones;
-        this.sucursales.add(this);
     }
 
-    public Boolean update() {
-        return super.update();
+    public Long getId() {
+        return id;
     }
 
-    public Boolean delete(Sucursal destino) {
-        if (this.getPeticionesFinalizadas().size() > 0)
-            return false;
-        this.transferirPeticiones(destino);
-        this.deleteSucursalPorId(this.getId());
-        return super.delete();
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void agregarPeticion(Peticion peticion) {
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Usuario getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(Usuario responsable) {
+        this.responsable = responsable;
+    }
+
+    public void addPeticion(Peticion peticion) {
         this.peticiones.add(peticion);
     }
 
-    private void transferirPeticiones(Sucursal destino) {
+    public void addPeticiones(List<Peticion> peticiones) {
+        this.peticiones.addAll(peticiones);
+    }
+
+    private void movePeticiones(Sucursal destino) {
         for (Peticion peticion: this.peticiones) {
             if (peticion.isActiva())
-                destino.agregarPeticion(peticion);
+                destino.addPeticion(peticion);
         }
     }
 
@@ -56,17 +80,5 @@ public class Sucursal extends Base {
                 peticiones.add(peticion);
         }
         return peticiones;
-    }
-
-    public Sucursal deleteSucursalPorId(Integer id) {
-        for (Sucursal sucursal: new ArrayList<Sucursal>(sucursales)) {
-            if (sucursal.getId() == id)
-                sucursales.remove(sucursal);
-        }
-        return null;
-    }
-
-    public List<Sucursal> getSucursales() {
-        return sucursales;
     }
 }

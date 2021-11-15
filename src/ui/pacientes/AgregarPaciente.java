@@ -98,9 +98,8 @@ public class AgregarPaciente {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+                frame.dispose();
                 new Pacientes();
-                frame.setVisible(false);
             }
         });
     }
@@ -108,6 +107,7 @@ public class AgregarPaciente {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
+                frame.dispose();
                 if (paciente != null) {
                     paciente.setNombre(nombreTextField.getText());
                     paciente.setDni(Integer.parseInt(dniTextField.getText()));
@@ -127,17 +127,17 @@ public class AgregarPaciente {
 
                     ));
                 }
+
                 new Pacientes();
-                frame.setVisible(false);
             }
         });
     }
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
+            frame.dispose();
             PacientesTable.deletePaciente(paciente);
             new Pacientes();
-            frame.setVisible(false);
         });
     }
 

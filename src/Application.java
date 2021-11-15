@@ -5,6 +5,9 @@ import models.UsuariosTable;
 import ui.login.Login;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
+import ui.sucursales.model.SucursalesTable;
+
+import java.util.Date;
 
 import java.util.Date;
 
@@ -22,6 +25,7 @@ public class Application {
     private static void initTables() {
         PacientesTable.init();
         UsuariosTable.init();
+        SucursalesTable.init();
 
         createUsuarios();
         createPacientes();

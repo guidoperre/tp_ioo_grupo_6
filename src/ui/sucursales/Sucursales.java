@@ -1,8 +1,9 @@
-package ui.pacientes;
+package ui.sucursales;
 
+import ui.sucursales.model.Sucursal;
 import ui.home.Home;
-import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
+import ui.sucursales.model.SucursalesTable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class Pacientes {
-    private final JFrame frame = new JFrame("Pacientes");
+public class Sucursales {
+    private final JFrame frame = new JFrame("Sucursales");
 
     private JLabel title;
     private JLabel backButton;
@@ -19,7 +20,7 @@ public class Pacientes {
     private JPanel panel;
     private JPanel listPanel;
 
-    public Pacientes() {
+    public Sucursales() {
         init();
     }
 
@@ -65,60 +66,60 @@ public class Pacientes {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();
-                new AgregarPaciente();
+                new AgregarSucursal();
             }
         });
     }
 
     private void showPacientes() {
         listPanel = new JPanel();
-        ListModel<Paciente> pacientes = getPacientes();
+        ListModel<Sucursal> sucursales = getSucursales();
 
-        JList<Paciente> list = new JList<>();
+        JList<Sucursal> list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
-        list.setCellRenderer(new PacienteViewHolder());
-        list.setModel(pacientes);
+        list.setCellRenderer(new SucursalViewHolder());
+        list.setModel(sucursales);
         list.setSize(300,300);
         listListener(list);
 
         listPanel.add(list);
     }
 
-    private void listListener(JList<Paciente> list) {
+    private void listListener(JList<Sucursal> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
                     frame.dispose();
-                    new AgregarPaciente((Paciente) target.getModel().getElementAt(index));
+                    new AgregarSucursal((Sucursal) target.getModel().getElementAt(index));
                 }
             }
         });
     }
 
-    private ListModel<Paciente> getPacientes() {
-        List<Paciente> pacientes = PacientesTable.getAllPacientes();
-        DefaultListModel<Paciente> pacientesModel = new DefaultListModel<>();
-        pacientesModel.addAll(pacientes);
-        return pacientesModel;
+    private ListModel<Sucursal> getSucursales() {
+        List<Sucursal> sucursales = SucursalesTable.getAllSucursales();
+        DefaultListModel<Sucursal> sucursalesModel = new DefaultListModel<>();
+        sucursalesModel.addAll(sucursales);
+        return sucursalesModel;
     }
 
-    static class PacienteViewHolder extends JPanel implements ListCellRenderer<Paciente> {
+    static class SucursalViewHolder extends JPanel implements ListCellRenderer<Sucursal> {
 
-        public PacienteViewHolder() {
+        public SucursalViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Paciente> list,
-            Paciente value,
+            JList<? extends Sucursal> list,
+            Sucursal value,
             int index,
             boolean isSelected,
             boolean cellHasFocus
         ) {
-            PacientesItem item = new PacientesItem();
+            SucursalesItem item = new SucursalesItem();
             item.setComponents(value);
             return item.getPanel();
         }

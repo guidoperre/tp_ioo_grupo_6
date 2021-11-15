@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ui.pacientes.PacientesItem">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ui.sucursales.SucursalesItem">
   <grid id="27dc6" binding="pacienteItem" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
@@ -38,7 +38,7 @@
           </component>
         </children>
       </grid>
-      <grid id="4e16d" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="4e16d" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="Center"/>
         <properties>
@@ -50,7 +50,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="67b0c" class="javax.swing.JLabel" binding="nombrePaciente">
+          <component id="67b0c" class="javax.swing.JLabel" binding="numeroSucursal">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -60,7 +60,7 @@
               <text value="Label"/>
             </properties>
           </component>
-          <component id="838c6" class="javax.swing.JLabel" binding="documentoPaciente">
+          <component id="838c6" class="javax.swing.JLabel" binding="direccionSucursal">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -70,43 +70,9 @@
               <text value="Label"/>
             </properties>
           </component>
-          <component id="b38" class="javax.swing.JLabel" binding="domicilioPaciente">
+          <component id="49a65" class="javax.swing.JLabel" binding="responsableSucursal">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Quicksand" size="14"/>
-              <foreground color="-16777216"/>
-              <text value="Label"/>
-            </properties>
-          </component>
-          <component id="25863" class="javax.swing.JLabel" binding="sexoPaciente">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="158" height="16"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font name="Quicksand" size="14"/>
-              <foreground color="-16777216"/>
-              <text value="Label"/>
-            </properties>
-          </component>
-          <component id="c9311" class="javax.swing.JLabel" binding="emailPaciente">
-            <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Quicksand" size="14"/>
-              <foreground color="-16777216"/>
-              <text value="Label"/>
-            </properties>
-          </component>
-          <component id="2b3ff" class="javax.swing.JLabel" binding="edadPaciente">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="213" height="16"/>
-              </grid>
             </constraints>
             <properties>
               <font name="Quicksand" size="14"/>
