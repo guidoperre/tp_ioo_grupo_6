@@ -1,6 +1,7 @@
 import models.Rol;
 import models.SexoEnum;
 import ui.peticiones.model.PeticionesTable;
+import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
@@ -10,6 +11,7 @@ import ui.pacientes.models.PacientesTable;
 import ui.sucursales.model.SucursalesTable;
 import utils.DataUtils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,6 +35,7 @@ public class Application {
 
         createUsuarios();
         createPacientes();
+        createPracticas();
     }
 
     private static void createUsuarios() {
@@ -52,18 +55,66 @@ public class Application {
         );
     }
 
+    private static void createPracticas(){
+        PracticasTable.addPractica(
+                new Practica(
+                        1,
+                        true,
+                        "Analisis de sangre",
+                        new ArrayList<>(),
+                        new ArrayList<>()
+                )
+        );
+        PracticasTable.addPractica(
+                new Practica(
+                        2,
+                        true,
+                        "Analsisi globulos rojos",
+                        new ArrayList<>(),
+                        new ArrayList<>()
+                )
+        );
+        PracticasTable.addPractica(
+                new Practica(
+                        3,
+                        true,
+                        "Radiografia torax",
+                        new ArrayList<>(),
+                        new ArrayList<>()
+                )
+        );
+    }
+
     private static void createPacientes() {
-        for (int i = 0; i < 4; i++) {
-            PacientesTable.addPaciente(
-                    new Paciente(
-                            "Guido Perre",
-                            42341208,
-                            "Siempre viva 742",
-                            "perreguido@gmail.com",
-                            21,
-                            SexoEnum.MASCULINO
-                    )
-            );
-        }
+        PacientesTable.addPaciente(
+                new Paciente(
+                        "Guido Perre",
+                        42341208,
+                        "Siempre viva 742",
+                        "perreguido@gmail.com",
+                        21,
+                        SexoEnum.MASCULINO
+                )
+        );
+        PacientesTable.addPaciente(
+                new Paciente(
+                        "Tomas Canzoniero",
+                        42341208,
+                        "Siempre viva 742",
+                        "perreguido@gmail.com",
+                        21,
+                        SexoEnum.MASCULINO
+                )
+        );
+        PacientesTable.addPaciente(
+                new Paciente(
+                        "Agustin Maio",
+                        42341208,
+                        "Siempre viva 742",
+                        "perreguido@gmail.com",
+                        21,
+                        SexoEnum.MASCULINO
+                )
+        );
     }
 }

@@ -25,7 +25,7 @@ public class AgregarPeticion {
     private JButton addButton;
     private JButton deleteButton;
     private JTextField obraSocialTextField;
-    private JList practicasList;
+    private JList<Practica> practicasList;
     private JLabel addPractica;
     private JComboBox<Paciente> pacientesSpinner;
     private JComboBox<Sucursal> sucursalSpinner;
@@ -86,6 +86,7 @@ public class AgregarPeticion {
         setPracticasSpinner();
         addPractica();
         removePractica();
+        setPracticasList();
     }
 
     private Boolean checkFields() {
@@ -142,6 +143,18 @@ public class AgregarPeticion {
             PeticionesTable.deletePeticiones(peticion);
             new Peticiones();
         });
+    }
+
+    private void setPracticasList() {
+        List<Practica> practicas = PracticasTable.getAllPracticas();
+        DefaultListModel<Practica> practicasModel = new DefaultListModel<>();
+        practicasModel.addAll(practicas);
+
+        practicasList = new JList<>();
+        practicasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        practicasList.setLayoutOrientation(JList.VERTICAL);
+        practicasList.setModel(practicasModel);
+        practicasList.setSize(300,300);
     }
 
     private void setPracticasSpinner() {
