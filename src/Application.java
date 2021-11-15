@@ -9,6 +9,8 @@ import ui.sucursales.model.SucursalesTable;
 
 import java.util.Date;
 
+import java.util.Date;
+
 /**
  * Esta es la clase principal de la aplicacion. Va a iniciar en la pantalla de login. Aqui se deben ejecutar todas
  * las instancias de configuracion previas.
