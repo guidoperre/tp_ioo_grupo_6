@@ -29,6 +29,7 @@ public class Peticion {
         this.obraSocial = obraSocial;
         this.fechaCarga = fechaCarga;
         this.fechaEntrega = fechaEntrega;
+        this.sucursal = sucursal;
         this.practicas = practicas;
         this.resultados = resultados;
     }
@@ -38,6 +39,7 @@ public class Peticion {
         this.obraSocial = obraSocial;
         this.fechaCarga = fechaCarga;
         this.fechaEntrega = fechaEntrega;
+        this.sucursal = sucursal;
         this.practicas = new ArrayList<>();
         this.resultados = new ArrayList<>();
     }
