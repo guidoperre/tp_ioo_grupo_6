@@ -1,7 +1,6 @@
 import models.Rol;
 import models.SexoEnum;
 import ui.peticiones.model.PeticionesTable;
-import ui.practicas.model.PracticasTable;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.login.Login;
@@ -29,7 +28,6 @@ public class Application {
         UsuariosTable.init();
         SucursalesTable.init();
         PeticionesTable.init();
-        PracticasTable.init();
 
         createUsuarios();
         createPacientes();

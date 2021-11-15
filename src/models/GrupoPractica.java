@@ -1,7 +1,5 @@
 package models;
 
-import ui.practicas.model.Practica;
-
 import java.util.List;
 
 public class GrupoPractica extends Base {
