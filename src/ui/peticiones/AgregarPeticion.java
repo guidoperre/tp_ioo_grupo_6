@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,9 +33,10 @@ public class AgregarPeticion {
     private JComboBox<Practica> practicasSpinner;
     private JLabel removePractica;
 
-    private Peticion peticion;
+    private final Peticion peticion;
 
     public AgregarPeticion() {
+        this.peticion = new Peticion();
         init();
     }
 
@@ -146,15 +148,17 @@ public class AgregarPeticion {
     }
 
     private void setPracticasList() {
-        List<Practica> practicas = PracticasTable.getAllPracticas();
-        DefaultListModel<Practica> practicasModel = new DefaultListModel<>();
-        practicasModel.addAll(practicas);
-
         practicasList = new JList<>();
         practicasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         practicasList.setLayoutOrientation(JList.VERTICAL);
-        practicasList.setModel(practicasModel);
+        practicasList.setModel(getPracticas(new ArrayList<>()));
         practicasList.setSize(300,300);
+    }
+
+    private ListModel<Practica> getPracticas(List<Practica> practicas) {
+        DefaultListModel<Practica> practicasModel = new DefaultListModel<>();
+        practicasModel.addAll(practicas);
+        return practicasModel;
     }
 
     private void setPracticasSpinner() {
@@ -172,6 +176,7 @@ public class AgregarPeticion {
             public void mouseClicked(MouseEvent e) {
                 Practica practica = (Practica) practicasSpinner.getSelectedItem();
                 peticion.addPractica(practica);
+                practicasList.setModel(getPracticas(peticion.getPracticas()));
             }
         });
     }
@@ -183,6 +188,7 @@ public class AgregarPeticion {
             public void mouseClicked(MouseEvent e) {
                 Practica practica = (Practica) practicasSpinner.getSelectedItem();
                 peticion.removePractica(practica);
+                practicasList.setModel(getPracticas(peticion.getPracticas()));
             }
         });
     }
