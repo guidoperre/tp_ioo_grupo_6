@@ -2,6 +2,7 @@ package ui.login;
 
 import ui.usuarios.model.Usuario;
 import ui.home.Home;
+import ui.usuarios.model.UsuariosTable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,6 +58,7 @@ public class Login {
                 if (user == null) {
                     errorLbl.setText("Credenciales incorrectas");
                 } else {
+                    UsuariosTable.usuario = user;
                     frame.dispose();
                     new Home();
                 }
