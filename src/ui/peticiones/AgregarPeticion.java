@@ -30,6 +30,7 @@ public class AgregarPeticion {
     private JComboBox<Paciente> pacientesSpinner;
     private JComboBox<Sucursal> sucursalSpinner;
     private JComboBox<Practica> practicasSpinner;
+    private JLabel removePractica;
 
     private Peticion peticion;
 
@@ -81,7 +82,10 @@ public class AgregarPeticion {
         addBackListener();
         setPaciente();
         setSucursal();
+
         setPracticasSpinner();
+        addPractica();
+        removePractica();
     }
 
     private Boolean checkFields() {
@@ -141,13 +145,33 @@ public class AgregarPeticion {
     }
 
     private void setPracticasSpinner() {
-        addPractica = new JLabel(new ImageIcon("resources/add.png"));
-
         practicasSpinner = new JComboBox<>();
         List<Practica> practicas = PracticasTable.getAllPracticas();
         DefaultComboBoxModel<Practica> practicasItem = new DefaultComboBoxModel<>();
         practicasItem.addAll(practicas);
         practicasSpinner.setModel(practicasItem);
+    }
+
+    private void addPractica() {
+        addPractica = new JLabel(new ImageIcon("resources/add.png"));
+        addPractica.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Practica practica = (Practica) practicasSpinner.getSelectedItem();
+                peticion.addPractica(practica);
+            }
+        });
+    }
+
+    private void removePractica() {
+        removePractica = new JLabel(new ImageIcon("resources/remove.png"));
+        removePractica.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Practica practica = (Practica) practicasSpinner.getSelectedItem();
+                peticion.removePractica(practica);
+            }
+        });
     }
 
     private void setPaciente() {

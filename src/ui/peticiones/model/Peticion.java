@@ -97,6 +97,10 @@ public class Peticion {
         this.practicas.add(practica);
     }
 
+    public void removePractica(Practica practica) {
+        this.practicas.remove(practica);
+    }
+
     public List<Resultado> getResultados() {
         return resultados;
     }
