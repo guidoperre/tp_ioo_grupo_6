@@ -3,11 +3,10 @@ package ui.peticiones;
 import ui.home.Home;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
-import ui.usuarios.model.Usuario;
-import ui.usuarios.model.UsuariosTable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -20,6 +19,8 @@ public class Peticiones {
     private JLabel addPaciente;
     private JPanel panel;
     private JPanel listPanel;
+    private JCheckBox criticosCheckBox;
+    private JList<Peticion> list;
 
     public Peticiones() {
         init();
@@ -48,6 +49,20 @@ public class Peticiones {
         addBackListener();
         addPeticionesListener();
         showPeticiones();
+        setCriticosCheckBox();
+    }
+
+    private void setCriticosCheckBox() {
+        criticosCheckBox = new JCheckBox();
+        criticosCheckBox.setText("Solo valores criticos");
+
+        criticosCheckBox.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                list.setModel(getPeticionesCriticas());
+            } else {
+                list.setModel(getPeticiones());
+            }
+        });
     }
 
     private void addBackListener() {
@@ -76,7 +91,7 @@ public class Peticiones {
         listPanel = new JPanel();
         ListModel<Peticion> peticiones = getPeticiones();
 
-        JList<Peticion> list = new JList<>();
+        list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setCellRenderer(new PeticionesViewHolder());
@@ -102,6 +117,13 @@ public class Peticiones {
 
     private ListModel<Peticion> getPeticiones() {
         List<Peticion> peticiones = PeticionesTable.getAllPeticiones();
+        DefaultListModel<Peticion> peticionesModel = new DefaultListModel<>();
+        peticionesModel.addAll(peticiones);
+        return peticionesModel;
+    }
+
+    private ListModel<Peticion> getPeticionesCriticas() {
+        List<Peticion> peticiones = PeticionesTable.getPeticionesCriticas();
         DefaultListModel<Peticion> peticionesModel = new DefaultListModel<>();
         peticionesModel.addAll(peticiones);
         return peticionesModel;

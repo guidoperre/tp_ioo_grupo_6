@@ -74,7 +74,7 @@
                   <font name="Quicksand" size="18" style="0"/>
                   <foreground color="-16777216"/>
                   <requestFocusEnabled value="true"/>
-                  <text value="Agregar usuario"/>
+                  <text value="Agregar peticion"/>
                 </properties>
               </component>
             </children>
