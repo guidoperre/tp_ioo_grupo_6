@@ -4,6 +4,8 @@ import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
+import ui.practicas.model.Practica;
+import ui.practicas.model.PracticasTable;
 import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalesTable;
 
@@ -27,6 +29,7 @@ public class AgregarPeticion {
     private JLabel addPractica;
     private JComboBox<Paciente> pacientesSpinner;
     private JComboBox<Sucursal> sucursalSpinner;
+    private JComboBox<Practica> practicasSpinner;
 
     private Peticion peticion;
 
@@ -78,7 +81,7 @@ public class AgregarPeticion {
         addBackListener();
         setPaciente();
         setSucursal();
-        setPracticas();
+        setPracticasSpinner();
     }
 
     private Boolean checkFields() {
@@ -137,8 +140,14 @@ public class AgregarPeticion {
         });
     }
 
-    private void setPracticas() {
+    private void setPracticasSpinner() {
         addPractica = new JLabel(new ImageIcon("resources/add.png"));
+
+        practicasSpinner = new JComboBox<>();
+        List<Practica> practicas = PracticasTable.getAllPracticas();
+        DefaultComboBoxModel<Practica> practicasItem = new DefaultComboBoxModel<>();
+        practicasItem.addAll(practicas);
+        practicasSpinner.setModel(practicasItem);
     }
 
     private void setPaciente() {
