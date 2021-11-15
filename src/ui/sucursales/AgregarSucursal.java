@@ -1,7 +1,7 @@
 package ui.sucursales;
 
-import models.Usuario;
-import models.UsuariosTable;
+import ui.usuarios.model.Usuario;
+import ui.usuarios.model.UsuariosTable;
 import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalesTable;
 

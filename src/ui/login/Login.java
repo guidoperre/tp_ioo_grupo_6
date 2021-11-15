@@ -1,6 +1,6 @@
 package ui.login;
 
-import models.Usuario;
+import ui.usuarios.model.Usuario;
 import ui.home.Home;
 
 import javax.swing.*;

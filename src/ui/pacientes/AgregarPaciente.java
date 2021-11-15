@@ -1,5 +1,6 @@
 package ui.pacientes;
 
+import models.Rol;
 import models.SexoEnum;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
@@ -8,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class AgregarPaciente {
     private final JFrame frame = new JFrame("Agregar Paciente");
@@ -143,9 +145,9 @@ public class AgregarPaciente {
 
     private void setSexo() {
         sexoSpinner = new JComboBox<>();
+        List<SexoEnum> sexosList = List.of(SexoEnum.values());
         DefaultComboBoxModel<SexoEnum> sexos = new DefaultComboBoxModel<>();
-        sexos.addElement(SexoEnum.MASCULINO);
-        sexos.addElement(SexoEnum.FEMENINO);
+        sexos.addAll(sexosList);
         sexoSpinner.setModel(sexos);
     }
 }

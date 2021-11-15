@@ -1,13 +1,11 @@
 import models.Rol;
 import models.SexoEnum;
-import models.Usuario;
-import models.UsuariosTable;
+import ui.usuarios.model.Usuario;
+import ui.usuarios.model.UsuariosTable;
 import ui.login.Login;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
 import ui.sucursales.model.SucursalesTable;
-
-import java.util.Date;
 
 import java.util.Date;
 
@@ -32,6 +30,8 @@ public class Application {
     }
 
     private static void createUsuarios() {
+        Date date = new Date();
+        date.setYear(2000);
         UsuariosTable.addUsuario(
                 new Usuario(
                         "Admin",
@@ -40,7 +40,7 @@ public class Application {
                         "mail@mail.com",
                         "admin",
                         "admin",
-                        new Date(),
+                        date,
                         Rol.ADMINISTRADOR
                 )
         );

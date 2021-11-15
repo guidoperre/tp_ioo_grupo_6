@@ -1,9 +1,8 @@
-package ui.sucursales;
+package ui.usuarios;
 
-import ui.sucursales.model.Sucursal;
 import ui.home.Home;
-import ui.pacientes.models.PacientesTable;
-import ui.sucursales.model.SucursalesTable;
+import ui.usuarios.model.Usuario;
+import ui.usuarios.model.UsuariosTable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +10,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class Sucursales {
-    private final JFrame frame = new JFrame("Sucursales");
+public class Usuarios {
+    private final JFrame frame = new JFrame("Usuarios");
 
     private JLabel title;
     private JLabel backButton;
@@ -20,7 +19,7 @@ public class Sucursales {
     private JPanel panel;
     private JPanel listPanel;
 
-    public Sucursales() {
+    public Usuarios() {
         init();
     }
 
@@ -45,8 +44,8 @@ public class Sucursales {
 
     private void createUIComponents() {
         addBackListener();
-        addSucursalListener();
-        showSucursales();
+        addUsuariosListener();
+        showUsuarios();
     }
 
     private void addBackListener() {
@@ -60,66 +59,66 @@ public class Sucursales {
         });
     }
 
-    private void addSucursalListener() {
+    private void addUsuariosListener() {
         addPaciente = new JLabel(new ImageIcon("resources/add.png"));
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();
-                new AgregarSucursal();
+                new AgregarUsuario();
             }
         });
     }
 
-    private void showSucursales() {
+    private void showUsuarios() {
         listPanel = new JPanel();
-        ListModel<Sucursal> sucursales = getSucursales();
+        ListModel<Usuario> usuarios = getUsuarios();
 
-        JList<Sucursal> list = new JList<>();
+        JList<Usuario> list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
-        list.setCellRenderer(new SucursalViewHolder());
-        list.setModel(sucursales);
+        list.setCellRenderer(new UsuariosViewHolder());
+        list.setModel(usuarios);
         list.setSize(300,300);
         listListener(list);
 
         listPanel.add(list);
     }
 
-    private void listListener(JList<Sucursal> list) {
+    private void listListener(JList<Usuario> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
                     frame.dispose();
-                    new AgregarSucursal((Sucursal) target.getModel().getElementAt(index));
+                    new AgregarUsuario((Usuario) target.getModel().getElementAt(index));
                 }
             }
         });
     }
 
-    private ListModel<Sucursal> getSucursales() {
-        List<Sucursal> sucursales = SucursalesTable.getAllSucursales();
-        DefaultListModel<Sucursal> sucursalesModel = new DefaultListModel<>();
-        sucursalesModel.addAll(sucursales);
-        return sucursalesModel;
+    private ListModel<Usuario> getUsuarios() {
+        List<Usuario> usuarios = UsuariosTable.getAllUsuarios();
+        DefaultListModel<Usuario> usuariosModel = new DefaultListModel<>();
+        usuariosModel.addAll(usuarios);
+        return usuariosModel;
     }
 
-    static class SucursalViewHolder extends JPanel implements ListCellRenderer<Sucursal> {
+    static class UsuariosViewHolder extends JPanel implements ListCellRenderer<Usuario> {
 
-        public SucursalViewHolder() {
+        public UsuariosViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Sucursal> list,
-            Sucursal value,
+            JList<? extends Usuario> list,
+            Usuario value,
             int index,
             boolean isSelected,
             boolean cellHasFocus
         ) {
-            SucursalesItem item = new SucursalesItem();
+            UsuariosItem item = new UsuariosItem();
             item.setComponents(value);
             return item.getPanel();
         }

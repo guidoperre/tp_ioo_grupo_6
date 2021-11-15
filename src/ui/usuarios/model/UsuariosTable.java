@@ -1,4 +1,4 @@
-package models;
+package ui.usuarios.model;
 
 import java.util.ArrayList;
 import java.util.List;

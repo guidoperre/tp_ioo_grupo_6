@@ -1,5 +1,9 @@
-package models;
+package ui.usuarios.model;
 
+import models.Persona;
+import models.Rol;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -7,14 +11,14 @@ public class Usuario extends Persona {
 
     private String username;
     private String password;
-    private Date fecnac;
+    private Date fechaNacimiento;
     private Rol rol;
 
     public Usuario(String nombre, int dni, String domicilio, String mail, String username, String password, Date fecnac, Rol rol) {
         super(nombre, dni, domicilio, mail);
         this.username = username;
         this.password = password;
-        this.fecnac = fecnac;
+        this.fechaNacimiento = fecnac;
         this.rol = rol;
     }
 
@@ -43,12 +47,16 @@ public class Usuario extends Persona {
         this.password = password;
     }
 
-    public Date getFecnac() {
-        return fecnac;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setFecnac(Date fecnac) {
-        this.fecnac = fecnac;
+    public int getEdad() {
+        return Calendar.getInstance().getTime().getYear() - fechaNacimiento.getYear();
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Rol getRol() {

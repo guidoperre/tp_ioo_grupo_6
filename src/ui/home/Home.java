@@ -3,6 +3,7 @@ package ui.home;
 import ui.login.Login;
 import ui.pacientes.Pacientes;
 import ui.sucursales.Sucursales;
+import ui.usuarios.Usuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,12 +54,12 @@ public class Home {
         practicaLogo = new JLabel(new ImageIcon("resources/practicas.png"));
         peticionesLogo = new JLabel(new ImageIcon("resources/peticiones.png"));
         resultadosLogo = new JLabel(new ImageIcon("resources/resultados.png"));
-        usuariosLogo = new JLabel(new ImageIcon("resources/usuarios.png"));
 
         // Evento click botonSalir
         setLogout();
         setPacientes();
         setSucursales();
+        setUsuarios();
     }
 
     private void setLogout() {
@@ -90,6 +91,17 @@ public class Home {
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();
                 new Sucursales();
+            }
+        });
+    }
+
+    private void setUsuarios() {
+        usuariosLogo = new JLabel(new ImageIcon("resources/usuarios.png"));
+        usuariosLogo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                new Usuarios();
             }
         });
     }
