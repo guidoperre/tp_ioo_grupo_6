@@ -6,7 +6,9 @@ import ui.login.Login;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
 import ui.sucursales.model.SucursalesTable;
+import utils.DataUtils;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -30,8 +32,8 @@ public class Application {
     }
 
     private static void createUsuarios() {
-        Date date = new Date();
-        date.setYear(2000);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DataUtils.getFechaFromString("3/3/2000"));
         UsuariosTable.addUsuario(
                 new Usuario(
                         "Admin",
@@ -40,7 +42,7 @@ public class Application {
                         "mail@mail.com",
                         "admin",
                         "admin",
-                        date,
+                        calendar.getTime(),
                         Rol.ADMINISTRADOR
                 )
         );

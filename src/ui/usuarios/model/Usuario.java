@@ -52,7 +52,9 @@ public class Usuario extends Persona {
     }
 
     public int getEdad() {
-        return Calendar.getInstance().getTime().getYear() - fechaNacimiento.getYear();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaNacimiento);
+        return 2021 - calendar.get(Calendar.YEAR);
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) {
