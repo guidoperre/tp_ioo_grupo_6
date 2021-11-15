@@ -65,6 +65,7 @@ public class AgregarPeticion {
         frame.setVisible(true);
 
         addListener();
+        practicasList.setModel(getPracticas(peticion.getPracticas()));
     }
 
     private void initUsuario() {
@@ -151,7 +152,6 @@ public class AgregarPeticion {
         practicasList = new JList<>();
         practicasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         practicasList.setLayoutOrientation(JList.VERTICAL);
-        practicasList.setModel(getPracticas(new ArrayList<>()));
         practicasList.setSize(300,300);
     }
 
@@ -186,7 +186,7 @@ public class AgregarPeticion {
         removePractica.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Practica practica = (Practica) practicasSpinner.getSelectedItem();
+                Practica practica = practicasList.getSelectedValue();
                 peticion.removePractica(practica);
                 practicasList.setModel(getPracticas(peticion.getPracticas()));
             }

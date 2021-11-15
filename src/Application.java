@@ -69,7 +69,7 @@ public class Application {
                 new Practica(
                         2,
                         true,
-                        "Analsisi globulos rojos",
+                        "Analisis globulos rojos",
                         new ArrayList<>(),
                         new ArrayList<>()
                 )
