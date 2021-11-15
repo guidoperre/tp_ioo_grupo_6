@@ -2,6 +2,7 @@ package ui.home;
 
 import ui.login.Login;
 import ui.pacientes.Pacientes;
+import ui.sucursales.Sucursales;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +50,6 @@ public class Home {
     }
 
     private void createUIComponents() {
-        sucursalesLogo = new JLabel(new ImageIcon("resources/home.png"));
         practicaLogo = new JLabel(new ImageIcon("resources/practicas.png"));
         peticionesLogo = new JLabel(new ImageIcon("resources/peticiones.png"));
         resultadosLogo = new JLabel(new ImageIcon("resources/resultados.png"));
@@ -58,6 +58,7 @@ public class Home {
         // Evento click botonSalir
         setLogout();
         setPacientes();
+        setSucursales();
     }
 
     private void setLogout() {
@@ -65,7 +66,7 @@ public class Home {
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.setVisible(false);
+                frame.dispose();
                 new Login();
             }
         });
@@ -76,8 +77,19 @@ public class Home {
         pacienteLogo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.setVisible(false);
+                frame.dispose();
                 new Pacientes();
+            }
+        });
+    }
+
+    private void setSucursales() {
+        sucursalesLogo = new JLabel(new ImageIcon("resources/home.png"));
+        sucursalesLogo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                new Sucursales();
             }
         });
     }

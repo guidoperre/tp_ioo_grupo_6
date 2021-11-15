@@ -57,8 +57,8 @@ public class Login {
                 if (user == null) {
                     errorLbl.setText("Credenciales incorrectas");
                 } else {
+                    frame.dispose();
                     new Home();
-                    frame.setVisible(false);
                 }
             }
         });

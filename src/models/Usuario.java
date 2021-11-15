@@ -58,4 +58,9 @@ public class Usuario extends Persona {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    @Override
+    public String toString() {
+        return getNombre();
+    }
 }
