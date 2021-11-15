@@ -1,14 +1,14 @@
 import models.Rol;
 import models.SexoEnum;
-import models.Usuario;
-import models.UsuariosTable;
+import ui.usuarios.model.Usuario;
+import ui.usuarios.model.UsuariosTable;
 import ui.login.Login;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
 import ui.sucursales.model.SucursalesTable;
+import utils.DataUtils;
 
-import java.util.Date;
-
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -32,6 +32,8 @@ public class Application {
     }
 
     private static void createUsuarios() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DataUtils.getFechaFromString("3/3/2000"));
         UsuariosTable.addUsuario(
                 new Usuario(
                         "Admin",
@@ -40,7 +42,7 @@ public class Application {
                         "mail@mail.com",
                         "admin",
                         "admin",
-                        new Date(),
+                        calendar.getTime(),
                         Rol.ADMINISTRADOR
                 )
         );

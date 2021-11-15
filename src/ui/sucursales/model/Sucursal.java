@@ -1,7 +1,7 @@
 package ui.sucursales.model;
 
 import models.Peticion;
-import models.Usuario;
+import ui.usuarios.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
