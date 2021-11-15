@@ -19,6 +19,11 @@ public class Peticion {
     private List<Practica> practicas;
     private List<Resultado> resultados;
 
+    public Peticion() {
+        this.practicas = new ArrayList<>();
+        this.resultados = new ArrayList<>();
+    }
+
     public Peticion(Paciente paciente, String obraSocial, Sucursal sucursal, Date fechaCarga, Date fechaEntrega, List<Practica> practicas, List<Resultado> resultados) {
         this.paciente = paciente;
         this.obraSocial = obraSocial;

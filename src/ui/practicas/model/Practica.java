@@ -86,4 +86,9 @@ public class Practica {
         }
         return critico;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
