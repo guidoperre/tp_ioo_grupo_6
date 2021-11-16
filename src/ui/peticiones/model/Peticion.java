@@ -120,6 +120,10 @@ public class Peticion {
         this.resultados = resultados;
     }
 
+    public void removeResultado(Resultado resultado) {
+        this.resultados.remove(resultado);
+    }
+
     public void addResultado(Resultado resultado) {
         this.resultados.add(resultado);
     }

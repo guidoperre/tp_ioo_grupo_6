@@ -10,11 +10,11 @@ import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
-import ui.resultados.model.ResultadosTable;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AgregarResultado implements Screen {
@@ -34,6 +34,7 @@ public class AgregarResultado implements Screen {
     private Resultado resultado;
 
     public AgregarResultado() {
+        this.resultado = new Resultado();
         addListener();
     }
 
@@ -92,7 +93,6 @@ public class AgregarResultado implements Screen {
 
     private Boolean checkFields() {
         String valor = resultadoValorTextField.getText();
-
         if (
                 !valor.equals("") &&
                 pacientesSpinner.getSelectedItem() != null &&
@@ -120,10 +120,40 @@ public class AgregarResultado implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
+                Resultado resultadoViejo = resultado;
+                Peticion peticion = this.peticion;
+
+                try {
+                    resultado.setValor(Float.parseFloat(resultadoValorTextField.getText()));
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(
+                            panel,
+                            "EL FORMATO DEL VALOR DEBE SER X.X",
+                            "ERROR",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+                resultado.setCodigoPractica(((Practica) practicasSpinner.getSelectedItem()).getCodigo());
+                resultado.setEstado((EstadoResultado) estadoSpinner.getSelectedItem());
+
                 if (peticion != null) {
-
+                    peticion.removeResultado(resultadoViejo);
+                    peticion.addResultado(resultado);
+                    PeticionesTable.modifyPeticiones(peticion);
                 } else {
-
+                    Peticion aux = (Peticion) peticionesSpinner.getSelectedItem();
+                    if (aux != null) {
+                        aux.addResultado(resultado);
+                        PeticionesTable.modifyPeticiones(aux);
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                panel,
+                                "OCURRIO UN ERROR DESCONOCIDO",
+                                "ERROR",
+                                JOptionPane.WARNING_MESSAGE
+                        );
+                    }
                 }
                 Application.manager.navigateTo(new Resultados());
             }
@@ -132,7 +162,8 @@ public class AgregarResultado implements Screen {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            ResultadosTable.deleteResultado(resultado);
+            peticion.removeResultado(resultado);
+            PeticionesTable.modifyPeticiones(peticion);
             Application.manager.navigateTo(new Resultados());
         });
     }
@@ -158,10 +189,37 @@ public class AgregarResultado implements Screen {
         peticionesSpinner = new JComboBox<>();
         peticionesSpinner.addItemListener(e -> {
             Peticion peticion = (Peticion) e.getItem();
-            List<Practica> practicasPeticion = peticion.getPracticas();
-            DefaultComboBoxModel<Practica> practicasPeticionItem = new DefaultComboBoxModel<>();
-            practicasPeticionItem.addAll(practicasPeticion);
-            practicasSpinner.setModel(practicasPeticionItem);
+            if (this.peticion != null) {
+                DefaultComboBoxModel<Practica> practicasPeticionItem = new DefaultComboBoxModel<>();
+                practicasPeticionItem.addAll(PracticasTable.getAllPracticas());
+                practicasSpinner.setModel(practicasPeticionItem);
+            } else {
+                if (peticion.getPracticas().size() != peticion.getResultados().size()) {
+                    List<Practica> practicasPendientes = new ArrayList<>();
+                    for (Practica p: peticion.getPracticas()) {
+                        boolean pendiente = true;
+                        for (Resultado r: peticion.getResultados()) {
+                            if (r.getCodigoPractica() == p.getCodigo()) {
+                                pendiente = false;
+                                break;
+                            }
+                        }
+                        if (pendiente) {
+                            practicasPendientes.add(p);
+                        }
+                    }
+                    DefaultComboBoxModel<Practica> practicasPeticionItem = new DefaultComboBoxModel<>();
+                    practicasPeticionItem.addAll(practicasPendientes);
+                    practicasSpinner.setModel(practicasPeticionItem);
+                } else {
+                    JOptionPane.showMessageDialog(
+                            panel,
+                            "NO EXISTEN PRACTICAS PENDIENTES DE CARGAR RESULTADOS PARA ESTA PETICION",
+                            "ERROR",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
         });
     }
 

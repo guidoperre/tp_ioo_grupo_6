@@ -9,7 +9,6 @@ import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
-import ui.resultados.model.ResultadosTable;
 import ui.sucursales.model.Sucursal;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
@@ -60,12 +59,10 @@ public class Application {
         PracticasTable.init();
         SucursalesTable.init();
         PeticionesTable.init();
-        ResultadosTable.init();
 
         createUsuarios();
         createPacientes();
         createPracticas();
-        createResultados();
         createSucursales();
         createPeticiones();
     }
@@ -141,30 +138,6 @@ public class Application {
         );
     }
 
-    private static void createResultados(){
-        ResultadosTable.addResultado(
-                new Resultado(
-                        1F,
-                        EstadoResultado.PENDIENTE,
-                        1
-                )
-        );
-        ResultadosTable.addResultado(
-                new Resultado(
-                        1F,
-                        EstadoResultado.FINALIZADO,
-                        2
-                )
-        );
-        ResultadosTable.addResultado(
-                new Resultado(
-                        1F,
-                        EstadoResultado.PENDIENTE,
-                        3
-                )
-        );
-    }
-
     private static void createPacientes() {
         PacientesTable.addPaciente(
                 new Paciente(
@@ -225,9 +198,17 @@ public class Application {
 
     private static void createPeticiones() {
         List<Practica> practias = PracticasTable.getAllPracticas();
-        List<Resultado> resultados = ResultadosTable.getAllResultados();
         List<Paciente> pacientes = PacientesTable.getAllPacientes();
         Sucursal sucursal = SucursalesTable.getAllSucursales().get(0);
+
+        List<Resultado> resultados1 = new ArrayList<>();
+        resultados1.add(
+                new Resultado(
+                        1F,
+                        EstadoResultado.PENDIENTE,
+                        1
+                )
+        );
         PeticionesTable.addPeticiones(
             new Peticion(
                     pacientes.get(0),
@@ -236,8 +217,17 @@ public class Application {
                     new Date(),
                     new Date(),
                     practias,
-                    resultados
+                    resultados1
             )
+        );
+
+        List<Resultado> resultados2 = new ArrayList<>();
+        resultados2.add(
+                new Resultado(
+                        1F,
+                        EstadoResultado.FINALIZADO,
+                        2
+                )
         );
         PeticionesTable.addPeticiones(
                 new Peticion(
@@ -247,8 +237,17 @@ public class Application {
                         new Date(),
                         new Date(),
                         practias,
-                        resultados
+                        resultados2
                 )
+        );
+
+        List<Resultado> resultados3 = new ArrayList<>();
+        resultados3.add(
+            new Resultado(
+                1F,
+                EstadoResultado.PENDIENTE,
+                3
+            )
         );
         PeticionesTable.addPeticiones(
                 new Peticion(
@@ -258,7 +257,7 @@ public class Application {
                         new Date(),
                         new Date(),
                         practias,
-                        resultados
+                        resultados3
                 )
         );
     }

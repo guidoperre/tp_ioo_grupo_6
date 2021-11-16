@@ -4,13 +4,20 @@ import models.EstadoResultado;
 
 public class Resultado {
 
+    public static Long indexCount = 0L;
+
     private Long id;
     private float valor;
     private EstadoResultado estado;
     private int codigoPractica;
 
+    public Resultado() {
+        this.id = indexCount++;
+    }
+
     public Resultado(float valor, EstadoResultado estado, int codigoPractica) {
         super();
+        this.id = indexCount++;
         this.valor = valor;
         this.estado = estado;
         this.codigoPractica = codigoPractica;
