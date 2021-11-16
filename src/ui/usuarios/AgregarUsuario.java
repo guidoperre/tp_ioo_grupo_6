@@ -118,6 +118,7 @@ public class AgregarUsuario implements Screen {
                     usuario.setUsername(usuarioTextField.getText());
                     usuario.setPassword(contrasenaTextField.getText());
                     usuario.setRol((Rol) rolSpinner.getSelectedItem());
+                    UsuariosTable.modifyUsuario(usuario);
                 } else {
                     UsuariosTable.addUsuario(new Usuario(
                             nombreTextField.getText(),

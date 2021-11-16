@@ -4,7 +4,9 @@ import ui.practicas.model.Practica;
 
 import java.util.List;
 
-public class GrupoPractica extends Base {
+public class GrupoPractica {
+
+    private Long id;
     private String nombre;
     private List<Practica> practicas;
 
@@ -14,11 +16,31 @@ public class GrupoPractica extends Base {
         this.practicas = practicas;
     }
 
-    public Boolean update() {
-        return super.update();
+    public Long getId() {
+        return id;
     }
 
-    public Boolean delete() {
-        return super.delete();
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Practica> getPracticas() {
+        return practicas;
+    }
+
+    public void addPractica(Practica practica) {
+        practicas.add(practica);
+    }
+
+    public void setPracticas(List<Practica> practicas) {
+        this.practicas = practicas;
     }
 }

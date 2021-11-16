@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 public class AgregarPeticion implements Screen {
@@ -53,7 +54,7 @@ public class AgregarPeticion implements Screen {
     }
 
     private void initUsuario() {
-        title.setText("Agregar peticion");
+        title.setText("Editar peticion");
         addButton.setText("Editar");
         deleteButton.setVisible(true);
 
@@ -103,19 +104,18 @@ public class AgregarPeticion implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                if (peticion != null) {
-                    peticion.setObraSocial(obraSocialTextField.getText());
-                    peticion.setPaciente((Paciente) pacientesSpinner.getSelectedItem());
-                    peticion.setSucursal((Sucursal) sucursalSpinner.getSelectedItem());
+                peticion.setObraSocial(obraSocialTextField.getText());
+                peticion.setPaciente((Paciente) pacientesSpinner.getSelectedItem());
+                peticion.setSucursal((Sucursal) sucursalSpinner.getSelectedItem());
+
+                if (peticion.getId() != null) {
+                    PeticionesTable.modifyPeticiones(peticion);
                 } else {
-                    PeticionesTable.addPeticiones(new Peticion(
-                            (Paciente) pacientesSpinner.getSelectedItem(),
-                            obraSocialTextField.getText(),
-                            (Sucursal) sucursalSpinner.getSelectedItem(),
-                            new Date(),
-                            new Date()
-                    ));
+                    peticion.setFechaCarga(new Date());
+                    peticion.setFechaEntrega(new Date());
+                    PeticionesTable.addPeticiones(peticion);
                 }
+
                 Application.manager.navigateTo(new Peticiones());
             }
         });
@@ -155,8 +155,17 @@ public class AgregarPeticion implements Screen {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Practica practica = (Practica) practicasSpinner.getSelectedItem();
-                peticion.addPractica(practica);
-                practicasList.setModel(getPracticas(peticion.getPracticas()));
+                if (practica != null) {
+                    peticion.addPractica(practica);
+                    practicasList.setModel(getPracticas(peticion.getPracticas()));
+                } else {
+                    JOptionPane.showMessageDialog(
+                            panel,
+                            "DEBE SELECCIONAR UNA PRACTICA",
+                            "ERROR",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
             }
         });
     }
@@ -167,8 +176,17 @@ public class AgregarPeticion implements Screen {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Practica practica = practicasList.getSelectedValue();
-                peticion.removePractica(practica);
-                practicasList.setModel(getPracticas(peticion.getPracticas()));
+                if (practica != null) {
+                    peticion.removePractica(practica);
+                    practicasList.setModel(getPracticas(peticion.getPracticas()));
+                } else {
+                    JOptionPane.showMessageDialog(
+                            panel,
+                            "DEBE SELECCIONAR UNA PRACTICA",
+                            "ERROR",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
             }
         });
     }

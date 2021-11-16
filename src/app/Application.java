@@ -1,12 +1,14 @@
 package app;
 
+import models.EstadoResultado;
 import models.Rol;
-import models.SexoEnum;
+import models.Sexo;
 import navigation.NavigationManager;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
+import ui.resultados.model.Resultado;
 import ui.sucursales.model.Sucursal;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
@@ -144,7 +146,7 @@ public class Application {
                         "Siempre viva 742",
                         "perreguido@gmail.com",
                         21,
-                        SexoEnum.MASCULINO
+                        Sexo.MASCULINO
                 )
         );
         PacientesTable.addPaciente(
@@ -154,7 +156,7 @@ public class Application {
                         "Siempre viva 742",
                         "perreguido@gmail.com",
                         21,
-                        SexoEnum.MASCULINO
+                        Sexo.MASCULINO
                 )
         );
         PacientesTable.addPaciente(
@@ -164,7 +166,7 @@ public class Application {
                         "Siempre viva 742",
                         "perreguido@gmail.com",
                         21,
-                        SexoEnum.MASCULINO
+                        Sexo.MASCULINO
                 )
         );
     }
@@ -196,39 +198,66 @@ public class Application {
 
     private static void createPeticiones() {
         List<Practica> practias = PracticasTable.getAllPracticas();
-        Paciente paciente = PacientesTable.getAllPacientes().get(0);
+        List<Paciente> pacientes = PacientesTable.getAllPacientes();
         Sucursal sucursal = SucursalesTable.getAllSucursales().get(0);
+
+        List<Resultado> resultados1 = new ArrayList<>();
+        resultados1.add(
+                new Resultado(
+                        1F,
+                        EstadoResultado.PENDIENTE,
+                        1
+                )
+        );
         PeticionesTable.addPeticiones(
             new Peticion(
-                    paciente,
+                    pacientes.get(0),
                     "OSDE 310",
                     sucursal,
                     new Date(),
                     new Date(),
                     practias,
-                    new ArrayList<>()
+                    resultados1
             )
+        );
+
+        List<Resultado> resultados2 = new ArrayList<>();
+        resultados2.add(
+                new Resultado(
+                        1F,
+                        EstadoResultado.FINALIZADO,
+                        2
+                )
         );
         PeticionesTable.addPeticiones(
                 new Peticion(
-                        paciente,
+                        pacientes.get(1),
                         "OSDE 410",
                         sucursal,
                         new Date(),
                         new Date(),
                         practias,
-                        new ArrayList<>()
+                        resultados2
                 )
+        );
+
+        List<Resultado> resultados3 = new ArrayList<>();
+        resultados3.add(
+            new Resultado(
+                1F,
+                EstadoResultado.PENDIENTE,
+                3
+            )
         );
         PeticionesTable.addPeticiones(
                 new Peticion(
-                        paciente,
+                        pacientes.get(2),
                         "OSDE 510",
                         sucursal,
                         new Date(),
                         new Date(),
                         practias,
-                        new ArrayList<>()
+                        resultados3
                 )
         );
     }

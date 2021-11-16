@@ -7,6 +7,7 @@ import ui.login.Login;
 import ui.pacientes.Pacientes;
 import ui.practicas.Practicas;
 import ui.peticiones.Peticiones;
+import ui.resultados.Resultados;
 import ui.sucursales.Sucursales;
 import ui.usuarios.Usuarios;
 import ui.usuarios.model.UsuariosTable;
@@ -140,7 +141,7 @@ public class Home implements Screen {
         resultadosLogo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                Application.manager.navigateTo(new Resultados());
             }
         });
     }
