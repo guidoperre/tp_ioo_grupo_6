@@ -4,7 +4,7 @@ import app.Application;
 import navigation.Screen;
 import ui.home.Home;
 import ui.usuarios.model.Usuario;
-import ui.usuarios.model.UsuariosTable;
+import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,7 +82,7 @@ public class Usuarios implements Screen {
     }
 
     private ListModel<Usuario> getUsuarios() {
-        List<Usuario> usuarios = UsuariosTable.getAllUsuarios();
+        List<Usuario> usuarios = UsuarioController.getAllUsuarios();
         DefaultListModel<Usuario> usuariosModel = new DefaultListModel<>();
         usuariosModel.addAll(usuarios);
         return usuariosModel;
