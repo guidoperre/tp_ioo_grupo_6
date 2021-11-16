@@ -1,7 +1,7 @@
 package ui.pacientes;
 
 import app.Application;
-import models.SexoEnum;
+import models.Sexo;
 import navigation.Screen;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
@@ -18,7 +18,7 @@ public class AgregarPaciente implements Screen {
     private JPanel panel;
     private JTextField nombreTextField;
     private JButton addButton;
-    private JComboBox<SexoEnum> sexoSpinner;
+    private JComboBox<Sexo> sexoSpinner;
     private JButton deleteButton;
     private JTextField dniTextField;
     private JTextField domicilioTextField;
@@ -94,7 +94,7 @@ public class AgregarPaciente implements Screen {
                     paciente.setNombre(nombreTextField.getText());
                     paciente.setDni(Integer.parseInt(dniTextField.getText()));
                     paciente.setDomicilio(domicilioTextField.getText());
-                    paciente.setSexo((SexoEnum) sexoSpinner.getSelectedItem());
+                    paciente.setSexo((Sexo) sexoSpinner.getSelectedItem());
                     paciente.setEdad(Integer.parseInt(edadTextField.getText()));
                     paciente.setMail(emailTextField.getText());
                     PacientesTable.modifyPaciente(paciente);
@@ -105,7 +105,7 @@ public class AgregarPaciente implements Screen {
                             domicilioTextField.getText(),
                             emailTextField.getText(),
                             Integer.parseInt(edadTextField.getText()),
-                            (SexoEnum) sexoSpinner.getSelectedItem()
+                            (Sexo) sexoSpinner.getSelectedItem()
 
                     ));
                 }
@@ -127,8 +127,8 @@ public class AgregarPaciente implements Screen {
 
     private void setSexo() {
         sexoSpinner = new JComboBox<>();
-        List<SexoEnum> sexosList = List.of(SexoEnum.values());
-        DefaultComboBoxModel<SexoEnum> sexos = new DefaultComboBoxModel<>();
+        List<Sexo> sexosList = List.of(Sexo.values());
+        DefaultComboBoxModel<Sexo> sexos = new DefaultComboBoxModel<>();
         sexos.addAll(sexosList);
         sexoSpinner.setModel(sexos);
     }

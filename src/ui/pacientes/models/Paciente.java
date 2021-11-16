@@ -1,7 +1,7 @@
 package ui.pacientes.models;
 
 import models.Persona;
-import models.SexoEnum;
+import models.Sexo;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
 
@@ -12,9 +12,9 @@ import java.util.Objects;
 public class Paciente extends Persona {
 
     private int edad;
-    private SexoEnum sexo;
+    private Sexo sexo;
 
-    public Paciente(String nombre, int dni, String domicilio, String mail, int edad, SexoEnum sexo) {
+    public Paciente(String nombre, int dni, String domicilio, String mail, int edad, Sexo sexo) {
         super(nombre, dni, domicilio, mail);
         this.edad = edad;
         this.sexo = sexo;
@@ -28,11 +28,11 @@ public class Paciente extends Persona {
         this.edad = edad;
     }
 
-    public SexoEnum getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(SexoEnum sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 

@@ -1,7 +1,7 @@
 package app;
 
 import models.Rol;
-import models.SexoEnum;
+import models.Sexo;
 import navigation.NavigationManager;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
@@ -144,7 +144,7 @@ public class Application {
                         "Siempre viva 742",
                         "perreguido@gmail.com",
                         21,
-                        SexoEnum.MASCULINO
+                        Sexo.MASCULINO
                 )
         );
         PacientesTable.addPaciente(
@@ -154,7 +154,7 @@ public class Application {
                         "Siempre viva 742",
                         "perreguido@gmail.com",
                         21,
-                        SexoEnum.MASCULINO
+                        Sexo.MASCULINO
                 )
         );
         PacientesTable.addPaciente(
@@ -164,7 +164,7 @@ public class Application {
                         "Siempre viva 742",
                         "perreguido@gmail.com",
                         21,
-                        SexoEnum.MASCULINO
+                        Sexo.MASCULINO
                 )
         );
     }
