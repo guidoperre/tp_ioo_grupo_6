@@ -1,5 +1,8 @@
+package app;
+
 import models.Rol;
 import models.SexoEnum;
+import navigation.NavigationManager;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
@@ -13,6 +16,8 @@ import ui.pacientes.models.PacientesTable;
 import ui.sucursales.model.SucursalesTable;
 import utils.DataUtils;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,8 +29,25 @@ import java.util.List;
 */
 public class Application {
 
+    private static final JFrame frame = new JFrame("MedicinaBinaria");
+    public static final NavigationManager manager = new NavigationManager(frame);
+
     public static void main(String[] args){
-        new Login();
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+
+        manager.navigateTo(new Login());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1280, 800);
+        frame.pack();
+
+        //Calculate the frame location
+        int x = (screenSize.width - frame.getWidth()) / 2;
+        int y = (screenSize.height - frame.getHeight()) / 2;
+
+        frame.setLocation(x, y);
+        frame.setVisible(true);
+
         initTables();
     }
 

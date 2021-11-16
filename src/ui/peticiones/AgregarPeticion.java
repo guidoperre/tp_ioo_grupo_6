@@ -1,5 +1,7 @@
 package ui.peticiones;
 
+import app.Application;
+import navigation.Screen;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
@@ -10,15 +12,12 @@ import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalesTable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AgregarPeticion {
-    private final JFrame frame = new JFrame("Agregar peticion");
+public class AgregarPeticion implements Screen {
 
     private JLabel title;
     private JLabel backButton;
@@ -37,35 +36,20 @@ public class AgregarPeticion {
 
     public AgregarPeticion() {
         this.peticion = new Peticion();
-        init();
+        addListener();
+        practicasList.setModel(getPracticas(peticion.getPracticas()));
     }
 
     public AgregarPeticion(Peticion peticion) {
         this.peticion = peticion;
-        init();
+        practicasList.setModel(getPracticas(peticion.getPracticas()));
+        addListener();
         initUsuario();
     }
 
-    // Inicializa la ventana
-    private void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
-
-        addListener();
-        practicasList.setModel(getPracticas(peticion.getPracticas()));
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
     private void initUsuario() {
@@ -78,7 +62,6 @@ public class AgregarPeticion {
         sucursalSpinner.setSelectedItem(peticion.getSucursal());
 
         deleteListener();
-        addListener();
     }
 
     private void createUIComponents() {
@@ -102,7 +85,7 @@ public class AgregarPeticion {
         ) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(frame, "DEBE COMPLETAR TODOS LOS CAMPOS", "ERROR", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(panel, "DEBE COMPLETAR TODOS LOS CAMPOS", "ERROR", JOptionPane.WARNING_MESSAGE);
             return false;
         }
     }
@@ -112,8 +95,7 @@ public class AgregarPeticion {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new Peticiones();
+                Application.manager.navigateTo(new Peticiones());
             }
         });
     }
@@ -121,7 +103,6 @@ public class AgregarPeticion {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                frame.dispose();
                 if (peticion != null) {
                     peticion.setObraSocial(obraSocialTextField.getText());
                     peticion.setPaciente((Paciente) pacientesSpinner.getSelectedItem());
@@ -135,16 +116,15 @@ public class AgregarPeticion {
                             new Date()
                     ));
                 }
-                new Peticiones();
+                Application.manager.navigateTo(new Peticiones());
             }
         });
     }
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            frame.dispose();
             PeticionesTable.deletePeticiones(peticion);
-            new Peticiones();
+            Application.manager.navigateTo(new Peticiones());
         });
     }
 

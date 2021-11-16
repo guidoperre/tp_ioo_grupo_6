@@ -1,5 +1,7 @@
 package ui.pacientes;
 
+import app.Application;
+import navigation.Screen;
 import ui.home.Home;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
@@ -10,36 +12,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class Pacientes {
-    private final JFrame frame = new JFrame("Pacientes");
+public class Pacientes implements Screen {
 
-    private JLabel title;
     private JLabel backButton;
     private JLabel addPaciente;
     private JPanel panel;
     private JPanel listPanel;
 
-    public Pacientes() {
-        init();
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
-    // Inicializa la ventana
-    public void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+    public Pacientes() {
 
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
     }
 
     private void createUIComponents() {
@@ -53,8 +39,7 @@ public class Pacientes {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new Home();
+                Application.manager.navigateTo(new Home());
             }
         });
     }
@@ -64,8 +49,7 @@ public class Pacientes {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new AgregarPaciente();
+                Application.manager.navigateTo(new AgregarPaciente());
             }
         });
     }
@@ -91,8 +75,7 @@ public class Pacientes {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    frame.dispose();
-                    new AgregarPaciente((Paciente) target.getModel().getElementAt(index));
+                    Application.manager.navigateTo(new AgregarPaciente((Paciente) target.getModel().getElementAt(index)));
                 }
             }
         });
