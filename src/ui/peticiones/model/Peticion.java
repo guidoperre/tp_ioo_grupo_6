@@ -159,4 +159,9 @@ public class Peticion {
         }
         return critico;
     }
+
+    @Override
+    public String toString() {
+        return "Peticion " + id + " / " + sucursal.getDireccion() + " / " + obraSocial;
+    }
 }
