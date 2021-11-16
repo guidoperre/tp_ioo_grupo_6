@@ -3,7 +3,6 @@ package ui.usuarios;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
-import ui.peticiones.AgregarPeticion;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 
@@ -15,7 +14,6 @@ import java.util.List;
 
 public class Usuarios implements Screen {
 
-    private JLabel title;
     private JLabel backButton;
     private JLabel addPaciente;
     private JPanel panel;

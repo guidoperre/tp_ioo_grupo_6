@@ -2,14 +2,12 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
-import ui.usuarios.Usuarios;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalesTable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;

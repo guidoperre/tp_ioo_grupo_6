@@ -2,12 +2,9 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
-import ui.peticiones.AgregarPeticion;
 import ui.sucursales.model.Sucursal;
 import ui.home.Home;
-import ui.pacientes.models.PacientesTable;
 import ui.sucursales.model.SucursalesTable;
-import ui.usuarios.AgregarUsuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +14,6 @@ import java.util.List;
 
 public class Sucursales implements Screen {
 
-    private JLabel title;
     private JLabel backButton;
     private JLabel addPaciente;
     private JPanel panel;

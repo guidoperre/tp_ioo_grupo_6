@@ -15,7 +15,6 @@ import java.util.List;
 
 public class Peticiones implements Screen {
 
-    private JLabel title;
     private JLabel backButton;
     private JLabel addPaciente;
     private JPanel panel;

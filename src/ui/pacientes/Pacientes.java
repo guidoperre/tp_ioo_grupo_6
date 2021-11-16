@@ -5,7 +5,6 @@ import navigation.Screen;
 import ui.home.Home;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
-import ui.sucursales.AgregarSucursal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +14,6 @@ import java.util.List;
 
 public class Pacientes implements Screen {
 
-    private JLabel title;
     private JLabel backButton;
     private JLabel addPaciente;
     private JPanel panel;
