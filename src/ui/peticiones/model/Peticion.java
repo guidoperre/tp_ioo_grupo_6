@@ -1,7 +1,7 @@
 package ui.peticiones.model;
 
 import ui.practicas.model.Practica;
-import models.Resultado;
+import ui.resultados.model.Resultado;
 import ui.pacientes.models.Paciente;
 import ui.sucursales.model.Sucursal;
 
@@ -120,6 +120,10 @@ public class Peticion {
         this.resultados = resultados;
     }
 
+    public void removeResultado(Resultado resultado) {
+        this.resultados.remove(resultado);
+    }
+
     public void addResultado(Resultado resultado) {
         this.resultados.add(resultado);
     }
@@ -158,5 +162,10 @@ public class Peticion {
                 critico = true;
         }
         return critico;
+    }
+
+    @Override
+    public String toString() {
+        return "Peticion " + id + " / " + sucursal.getDireccion() + " / " + obraSocial;
     }
 }

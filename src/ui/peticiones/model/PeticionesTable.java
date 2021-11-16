@@ -1,5 +1,7 @@
 package ui.peticiones.model;
 
+import ui.pacientes.models.Paciente;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +17,16 @@ public class PeticionesTable {
 
     public static List<Peticion> getAllPeticiones() {
         return peticiones;
+    }
+
+    public static List<Peticion> getAllPeticionesPaciente(Paciente paciente) {
+        List<Peticion> peticionesPaciente = new ArrayList<>();
+        for (Peticion p: peticiones) {
+            if (p.getPaciente().equals(paciente)) {
+                peticionesPaciente.add(p);
+            }
+        }
+        return peticionesPaciente;
     }
 
     public static List<Peticion> getPeticionesCriticas() {
@@ -49,7 +61,7 @@ public class PeticionesTable {
             if (Objects.equals(aux.getId(), peticion.getId())) {
                 peticiones.remove(i);
                 peticiones.add(peticion);
-                break;
+                return;
             }
         }
     }
