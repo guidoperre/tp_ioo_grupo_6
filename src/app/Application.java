@@ -116,8 +116,7 @@ public class Application {
                         "Analisis de sangre",
                         12,
                         new ArrayList<>(),
-                        new ArrayList<>(),
-                        1
+                        new ArrayList<>()
                 )
         );
         PracticasTable.addPractica(
@@ -127,8 +126,7 @@ public class Application {
                         "Analisis globulos rojos",
                         12,
                         new ArrayList<>(),
-                        new ArrayList<>(),
-                        1
+                        new ArrayList<>()
                 )
         );
         PracticasTable.addPractica(
@@ -138,8 +136,7 @@ public class Application {
                         "Radiografia torax",
                         12,
                         new ArrayList<>(),
-                        new ArrayList<>(),
-                        1
+                        new ArrayList<>()
                 )
         );
     }
