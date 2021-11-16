@@ -32,6 +32,8 @@ public class Peticion {
         this.sucursal = sucursal;
         this.practicas = practicas;
         this.resultados = resultados;
+
+        sucursal.addPeticion(this);
     }
 
     public Peticion(Paciente paciente, String obraSocial, Sucursal sucursal, Date fechaCarga, Date fechaEntrega) {
@@ -42,6 +44,8 @@ public class Peticion {
         this.sucursal = sucursal;
         this.practicas = new ArrayList<>();
         this.resultados = new ArrayList<>();
+
+        sucursal.addPeticion(this);
     }
 
     public Long getId() {
@@ -127,6 +131,15 @@ public class Peticion {
                 activa = true;
         }
         return activa;
+    }
+
+    public Boolean isFinalizada() {
+        boolean finalizada = false;
+        for (Resultado resultado: this.resultados) {
+            if (resultado.isFinalizada())
+                finalizada = true;
+        }
+        return finalizada;
     }
 
     private Practica getPratica(int codigo) {

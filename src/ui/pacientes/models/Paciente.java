@@ -2,7 +2,11 @@ package ui.pacientes.models;
 
 import models.Persona;
 import models.SexoEnum;
+import ui.peticiones.model.Peticion;
+import ui.peticiones.model.PeticionesTable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Paciente extends Persona {
@@ -53,5 +57,16 @@ public class Paciente extends Persona {
     @Override
     public String toString() {
         return getNombre();
+    }
+
+    public List<Peticion> getPeticionesFinalizadas() {
+        List<Peticion> peticiones = new ArrayList<>();
+        for (Peticion peticion: PeticionesTable.getAllPeticiones()) {
+            if (peticion.getPaciente().getId() == this.getId()) {
+                if (peticion.isFinalizada())
+                    peticiones.add(peticion);
+            }
+        }
+        return peticiones;
     }
 }

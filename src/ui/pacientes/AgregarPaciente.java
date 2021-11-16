@@ -4,6 +4,7 @@ import models.Rol;
 import models.SexoEnum;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
+import ui.sucursales.Sucursales;
 
 import javax.swing.*;
 import java.awt.*;
@@ -138,7 +139,11 @@ public class AgregarPaciente {
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
             frame.dispose();
-            PacientesTable.deletePaciente(paciente);
+            if (paciente.getPeticionesFinalizadas().size() > 0) {
+                JOptionPane.showMessageDialog(frame, "ESTE PACIENTE NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                PacientesTable.deletePaciente(paciente);
+            }
             new Pacientes();
         });
     }
