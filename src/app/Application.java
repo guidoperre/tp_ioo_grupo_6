@@ -212,6 +212,10 @@ public class Application {
                         1
                 )
         );
+
+        List<Practica> PracticaPeticion1 = new ArrayList<>();
+        PracticaPeticion1.addAll(practias);
+
         PeticionesTable.addPeticiones(
             new Peticion(
                     pacientes.get(0),
@@ -219,10 +223,13 @@ public class Application {
                     sucursal,
                     new Date(),
                     new Date(),
-                    practias,
+                    PracticaPeticion1,
                     resultados1
             )
         );
+
+        List<Practica> PracticaPeticion2 = new ArrayList<>();
+        PracticaPeticion2.addAll(practias);
 
         List<Resultado> resultados2 = new ArrayList<>();
         resultados2.add(
@@ -239,10 +246,13 @@ public class Application {
                         sucursal,
                         new Date(),
                         new Date(),
-                        practias,
+                        PracticaPeticion2,
                         resultados2
                 )
         );
+
+        List<Practica> PracticaPeticion3 = new ArrayList<>();
+        PracticaPeticion3.addAll(practias);
 
         List<Resultado> resultados3 = new ArrayList<>();
         resultados3.add(
@@ -259,7 +269,7 @@ public class Application {
                         sucursal,
                         new Date(),
                         new Date(),
-                        practias,
+                        PracticaPeticion3,
                         resultados3
                 )
         );

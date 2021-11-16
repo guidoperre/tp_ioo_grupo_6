@@ -41,6 +41,11 @@ public class AgregarResultado implements Screen {
     public AgregarResultado(Resultado resultado) {
         this.resultado = resultado;
         this.peticion = getPeticion();
+
+        if (checkValorReservado()) {
+            return;
+        }
+
         addListener();
         initResultado();
     }
@@ -60,6 +65,20 @@ public class AgregarResultado implements Screen {
             }
         }
         return null;
+    }
+
+    private Boolean checkValorReservado() {
+        Practica practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
+        if (practica.isValorCritico(resultado.getValor())) {
+            JOptionPane.showMessageDialog(
+                    panel,
+                    "RETIRAR POR SUCURSAL",
+                    "ERROR",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return true;
+        }
+        return false;
     }
 
     private void initResultado() {
