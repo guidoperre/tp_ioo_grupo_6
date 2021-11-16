@@ -11,6 +11,7 @@ public class Practica {
     private int codigo;
     private Boolean activo;
     private String nombre;
+    private int horas;
     private List<Regla> valoresCriticos;
     private List<Regla> valoresReservados;
 
@@ -19,11 +20,12 @@ public class Practica {
         this.valoresReservados = new ArrayList<>();
     }
 
-    public Practica(int codigo, Boolean activo, String nombre, List<Regla> valoresCriticos, List<Regla> valoresReservados) {
+    public Practica(int codigo, Boolean activo, String nombre, int horas,List<Regla> valoresCriticos, List<Regla> valoresReservados) {
         super();
         this.codigo = codigo;
         this.activo = activo;
         this.nombre = nombre;
+        this.horas = horas;
         this.valoresCriticos = valoresCriticos;
         this.valoresReservados = valoresReservados;
     }
@@ -58,6 +60,14 @@ public class Practica {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getHoras() {
+        return horas;
+    }
+
+    public void setHoras(int horas) {
+        this.horas = horas;
     }
 
     public List<Regla> getValoresCriticos() {

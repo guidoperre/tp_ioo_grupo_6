@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgregarPractica implements Screen {
-    
+
     private JLabel title;
     private JLabel backButton;
     private JPanel panel;
@@ -68,7 +68,6 @@ public class AgregarPractica implements Screen {
         addBackListener();
         setValoresCriticos();
         setValoresReservados();
-
     }
 
     private Boolean checkFields() {
