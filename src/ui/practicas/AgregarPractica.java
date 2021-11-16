@@ -109,10 +109,14 @@ public class AgregarPractica implements Screen {
                 case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> {
                     valorCriticoMaximo.setVisible(false);
                     valorCriticoMinimo.setVisible(true);
+                    panel.revalidate();
+                    panel.repaint();
                 }
                 default -> {
                     valorCriticoMaximo.setVisible(true);
                     valorCriticoMinimo.setVisible(true);
+                    panel.revalidate();
+                    panel.repaint();
                 }
             }
         });
@@ -131,10 +135,14 @@ public class AgregarPractica implements Screen {
                 case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> {
                     valorReservadoMinimo.setVisible(false);
                     valorReservadoMaximo.setVisible(true);
+                    panel.revalidate();
+                    panel.repaint();
                 }
                 default -> {
                     valorReservadoMinimo.setVisible(true);
                     valorReservadoMaximo.setVisible(true);
+                    panel.revalidate();
+                    panel.repaint();
                 }
             }
         });
