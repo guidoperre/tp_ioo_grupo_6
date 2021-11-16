@@ -2,19 +2,13 @@ package ui.practicas;
 
 import app.Application;
 import models.OperadorRegla;
-import models.Regla;
 import navigation.Screen;
-import ui.pacientes.models.Paciente;
-import ui.pacientes.models.PacientesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
-import ui.sucursales.Sucursales;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AgregarPractica implements Screen {
@@ -24,19 +18,6 @@ public class AgregarPractica implements Screen {
     private JPanel panel;
     private JButton addButton;
     private JButton deleteButton;
-    private JTextField nombreTextField;
-    private JList<Regla> valoresCriticosList;
-    private JList<Regla> valoresReservadosList;
-    private JLabel addPractica;
-    private JLabel addValorCritico;
-    private JLabel addValorReservado;
-    private JLabel removeValorCritico;
-    private JLabel removeValorReservado;
-    private JTextField cantidadDeHorasTextField;
-    private JCheckBox activoCheckBoxField;
-    private JComboBox<Regla> valoresCriticosSpinner;
-    private JComboBox<Regla> valoresReservadosSpinner;
-    private JLabel removePractica;
 
     private Practica practica;
 
@@ -52,22 +33,22 @@ public class AgregarPractica implements Screen {
     public AgregarPractica(Practica practica) {
         this.practica = practica;
         initPractica();
+        addListener();
     }
 
     private void initPractica() {
-        title.setText("Agregar Práctica");
+        title.setText("Editar práctica");
         addButton.setText("Editar");
         deleteButton.setVisible(true);
-
-        nombreTextField.setText(practica.getNombre());
 
         deleteListener();
     }
 
     private void createUIComponents() {
         addBackListener();
-        setValoresCriticos();
-        setValoresReservados();
+
+        setValorCriticoSpinner();
+        setValorReservadoSpinner();
     }
 
     private Boolean checkFields() {
@@ -85,25 +66,12 @@ public class AgregarPractica implements Screen {
     }
 
     private void addListener() {
-//        addButton.addActionListener(e -> {
-//            if (checkFields()) {
-//                frame.dispose();
-//                if (peticion != null) {
-//                    peticion.setObraSocial(obraSocialTextField.getText());
-//                    peticion.setPaciente((Paciente) pacientesSpinner.getSelectedItem());
-//                    peticion.setSucursal((Sucursal) sucursalSpinner.getSelectedItem());
-//                } else {
-//                    PeticionesTable.addPeticiones(new Peticion(
-//                            (Paciente) pacientesSpinner.getSelectedItem(),
-//                            obraSocialTextField.getText(),
-//                            (Sucursal) sucursalSpinner.getSelectedItem(),
-//                            new Date(),
-//                            new Date()
-//                    ));
-//                }
-//                new Peticiones();
-//            }
-//        });
+        addButton.addActionListener(e -> {
+            if (checkFields()) {
+
+                Application.manager.navigateTo(new Practicas());
+            }
+        });
     }
 
     private void deleteListener() {
@@ -111,6 +79,50 @@ public class AgregarPractica implements Screen {
             PracticasTable.deletePractica(practica);
             Application.manager.navigateTo(new Practicas());
         });
+    }
+
+    private void setValorCriticoSpinner() {
+//        valoresCriticosSpinner = new JComboBox<>();
+//        List<OperadorRegla> operadorReglaList = List.of(OperadorRegla.values());
+//        DefaultComboBoxModel<OperadorRegla> operadorRegla = new DefaultComboBoxModel<>();
+//        operadorRegla.addAll(operadorReglaList);
+//        valoresCriticosSpinner.setModel(operadorRegla);
+//
+//        valoresCriticosSpinner.addItemListener(e -> {
+//            OperadorRegla operadorRegla1 = (OperadorRegla) e.getItem();
+//            switch (operadorRegla1) {
+//                case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> {
+//                    valorCriticoMaximoTextField.setVisible(false);
+//                    valorCriticoMinimoTextField.setVisible(true);
+//                }
+//                default -> {
+//                    valorCriticoMaximoTextField.setVisible(true);
+//                    valorCriticoMinimoTextField.setVisible(true);
+//                }
+//            }
+//        });
+    }
+
+    private void setValorReservadoSpinner() {
+//        valoresReservadosSpinner = new JComboBox<>();
+//        List<OperadorRegla> operadorReglaList = List.of(OperadorRegla.values());
+//        DefaultComboBoxModel<OperadorRegla> operadorRegla = new DefaultComboBoxModel<>();
+//        operadorRegla.addAll(operadorReglaList);
+//        valoresReservadosSpinner.setModel(operadorRegla);
+//
+//        valoresReservadosSpinner.addItemListener(e -> {
+//            OperadorRegla operadorRegla1 = (OperadorRegla) e.getItem();
+//            switch (operadorRegla1) {
+//                case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> {
+//                    valorReservadoMinimoTextField.setVisible(false);
+//                    valorReservadoMaximoTextField.setVisible(true);
+//                }
+//                default -> {
+//                    valorReservadoMinimoTextField.setVisible(true);
+//                    valorReservadoMaximoTextField.setVisible(true);
+//                }
+//            }
+//        });
     }
 
     private void addValorCritico() {
@@ -121,19 +133,11 @@ public class AgregarPractica implements Screen {
 
     }
 
-    private void setValoresCriticos() {
-        valoresCriticosSpinner = new JComboBox<>();
-        List<Regla> criticos = new ArrayList<>();
-        criticos.add(new Regla(0, 5, OperadorRegla.MENOR));
-        DefaultComboBoxModel<Regla> criticosItem = new DefaultComboBoxModel<>();
-        criticosItem.addAll(criticos);
-        valoresCriticosSpinner.setModel(criticosItem);
-    }
-
-    private void setValoresReservados() {
+    private void removeValoresCriticos() {
 
     }
 
+    private void removeValoresReservados() {
 
-
+    }
 }

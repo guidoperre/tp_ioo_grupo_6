@@ -2,7 +2,6 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
-import ui.peticiones.model.Peticion;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.sucursales.model.Sucursal;
@@ -22,6 +21,11 @@ public class AgregarSucursal implements Screen {
     private JButton addButton;
     private JComboBox<Usuario> responsableSpinner;
     private JButton deleteButton;
+    private JLabel addValorCritico;
+    private JComboBox valoresCriticosSpinner;
+    private JLabel removeValorCritico;
+    private JTextField valorCriticoMinimoTextField;
+    private JTextField valorCriticoMaximoTextField;
 
     private Sucursal sucursal;
 
@@ -100,9 +104,9 @@ public class AgregarSucursal implements Screen {
             if (sucursal.getPeticionesFinalizadas().size() > 0) {
                 JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                Boolean movido = false;
+                boolean movido = false;
                 for (Sucursal sucursalItem: SucursalesTable.getAllSucursales()) {
-                    if (sucursalItem.getId() != sucursal.getId()) {
+                    if (!sucursalItem.getId().equals(sucursal.getId())) {
                         sucursal.movePeticiones(sucursalItem);
                         movido = true;
                         SucursalesTable.deleteSucursal(sucursal);
@@ -111,7 +115,7 @@ public class AgregarSucursal implements Screen {
                     }
                 }
 
-                if (movido == false) {
+                if (!movido) {
                     JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE NO HAY SUCURSALES DISPONIBLES PARA TRANSFERIR LAS PETICIONES", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }

@@ -15,7 +15,6 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 public class AgregarPeticion implements Screen {
