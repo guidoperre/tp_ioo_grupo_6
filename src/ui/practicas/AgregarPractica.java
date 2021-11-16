@@ -4,12 +4,17 @@ import app.Application;
 import models.OperadorRegla;
 import models.Regla;
 import navigation.Screen;
+import ui.pacientes.models.Paciente;
+import ui.peticiones.Peticiones;
+import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
+import ui.sucursales.model.Sucursal;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 import java.util.List;
 
 public class AgregarPractica implements Screen {
@@ -18,7 +23,6 @@ public class AgregarPractica implements Screen {
     private JLabel backButton;
     private JPanel panel;
     private JButton addButton;
-    private JButton deleteButton;
     private JLabel removeValorCritico;
     private JLabel addValorCritico;
     private JLabel addValorReservado;
@@ -32,6 +36,8 @@ public class AgregarPractica implements Screen {
     private JComboBox<OperadorRegla> valoresCriticosSpinner;
     private JList<Regla> valoresReservadosList;
     private JList<Regla> valoresCriticosList;
+    private JTextField nombreTextField;
+    private JTextField horasTextField;
 
     private final Practica practica;
 
@@ -54,9 +60,8 @@ public class AgregarPractica implements Screen {
     private void initPractica() {
         title.setText("Editar práctica");
         addButton.setText("Editar");
-        deleteButton.setVisible(true);
 
-        deleteListener();
+
     }
 
     private void createUIComponents() {
@@ -73,7 +78,15 @@ public class AgregarPractica implements Screen {
     }
 
     private Boolean checkFields() {
-       return true;
+        String nombre = nombreTextField.getText();
+        String horas = horasTextField.getText();
+
+        if (!nombre.equals("") && !horas.equals("")) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(panel, "DEBE COMPLETAR TODOS LOS CAMPOS", "ERROR", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
     }
 
     private void addBackListener() {
@@ -89,16 +102,20 @@ public class AgregarPractica implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
+                if (checkFields()) {
+                    practica.setNombre(nombreTextField.getText());
+                    practica.setHoras(Integer.parseInt(horasTextField.getText()));
+                    practica.setActivo(activoCheckBox.isSelected());
 
-                Application.manager.navigateTo(new Practicas());
+                    if (practica.getId() != null) {
+                        PracticasTable.modifyPractica(practica);
+                    } else {
+                        PracticasTable.addPractica(practica);
+                    }
+
+                    Application.manager.navigateTo(new Practicas());
+                }
             }
-        });
-    }
-
-    private void deleteListener() {
-        deleteButton.addActionListener(e -> {
-            PracticasTable.deletePractica(practica);
-            Application.manager.navigateTo(new Practicas());
         });
     }
 
