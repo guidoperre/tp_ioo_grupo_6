@@ -10,13 +10,10 @@ import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalesTable;
-import ui.usuarios.AgregarUsuario;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,8 +42,8 @@ public class AgregarPeticion implements Screen {
 
     public AgregarPeticion(Peticion peticion) {
         this.peticion = peticion;
-        addListener();
         practicasList.setModel(getPracticas(peticion.getPracticas()));
+        addListener();
         initUsuario();
     }
 
@@ -65,7 +62,6 @@ public class AgregarPeticion implements Screen {
         sucursalSpinner.setSelectedItem(peticion.getSucursal());
 
         deleteListener();
-        addListener();
     }
 
     private void createUIComponents() {

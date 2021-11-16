@@ -55,7 +55,6 @@ public class AgregarPaciente implements Screen {
         emailTextField.setText(paciente.getMail());
 
         deleteListener();
-        addListener();
     }
 
     private void createUIComponents() {

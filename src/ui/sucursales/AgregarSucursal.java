@@ -50,7 +50,6 @@ public class AgregarSucursal implements Screen {
         responsableSpinner.setSelectedItem(sucursal.getResponsable());
 
         deleteListener();
-        addListener();
     }
 
     private void createUIComponents() {

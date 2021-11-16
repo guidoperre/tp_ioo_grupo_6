@@ -3,7 +3,6 @@ package ui.usuarios;
 import app.Application;
 import models.Rol;
 import navigation.Screen;
-import ui.peticiones.Peticiones;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import utils.DataUtils;
@@ -61,7 +60,6 @@ public class AgregarUsuario implements Screen {
         rolSpinner.setSelectedItem(usuario.getRol());
 
         deleteListener();
-        addListener();
     }
 
     private void createUIComponents() {
