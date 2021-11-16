@@ -61,7 +61,7 @@ public class PeticionesTable {
             if (Objects.equals(aux.getId(), peticion.getId())) {
                 peticiones.remove(i);
                 peticiones.add(peticion);
-                break;
+                return;
             }
         }
     }

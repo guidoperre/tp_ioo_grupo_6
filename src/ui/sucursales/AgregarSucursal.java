@@ -82,6 +82,7 @@ public class AgregarSucursal implements Screen {
                 if (sucursal != null) {
                     sucursal.setDireccion(direccionTextField.getText());
                     sucursal.setResponsable((Usuario) responsableSpinner.getSelectedItem());
+                    SucursalesTable.modifySucursal(sucursal);
                 } else {
                     SucursalesTable.addSucursal(new Sucursal(
                             direccionTextField.getText(),

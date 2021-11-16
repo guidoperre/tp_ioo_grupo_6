@@ -31,7 +31,7 @@ public class AgregarResultado implements Screen {
     private JTextField resultadoValorTextField;
 
     private Peticion peticion;
-    private Resultado resultado;
+    private final Resultado resultado;
 
     public AgregarResultado() {
         this.resultado = new Resultado();
