@@ -1,6 +1,7 @@
 package ui.practicas;
 
 import app.Application;
+import models.OperadorRegla;
 import models.Regla;
 import navigation.Screen;
 import ui.pacientes.models.Paciente;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgregarPractica implements Screen {
+    
     private JLabel title;
     private JLabel backButton;
     private JPanel panel;
@@ -123,7 +125,7 @@ public class AgregarPractica implements Screen {
     private void setValoresCriticos() {
         valoresCriticosSpinner = new JComboBox<>();
         List<Regla> criticos = new ArrayList<>();
-        criticos.add(new Regla(0, 5, Regla.operadorEnum.menor));
+        criticos.add(new Regla(0, 5, OperadorRegla.MENOR));
         DefaultComboBoxModel<Regla> criticosItem = new DefaultComboBoxModel<>();
         criticosItem.addAll(criticos);
         valoresCriticosSpinner.setModel(criticosItem);
