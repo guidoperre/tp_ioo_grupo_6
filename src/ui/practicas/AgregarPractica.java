@@ -1,7 +1,6 @@
 package ui.practicas;
 
 import app.Application;
-import models.OperadorRegla;
 import navigation.Screen;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
@@ -9,7 +8,6 @@ import ui.practicas.model.PracticasTable;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 
 public class AgregarPractica implements Screen {
 
@@ -18,6 +16,11 @@ public class AgregarPractica implements Screen {
     private JPanel panel;
     private JButton addButton;
     private JButton deleteButton;
+    private JLabel removeValorCritico;
+    private JLabel addValorCritico;
+    private JLabel addValorReservado;
+    private JLabel removeValorReservado;
+    private JCheckBox activoCheckBox;
 
     private Practica practica;
 
@@ -49,6 +52,10 @@ public class AgregarPractica implements Screen {
 
         setValorCriticoSpinner();
         setValorReservadoSpinner();
+        addValoresCriticos();
+        addValoresReservados();
+        removeValoresCriticos();
+        removeValoresReservados();
     }
 
     private Boolean checkFields() {
@@ -125,19 +132,19 @@ public class AgregarPractica implements Screen {
 //        });
     }
 
-    private void addValorCritico() {
-
+    private void addValoresCriticos() {
+        addValorCritico = new JLabel(new ImageIcon("resources/add.png"));
     }
 
-    private void addValorReservado() {
-
+    private void addValoresReservados() {
+        addValorReservado = new JLabel(new ImageIcon("resources/add.png"));
     }
 
     private void removeValoresCriticos() {
-
+        removeValorCritico = new JLabel(new ImageIcon("resources/remove.png"));
     }
 
     private void removeValoresReservados() {
-
+        removeValorReservado= new JLabel(new ImageIcon("resources/remove.png"));
     }
 }

@@ -21,11 +21,6 @@ public class AgregarSucursal implements Screen {
     private JButton addButton;
     private JComboBox<Usuario> responsableSpinner;
     private JButton deleteButton;
-    private JLabel addValorCritico;
-    private JComboBox valoresCriticosSpinner;
-    private JLabel removeValorCritico;
-    private JTextField valorCriticoMinimoTextField;
-    private JTextField valorCriticoMaximoTextField;
 
     private Sucursal sucursal;
 
