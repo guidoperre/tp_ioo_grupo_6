@@ -126,7 +126,7 @@ public class Home implements Screen {
             practicaLogo.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-
+                    Application.manager.navigateTo(new Practicas());
                 }
             });
         } else {
@@ -145,14 +145,4 @@ public class Home implements Screen {
         });
     }
 
-    private void setPracticas() {
-        practicaLogo = new JLabel(new ImageIcon("resources/practicas.png"));
-        practicaLogo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new Practicas();
-            }
-        });
-    }
 }

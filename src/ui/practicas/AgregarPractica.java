@@ -1,10 +1,13 @@
 package ui.practicas;
 
+import app.Application;
 import models.Regla;
+import navigation.Screen;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
+import ui.sucursales.Sucursales;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +16,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgregarPractica {
-    private final JFrame frame = new JFrame("Agregar practica");
-
+public class AgregarPractica implements Screen {
     private JLabel title;
     private JLabel backButton;
     private JPanel panel;
@@ -35,39 +36,20 @@ public class AgregarPractica {
     private JComboBox<Regla> valoresReservadosSpinner;
     private JLabel removePractica;
 
-    private final Practica practica;
+    private Practica practica;
+
+    @Override
+    public JPanel getPanel() {
+        return panel;
+    }
 
     public AgregarPractica() {
-        this.practica = new Practica();
-        init();
+        addListener();
     }
 
     public AgregarPractica(Practica practica) {
         this.practica = practica;
-
-        init();
         initPractica();
-    }
-
-    // Inicializa la ventana
-    private void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
-
-        addListener();
     }
 
     private void initPractica() {
@@ -78,7 +60,6 @@ public class AgregarPractica {
         nombreTextField.setText(practica.getNombre());
 
         deleteListener();
-        addListener();
     }
 
     private void createUIComponents() {
@@ -97,8 +78,7 @@ public class AgregarPractica {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new Practicas();
+                Application.manager.navigateTo(new Practicas());
             }
         });
     }
@@ -127,9 +107,8 @@ public class AgregarPractica {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            frame.dispose();
             PracticasTable.deletePractica(practica);
-            new Practicas();
+            Application.manager.navigateTo(new Practicas());
         });
     }
 

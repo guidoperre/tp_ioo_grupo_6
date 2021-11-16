@@ -3,7 +3,7 @@ package models;
 public class Regla extends Base {
     private float min;
     private float max;
-    private enum operadorEnum {
+    public enum operadorEnum {
         mayorigual,
         mayor,
         menorigual,

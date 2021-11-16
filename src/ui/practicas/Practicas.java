@@ -1,7 +1,7 @@
 package ui.practicas;
 
+import navigation.Screen;
 import ui.home.Home;
-//import ui.practicas.PeticionesItem;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 
@@ -11,8 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class Practicas {
-    private final JFrame frame = new JFrame("Prácticas");
+public class Practicas implements Screen {
+    private final JFrame frame = new JFrame("Practicas");
 
     private JLabel title;
     private JLabel backButton;
@@ -22,6 +22,11 @@ public class Practicas {
 
     public Practicas() {
         init();
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
     // Inicializa la ventana
