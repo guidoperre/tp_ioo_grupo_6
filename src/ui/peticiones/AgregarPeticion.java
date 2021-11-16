@@ -79,9 +79,9 @@ public class AgregarPeticion implements Screen {
         String obraSocial = obraSocialTextField.getText();
 
         if (
-                !obraSocial.equals("") &&
-                pacientesSpinner.getSelectedItem() != null &&
-                sucursalSpinner.getSelectedItem() != null
+            !obraSocial.equals("") &&
+            pacientesSpinner.getSelectedItem() != null &&
+            sucursalSpinner.getSelectedItem() != null
         ) {
             return true;
         } else {

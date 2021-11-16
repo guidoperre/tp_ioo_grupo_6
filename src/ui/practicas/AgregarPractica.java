@@ -49,19 +49,25 @@ public class AgregarPractica implements Screen {
     public AgregarPractica() {
         this.practica = new Practica();
         addListener();
+        valoresReservadosList.setModel(getValores(practica.getValoresReservados()));
+        valoresCriticosList.setModel(getValores(practica.getValoresCriticos()));
     }
 
     public AgregarPractica(Practica practica) {
         this.practica = practica;
         initPractica();
         addListener();
+        valoresReservadosList.setModel(getValores(practica.getValoresReservados()));
+        valoresCriticosList.setModel(getValores(practica.getValoresCriticos()));
     }
 
     private void initPractica() {
         title.setText("Editar práctica");
         addButton.setText("Editar");
 
-
+        nombreTextField.setText(practica.getNombre());
+        horasTextField.setText(String.valueOf(practica.getHoras()));
+        activoCheckBox.setSelected(practica.getActivo());
     }
 
     private void createUIComponents() {
