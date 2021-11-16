@@ -54,8 +54,7 @@ public class AgregarResultado implements Screen {
         for (Peticion p: peticions) {
             for (Resultado resultado: p.getResultados()) {
                 if (resultado.getId().equals(this.resultado.getId())) {
-                    peticion = p;
-                    break;
+                    return p;
                 }
             }
         }
@@ -69,11 +68,11 @@ public class AgregarResultado implements Screen {
 
         if (peticion != null) {
             pacientesSpinner.setSelectedItem(peticion.getPaciente());
-            pacientesSpinner.setEditable(false);
+            pacientesSpinner.setEnabled(false);
             peticionesSpinner.setSelectedItem(peticion);
-            peticionesSpinner.setEditable(false);
+            peticionesSpinner.setEnabled(false);
             practicasSpinner.setSelectedItem(PracticasTable.getPracticas(resultado.getCodigoPractica()));
-            practicasSpinner.setEditable(false);
+            practicasSpinner.setEnabled(false);
         }
 
         estadoSpinner.setSelectedItem(resultado.getEstado());
@@ -151,7 +150,7 @@ public class AgregarResultado implements Screen {
             DefaultComboBoxModel<Peticion> peticionesPacienteItem = new DefaultComboBoxModel<>();
             peticionesPacienteItem.addAll(peticionesPaciente);
             peticionesSpinner.setModel(peticionesPacienteItem);
-            practicasSpinner.setModel(null);
+            practicasSpinner.setSelectedItem(null);
         });
     }
 
