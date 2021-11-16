@@ -2,6 +2,7 @@ package ui.practicas.model;
 
 import models.Regla;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Practica {
@@ -12,6 +13,11 @@ public class Practica {
     private String nombre;
     private List<Regla> valoresCriticos;
     private List<Regla> valoresReservados;
+
+    public Practica() {
+        this.valoresCriticos = new ArrayList<>();
+        this.valoresReservados = new ArrayList<>();
+    }
 
     public Practica(int codigo, Boolean activo, String nombre, List<Regla> valoresCriticos, List<Regla> valoresReservados) {
         super();

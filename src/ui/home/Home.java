@@ -2,6 +2,7 @@ package ui.home;
 
 import ui.login.Login;
 import ui.pacientes.Pacientes;
+import ui.practicas.Practicas;
 import ui.peticiones.Peticiones;
 import ui.sucursales.Sucursales;
 import ui.usuarios.Usuarios;
@@ -52,7 +53,6 @@ public class Home {
     }
 
     private void createUIComponents() {
-        practicaLogo = new JLabel(new ImageIcon("resources/practicas.png"));
         resultadosLogo = new JLabel(new ImageIcon("resources/resultados.png"));
 
         // Evento click botonSalir
@@ -61,6 +61,7 @@ public class Home {
         setSucursales();
         setUsuarios();
         setPeticiones();
+        setPracticas();
     }
 
     private void setLogout() {
@@ -114,6 +115,17 @@ public class Home {
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();
                 new Peticiones();
+            }
+        });
+    }
+
+    private void setPracticas() {
+        practicaLogo = new JLabel(new ImageIcon("resources/practicas.png"));
+        practicaLogo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                new Practicas();
             }
         });
     }
