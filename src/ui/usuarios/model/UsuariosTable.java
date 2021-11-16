@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class UsuariosTable {
+    public static Usuario usuario = null;
 
     private static ArrayList<Usuario> usuarios;
     private static Long indexCount = 0L;

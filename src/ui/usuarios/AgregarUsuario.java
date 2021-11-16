@@ -1,18 +1,18 @@
 package ui.usuarios;
 
+import app.Application;
 import models.Rol;
+import navigation.Screen;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import utils.DataUtils;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class AgregarUsuario {
-    private final JFrame frame = new JFrame("Agregar usuario");
+public class AgregarUsuario implements Screen {
 
     private JLabel title;
     private JLabel backButton;
@@ -31,34 +31,18 @@ public class AgregarUsuario {
     private Usuario usuario;
 
     public AgregarUsuario() {
-        init();
+        addListener();
     }
 
     public AgregarUsuario(Usuario usuario) {
         this.usuario = usuario;
-        init();
+        addListener();
         initUsuario();
     }
 
-    // Inicializa la ventana
-    private void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
-
-        addListener();
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
     private void initUsuario() {
@@ -76,7 +60,6 @@ public class AgregarUsuario {
         rolSpinner.setSelectedItem(usuario.getRol());
 
         deleteListener();
-        addListener();
     }
 
     private void createUIComponents() {
@@ -105,10 +88,10 @@ public class AgregarUsuario {
         ) {
             return true;
         } else if (DataUtils.getFechaFromString(fechaNacimiento) == null) {
-            JOptionPane.showMessageDialog(frame, "EL FORMATO DE FECHA DEBE SER DD/MM/AAAA", "ERROR", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(panel, "EL FORMATO DE FECHA DEBE SER DD/MM/AAAA", "ERROR", JOptionPane.WARNING_MESSAGE);
             return false;
         } else {
-            JOptionPane.showMessageDialog(frame, "DEBE COMPLETAR TODOS LOS CAMPOS", "ERROR", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(panel, "DEBE COMPLETAR TODOS LOS CAMPOS", "ERROR", JOptionPane.WARNING_MESSAGE);
             return false;
         }
     }
@@ -118,8 +101,7 @@ public class AgregarUsuario {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new Usuarios();
+                Application.manager.navigateTo(new Usuarios());
             }
         });
     }
@@ -127,7 +109,6 @@ public class AgregarUsuario {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                frame.dispose();
                 if (usuario != null) {
                     usuario.setNombre(nombreTextField.getText());
                     usuario.setDni(Integer.parseInt(dniTextField.getText()));
@@ -149,16 +130,15 @@ public class AgregarUsuario {
                             (Rol) rolSpinner.getSelectedItem()
                     ));
                 }
-                new Usuarios();
+                Application.manager.navigateTo(new Usuarios());
             }
         });
     }
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            frame.dispose();
             UsuariosTable.deleteUsuario(usuario);
-            new Usuarios();
+            Application.manager.navigateTo(new Usuarios());
         });
     }
 

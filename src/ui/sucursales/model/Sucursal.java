@@ -57,17 +57,26 @@ public class Sucursal {
         this.peticiones.addAll(peticiones);
     }
 
-    private void movePeticiones(Sucursal destino) {
+    public void movePeticiones(Sucursal destino) {
         for (Peticion peticion: this.peticiones) {
             if (peticion.isActiva())
                 destino.addPeticion(peticion);
         }
     }
 
-    private List<Peticion> getPeticionesFinalizadas() {
+    public List<Peticion> getPeticionesActivas() {
         List<Peticion> peticiones = new ArrayList<>();
         for (Peticion peticion: this.peticiones) {
             if (!peticion.isActiva())
+                peticiones.add(peticion);
+        }
+        return peticiones;
+    }
+
+    public List<Peticion> getPeticionesFinalizadas() {
+        List<Peticion> peticiones = new ArrayList<>();
+        for (Peticion peticion: this.peticiones) {
+            if (peticion.isFinalizada())
                 peticiones.add(peticion);
         }
         return peticiones;
@@ -80,5 +89,10 @@ public class Sucursal {
                 peticiones.add(peticion);
         }
         return peticiones;
+    }
+
+    @Override
+    public String toString() {
+        return direccion;
     }
 }

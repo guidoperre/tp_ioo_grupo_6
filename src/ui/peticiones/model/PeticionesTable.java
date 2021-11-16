@@ -17,6 +17,17 @@ public class PeticionesTable {
         return peticiones;
     }
 
+    public static List<Peticion> getPeticionesCriticas() {
+        List<Peticion> aux = new ArrayList<>();
+        for (Peticion peticion: peticiones) {
+            if (peticion.isCritica()) {
+                aux.add(peticion);
+            }
+        }
+        return aux;
+    }
+
+
     public static Peticion getPeticiones(String nombre) {
         for (Peticion p: peticiones) {
             if (p.getPaciente().getNombre().equals(nombre)) {

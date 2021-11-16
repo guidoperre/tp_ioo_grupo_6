@@ -1,13 +1,14 @@
 package ui.login;
 
+import app.Application;
+import navigation.Screen;
 import ui.usuarios.model.Usuario;
 import ui.home.Home;
+import ui.usuarios.model.UsuariosTable;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class Login {
-    private final JFrame frame = new JFrame("Login");
+public class Login implements Screen {
 
     private JPanel panel;
     private JLabel imageLabel;
@@ -17,27 +18,12 @@ public class Login {
     private JLabel errorLbl;
 
     public Login() {
-        init();
         setLogin();
     }
 
-    // Inicializa la ventana
-    private void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
     private void createUIComponents() {
@@ -57,8 +43,8 @@ public class Login {
                 if (user == null) {
                     errorLbl.setText("Credenciales incorrectas");
                 } else {
-                    frame.dispose();
-                    new Home();
+                    UsuariosTable.usuario = user;
+                    Application.manager.navigateTo(new Home());
                 }
             }
         });
