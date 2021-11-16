@@ -1,6 +1,9 @@
 package ui.usuarios;
 
+import app.Application;
+import navigation.Screen;
 import ui.home.Home;
+import ui.peticiones.AgregarPeticion;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 
@@ -10,8 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class Usuarios {
-    private final JFrame frame = new JFrame("Usuarios");
+public class Usuarios implements Screen {
 
     private JLabel title;
     private JLabel backButton;
@@ -19,27 +21,13 @@ public class Usuarios {
     private JPanel panel;
     private JPanel listPanel;
 
-    public Usuarios() {
-        init();
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
-    // Inicializa la ventana
-    public void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+    public Usuarios() {
 
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
     }
 
     private void createUIComponents() {
@@ -53,8 +41,7 @@ public class Usuarios {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new Home();
+                Application.manager.navigateTo(new Home());
             }
         });
     }
@@ -64,8 +51,7 @@ public class Usuarios {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new AgregarUsuario();
+                Application.manager.navigateTo(new AgregarUsuario());
             }
         });
     }
@@ -91,8 +77,7 @@ public class Usuarios {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    frame.dispose();
-                    new AgregarUsuario((Usuario) target.getModel().getElementAt(index));
+                    Application.manager.navigateTo(new AgregarUsuario((Usuario) target.getModel().getElementAt(index)));
                 }
             }
         });

@@ -1,5 +1,6 @@
 package ui.home;
 
+import app.Application;
 import models.Rol;
 import navigation.Screen;
 import ui.login.Login;
@@ -17,7 +18,6 @@ import java.awt.event.MouseEvent;
  * Pantalla principal de medicina binaria
  */
 public class Home implements Screen {
-    private final JFrame frame = new JFrame("Home");
 
     private JLabel exitButton;
     private JPanel panel;
@@ -28,13 +28,13 @@ public class Home implements Screen {
     private JLabel resultadosLogo;
     private JLabel usuariosLogo;
 
+    public Home() {
+
+    }
+
     @Override
     public JPanel getPanel() {
         return panel;
-    }
-
-    public Home() {
-
     }
 
     private void createUIComponents() {
@@ -54,8 +54,7 @@ public class Home implements Screen {
             @Override
             public void mouseClicked(MouseEvent e) {
                 UsuariosTable.usuario = null;
-                frame.dispose();
-                new Login();
+                Application.manager.navigateTo(new Login());
             }
         });
     }
@@ -66,8 +65,7 @@ public class Home implements Screen {
             pacienteLogo.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    frame.dispose();
-                    new Pacientes();
+                    Application.manager.navigateTo(new Pacientes());
                 }
             });
         } else {
@@ -82,8 +80,7 @@ public class Home implements Screen {
             sucursalesLogo.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    frame.dispose();
-                    new Sucursales();
+                    Application.manager.navigateTo(new Sucursales());
                 }
             });
         } else {
@@ -98,8 +95,7 @@ public class Home implements Screen {
             usuariosLogo.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    frame.dispose();
-                    new Usuarios();
+                    Application.manager.navigateTo(new Usuarios());
                 }
             });
         } else {
@@ -114,8 +110,7 @@ public class Home implements Screen {
             peticionesLogo.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    frame.dispose();
-                    new Peticiones();
+                    Application.manager.navigateTo(new Peticiones());
                 }
             });
         } else {

@@ -9,7 +9,6 @@ import ui.usuarios.model.UsuariosTable;
 import javax.swing.*;
 
 public class Login implements Screen {
-    private final JFrame frame = new JFrame("Login");
 
     private JPanel panel;
     private JLabel imageLabel;
@@ -18,13 +17,13 @@ public class Login implements Screen {
     private JButton iniciarBtn;
     private JLabel errorLbl;
 
+    public Login() {
+        setLogin();
+    }
+
     @Override
     public JPanel getPanel() {
         return panel;
-    }
-
-    public Login() {
-        setLogin();
     }
 
     private void createUIComponents() {

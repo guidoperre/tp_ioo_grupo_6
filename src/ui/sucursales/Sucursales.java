@@ -1,9 +1,13 @@
 package ui.sucursales;
 
+import app.Application;
+import navigation.Screen;
+import ui.peticiones.AgregarPeticion;
 import ui.sucursales.model.Sucursal;
 import ui.home.Home;
 import ui.pacientes.models.PacientesTable;
 import ui.sucursales.model.SucursalesTable;
+import ui.usuarios.AgregarUsuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class Sucursales {
-    private final JFrame frame = new JFrame("Sucursales");
+public class Sucursales implements Screen {
 
     private JLabel title;
     private JLabel backButton;
@@ -20,27 +23,13 @@ public class Sucursales {
     private JPanel panel;
     private JPanel listPanel;
 
-    public Sucursales() {
-        init();
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
-    // Inicializa la ventana
-    public void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+    public Sucursales() {
 
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
     }
 
     private void createUIComponents() {
@@ -54,8 +43,7 @@ public class Sucursales {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new Home();
+                Application.manager.navigateTo(new Home());
             }
         });
     }
@@ -65,8 +53,7 @@ public class Sucursales {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new AgregarSucursal();
+                Application.manager.navigateTo(new AgregarSucursal());
             }
         });
     }
@@ -92,8 +79,7 @@ public class Sucursales {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    frame.dispose();
-                    new AgregarSucursal((Sucursal) target.getModel().getElementAt(index));
+                    Application.manager.navigateTo(new AgregarSucursal((Sucursal) target.getModel().getElementAt(index)));
                 }
             }
         });

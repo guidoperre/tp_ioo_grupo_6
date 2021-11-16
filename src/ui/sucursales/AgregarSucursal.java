@@ -1,5 +1,8 @@
 package ui.sucursales;
 
+import app.Application;
+import navigation.Screen;
+import ui.usuarios.Usuarios;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.sucursales.model.Sucursal;
@@ -11,8 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class AgregarSucursal {
-    private final JFrame frame = new JFrame("Agregar Sucursal");
+public class AgregarSucursal implements Screen {
 
     private JLabel title;
     private JLabel backButton;
@@ -25,34 +27,18 @@ public class AgregarSucursal {
     private Sucursal sucursal;
 
     public AgregarSucursal() {
-        init();
+        addListener();
     }
 
     public AgregarSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
-        init();
+        addListener();
         initSucursal();
     }
 
-    // Inicializa la ventana
-    private void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
-
-        addListener();
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
     private void initSucursal() {
@@ -78,7 +64,7 @@ public class AgregarSucursal {
         if (!direccion.equals("") && responsableSpinner.getSelectedItem() != null) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(frame, "DEBE COMPLETAR TODOS LOS CAMPOS", "ERROR", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(panel, "DEBE COMPLETAR TODOS LOS CAMPOS", "ERROR", JOptionPane.WARNING_MESSAGE);
             return false;
         }
     }
@@ -88,8 +74,7 @@ public class AgregarSucursal {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                frame.dispose();
-                new Sucursales();
+                Application.manager.navigateTo(new Sucursales());
             }
         });
     }
@@ -97,7 +82,6 @@ public class AgregarSucursal {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                frame.dispose();
                 if (sucursal != null) {
                     sucursal.setDireccion(direccionTextField.getText());
                     sucursal.setResponsable((Usuario) responsableSpinner.getSelectedItem());
@@ -107,21 +91,20 @@ public class AgregarSucursal {
                             (Usuario) responsableSpinner.getSelectedItem()
                     ));
                 }
-                new Sucursales();
+                Application.manager.navigateTo(new Sucursales());
             }
         });
     }
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            frame.dispose();
             if (sucursal.getPeticionesFinalizadas().size() > 0) {
-                JOptionPane.showMessageDialog(frame, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 SucursalesTable.deleteSucursal(sucursal);
                 // TODO: Derivar sucursale
             }
-            new Sucursales();
+            Application.manager.navigateTo(new Sucursales());
         });
     }
 
