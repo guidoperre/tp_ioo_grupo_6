@@ -2,6 +2,7 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
+import ui.peticiones.model.Peticion;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.sucursales.model.Sucursal;
@@ -98,8 +99,20 @@ public class AgregarSucursal implements Screen {
             if (sucursal.getPeticionesFinalizadas().size() > 0) {
                 JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                SucursalesTable.deleteSucursal(sucursal);
-                // TODO: Derivar sucursale
+                Boolean movido = false;
+                for (Sucursal sucursalItem: SucursalesTable.getAllSucursales()) {
+                    if (sucursalItem.getId() != sucursal.getId()) {
+                        sucursal.movePeticiones(sucursalItem);
+                        movido = true;
+                        SucursalesTable.deleteSucursal(sucursal);
+                        JOptionPane.showMessageDialog(panel, "LAS PETICIONES ACTIVAS SE HAN MOVIDO A LA SUCURSAL: Sucursal " + sucursalItem.getId(), "CORRECTO", JOptionPane.PLAIN_MESSAGE);
+                        break;
+                    }
+                }
+
+                if (movido == false) {
+                    JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE NO HAY SUCURSALES DISPONIBLES PARA TRANSFERIR LAS PETICIONES", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             }
             Application.manager.navigateTo(new Sucursales());
         });
