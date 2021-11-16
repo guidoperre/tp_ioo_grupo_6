@@ -72,4 +72,12 @@ public class Regla {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return switch (operador) {
+            case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> operador + " a " + min;
+            default -> operador + " " + min + " y " + max;
+        };
+    }
 }

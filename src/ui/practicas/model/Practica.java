@@ -2,6 +2,7 @@ package ui.practicas.model;
 
 import models.Regla;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Practica {
@@ -14,11 +15,17 @@ public class Practica {
     private List<Regla> valoresCriticos;
     private List<Regla> valoresReservados;
 
-    public Practica(int codigo, Boolean activo, String nombre, List<Regla> valoresCriticos, List<Regla> valoresReservados, int horas) {
+    public Practica() {
+        this.valoresCriticos = new ArrayList<>();
+        this.valoresReservados = new ArrayList<>();
+    }
+
+    public Practica(int codigo, Boolean activo, String nombre, int horas, List<Regla> valoresCriticos, List<Regla> valoresReservados) {
         super();
         this.codigo = codigo;
         this.activo = activo;
         this.nombre = nombre;
+        this.horas = horas;
         this.valoresCriticos = valoresCriticos;
         this.valoresReservados = valoresReservados;
         this.horas = horas;
@@ -38,6 +45,10 @@ public class Practica {
 
     public int getHoras() {
         return horas;
+    }
+
+    public void setHoras(int horas) {
+        this.horas = horas;
     }
 
     public void setCodigo(int codigo) {
@@ -68,6 +79,11 @@ public class Practica {
         this.valoresCriticos.add(valorCritico);
     }
 
+    public void removeValorCritico(Regla valorCritico) {
+        this.valoresCriticos.remove(valorCritico);
+    }
+
+
     public void setValoresCriticos(List<Regla> valoresCriticos) {
         this.valoresCriticos = valoresCriticos;
     }
@@ -78,6 +94,10 @@ public class Practica {
 
     public void addValorReservado(Regla valorReservado) {
         this.valoresReservados.add(valorReservado);
+    }
+
+    public void removeValorReservado(Regla valorReservado) {
+        this.valoresReservados.remove(valorReservado);
     }
 
     public void setValoresReservados(List<Regla> valoresReservados) {

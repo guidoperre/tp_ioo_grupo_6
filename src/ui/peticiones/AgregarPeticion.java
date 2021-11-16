@@ -15,7 +15,6 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 public class AgregarPeticion implements Screen {
@@ -80,9 +79,9 @@ public class AgregarPeticion implements Screen {
         String obraSocial = obraSocialTextField.getText();
 
         if (
-                !obraSocial.equals("") &&
-                pacientesSpinner.getSelectedItem() != null &&
-                sucursalSpinner.getSelectedItem() != null
+            !obraSocial.equals("") &&
+            pacientesSpinner.getSelectedItem() != null &&
+            sucursalSpinner.getSelectedItem() != null
         ) {
             return true;
         } else {
