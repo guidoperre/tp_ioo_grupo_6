@@ -6,6 +6,7 @@ import ui.pacientes.models.Paciente;
 import ui.sucursales.model.Sucursal;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -89,7 +90,17 @@ public class Peticion {
     }
 
     public Date getFechaEntrega() {
-        return fechaEntrega;
+        int max = 0;
+        for (Practica practica: this.practicas) {
+            if (practica.getHoras() > max)
+                max = practica.getHoras();
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(fechaEntrega);
+
+        c.add(Calendar.HOUR, max);
+        Date fecha = c.getTime();
+        return fecha;
     }
 
     public void setFechaEntrega(Date fechaEntrega) {

@@ -10,16 +10,18 @@ public class Practica {
     private int codigo;
     private Boolean activo;
     private String nombre;
+    private int horas;
     private List<Regla> valoresCriticos;
     private List<Regla> valoresReservados;
 
-    public Practica(int codigo, Boolean activo, String nombre, List<Regla> valoresCriticos, List<Regla> valoresReservados) {
+    public Practica(int codigo, Boolean activo, String nombre, List<Regla> valoresCriticos, List<Regla> valoresReservados, int horas) {
         super();
         this.codigo = codigo;
         this.activo = activo;
         this.nombre = nombre;
         this.valoresCriticos = valoresCriticos;
         this.valoresReservados = valoresReservados;
+        this.horas = horas;
     }
 
     public Long getId() {
@@ -32,6 +34,10 @@ public class Practica {
 
     public int getCodigo() {
         return codigo;
+    }
+
+    public int getHoras() {
+        return horas;
     }
 
     public void setCodigo(int codigo) {
