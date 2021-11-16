@@ -115,8 +115,12 @@ public class AgregarSucursal {
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
             frame.dispose();
-            SucursalesTable.deleteSucursal(sucursal);
-            // TODO: Derivar sucursales
+            if (sucursal.getPeticionesFinalizadas().size() > 0) {
+                JOptionPane.showMessageDialog(frame, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                SucursalesTable.deleteSucursal(sucursal);
+                // TODO: Derivar sucursale
+            }
             new Sucursales();
         });
     }

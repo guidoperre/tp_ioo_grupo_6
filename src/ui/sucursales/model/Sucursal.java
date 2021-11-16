@@ -64,10 +64,19 @@ public class Sucursal {
         }
     }
 
-    private List<Peticion> getPeticionesFinalizadas() {
+    public List<Peticion> getPeticionesActivas() {
         List<Peticion> peticiones = new ArrayList<>();
         for (Peticion peticion: this.peticiones) {
             if (!peticion.isActiva())
+                peticiones.add(peticion);
+        }
+        return peticiones;
+    }
+
+    public List<Peticion> getPeticionesFinalizadas() {
+        List<Peticion> peticiones = new ArrayList<>();
+        for (Peticion peticion: this.peticiones) {
+            if (peticion.isFinalizada())
                 peticiones.add(peticion);
         }
         return peticiones;
