@@ -53,7 +53,7 @@ public class AgregarPeticion implements Screen {
     }
 
     private void initUsuario() {
-        title.setText("Agregar peticion");
+        title.setText("Editar peticion");
         addButton.setText("Editar");
         deleteButton.setVisible(true);
 

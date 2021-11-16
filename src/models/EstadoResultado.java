@@ -2,5 +2,13 @@ package models;
 
 public enum EstadoResultado {
     PENDIENTE,
-    FINALIZADO
+    FINALIZADO;
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case PENDIENTE -> "En curso";
+            case FINALIZADO -> "Finalizado";
+        };
+    }
 }

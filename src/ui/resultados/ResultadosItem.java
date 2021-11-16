@@ -1,18 +1,17 @@
 package ui.resultados;
 
-import ui.peticiones.model.Peticion;
-import utils.DataUtils;
+import ui.practicas.model.Practica;
+import ui.practicas.model.PracticasTable;
+import ui.resultados.model.Resultado;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ResultadosItem {
     private JPanel pacienteItem;
-    private JLabel nombrePeticion;
-    private JLabel fechaCargaPeticion;
+    private JLabel nombrePractica;
     private JLabel icon;
-    private JLabel obraSocialPeticion;
-    private JLabel fechaEntregaPeticion;
+    private JLabel estadoResultado;
 
     public ResultadosItem() {
 
@@ -22,14 +21,15 @@ public class ResultadosItem {
         return pacienteItem;
     }
 
-    public void setComponents(Peticion peticion) {
-        nombrePeticion.setText(peticion.getPaciente().getNombre());
-        obraSocialPeticion.setText(peticion.getObraSocial());
-        fechaCargaPeticion.setText("Fecha de carga: " + DataUtils.getFechaFromDate(peticion.getFechaCarga()));
-        fechaEntregaPeticion.setText("Fecha de entrega: " + DataUtils.getFechaFromDate(peticion.getFechaEntrega()));
+    public void setComponents(Resultado resultado) {
+        Practica practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
+        if (practica != null) {
+            nombrePractica.setText(practica.getNombre());
+        }
+        estadoResultado.setText(resultado.getEstado().toString());
     }
 
     private void createUIComponents() {
-        icon = new JLabel(new ImageIcon("resources/peticiones.png"));
+        icon = new JLabel(new ImageIcon("resources/resultados.png"));
     }
 }

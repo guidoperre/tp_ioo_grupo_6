@@ -1,6 +1,7 @@
 package ui.resultados;
 
 import app.Application;
+import models.EstadoResultado;
 import navigation.Screen;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
@@ -8,13 +9,12 @@ import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
-import ui.sucursales.model.Sucursal;
-import ui.sucursales.model.SucursalesTable;
+import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadosTable;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
 import java.util.List;
 
 public class AgregarResultado implements Screen {
@@ -24,27 +24,24 @@ public class AgregarResultado implements Screen {
     private JPanel panel;
     private JButton addButton;
     private JButton deleteButton;
-    private JTextField obraSocialTextField;
-    private JList<Practica> practicasList;
-    private JLabel addPractica;
     private JComboBox<Paciente> pacientesSpinner;
-    private JComboBox<Sucursal> sucursalSpinner;
+    private JComboBox<Peticion> peticionesSpinner;
     private JComboBox<Practica> practicasSpinner;
-    private JLabel removePractica;
+    private JComboBox<EstadoResultado> estadoSpinner;
+    private JTextField resultadoValorTextField;
 
-    private final Peticion peticion;
+    private Peticion peticion;
+    private Resultado resultado;
 
     public AgregarResultado() {
-        this.peticion = new Peticion();
         addListener();
-        practicasList.setModel(getPracticas(peticion.getPracticas()));
     }
 
-    public AgregarResultado(Peticion peticion) {
-        this.peticion = peticion;
-        practicasList.setModel(getPracticas(peticion.getPracticas()));
+    public AgregarResultado(Resultado resultado) {
+        this.resultado = resultado;
+        this.peticion = getPeticion();
         addListener();
-        initUsuario();
+        initResultado();
     }
 
     @Override
@@ -52,36 +49,57 @@ public class AgregarResultado implements Screen {
         return panel;
     }
 
-    private void initUsuario() {
-        title.setText("Agregar peticion");
+    private Peticion getPeticion() {
+        List<Peticion> peticions = PeticionesTable.getAllPeticiones();
+        for (Peticion p: peticions) {
+            for (Resultado resultado: p.getResultados()) {
+                if (resultado.getId().equals(this.resultado.getId())) {
+                    peticion = p;
+                    break;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void initResultado() {
+        title.setText("Editar resultado");
         addButton.setText("Editar");
         deleteButton.setVisible(true);
 
-        pacientesSpinner.setSelectedItem(peticion.getPaciente());
-        obraSocialTextField.setText(peticion.getObraSocial());
-        sucursalSpinner.setSelectedItem(peticion.getSucursal());
+        if (peticion != null) {
+            pacientesSpinner.setSelectedItem(peticion.getPaciente());
+            pacientesSpinner.setEditable(false);
+            peticionesSpinner.setSelectedItem(peticion);
+            peticionesSpinner.setEditable(false);
+            practicasSpinner.setSelectedItem(PracticasTable.getPracticas(resultado.getCodigoPractica()));
+            practicasSpinner.setEditable(false);
+        }
+
+        estadoSpinner.setSelectedItem(resultado.getEstado());
+        resultadoValorTextField.setText(String.valueOf(resultado.getValor()));
 
         deleteListener();
     }
 
     private void createUIComponents() {
         addBackListener();
-        setPaciente();
-        setSucursal();
 
         setPracticasSpinner();
-        addPractica();
-        removePractica();
-        setPracticasList();
+        setPeticionSpinner();
+        setPacientesSpinner();
+        setEstadoSpinner();
     }
 
     private Boolean checkFields() {
-        String obraSocial = obraSocialTextField.getText();
+        String valor = resultadoValorTextField.getText();
 
         if (
-                !obraSocial.equals("") &&
+                !valor.equals("") &&
                 pacientesSpinner.getSelectedItem() != null &&
-                sucursalSpinner.getSelectedItem() != null
+                peticionesSpinner.getSelectedItem() != null &&
+                practicasSpinner.getSelectedItem() != null &&
+                estadoSpinner.getSelectedItem() != null
         ) {
             return true;
         } else {
@@ -104,17 +122,9 @@ public class AgregarResultado implements Screen {
         addButton.addActionListener(e -> {
             if (checkFields()) {
                 if (peticion != null) {
-                    peticion.setObraSocial(obraSocialTextField.getText());
-                    peticion.setPaciente((Paciente) pacientesSpinner.getSelectedItem());
-                    peticion.setSucursal((Sucursal) sucursalSpinner.getSelectedItem());
+
                 } else {
-                    PeticionesTable.addPeticiones(new Peticion(
-                            (Paciente) pacientesSpinner.getSelectedItem(),
-                            obraSocialTextField.getText(),
-                            (Sucursal) sucursalSpinner.getSelectedItem(),
-                            new Date(),
-                            new Date()
-                    ));
+
                 }
                 Application.manager.navigateTo(new Resultados());
             }
@@ -123,69 +133,48 @@ public class AgregarResultado implements Screen {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            PeticionesTable.deletePeticiones(peticion);
+            ResultadosTable.deleteResultado(resultado);
             Application.manager.navigateTo(new Resultados());
         });
     }
 
-    private void setPracticasList() {
-        practicasList = new JList<>();
-        practicasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        practicasList.setLayoutOrientation(JList.VERTICAL);
-        practicasList.setSize(300,300);
-    }
-
-    private ListModel<Practica> getPracticas(List<Practica> practicas) {
-        DefaultListModel<Practica> practicasModel = new DefaultListModel<>();
-        practicasModel.addAll(practicas);
-        return practicasModel;
-    }
-
-    private void setPracticasSpinner() {
-        practicasSpinner = new JComboBox<>();
-        List<Practica> practicas = PracticasTable.getAllPracticas();
-        DefaultComboBoxModel<Practica> practicasItem = new DefaultComboBoxModel<>();
-        practicasItem.addAll(practicas);
-        practicasSpinner.setModel(practicasItem);
-    }
-
-    private void addPractica() {
-        addPractica = new JLabel(new ImageIcon("resources/add.png"));
-        addPractica.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Practica practica = (Practica) practicasSpinner.getSelectedItem();
-                peticion.addPractica(practica);
-                practicasList.setModel(getPracticas(peticion.getPracticas()));
-            }
-        });
-    }
-
-    private void removePractica() {
-        removePractica = new JLabel(new ImageIcon("resources/remove.png"));
-        removePractica.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Practica practica = practicasList.getSelectedValue();
-                peticion.removePractica(practica);
-                practicasList.setModel(getPracticas(peticion.getPracticas()));
-            }
-        });
-    }
-
-    private void setPaciente() {
+    private void setPacientesSpinner() {
         pacientesSpinner = new JComboBox<>();
         List<Paciente> pacientes = PacientesTable.getAllPacientes();
         DefaultComboBoxModel<Paciente> pacientesItem = new DefaultComboBoxModel<>();
         pacientesItem.addAll(pacientes);
         pacientesSpinner.setModel(pacientesItem);
+
+        pacientesSpinner.addItemListener(e -> {
+            Paciente paciente = (Paciente) e.getItem();
+            List<Peticion> peticionesPaciente = PeticionesTable.getAllPeticionesPaciente(paciente);
+            DefaultComboBoxModel<Peticion> peticionesPacienteItem = new DefaultComboBoxModel<>();
+            peticionesPacienteItem.addAll(peticionesPaciente);
+            peticionesSpinner.setModel(peticionesPacienteItem);
+            practicasSpinner.setModel(null);
+        });
     }
 
-    private void setSucursal() {
-        sucursalSpinner = new JComboBox<>();
-        List<Sucursal> sucursales = SucursalesTable.getAllSucursales();
-        DefaultComboBoxModel<Sucursal> sucursalItem = new DefaultComboBoxModel<>();
-        sucursalItem.addAll(sucursales);
-        sucursalSpinner.setModel(sucursalItem);
+    private void setPeticionSpinner() {
+        peticionesSpinner = new JComboBox<>();
+        peticionesSpinner.addItemListener(e -> {
+            Peticion peticion = (Peticion) e.getItem();
+            List<Practica> practicasPeticion = peticion.getPracticas();
+            DefaultComboBoxModel<Practica> practicasPeticionItem = new DefaultComboBoxModel<>();
+            practicasPeticionItem.addAll(practicasPeticion);
+            practicasSpinner.setModel(practicasPeticionItem);
+        });
+    }
+
+    private void setPracticasSpinner() {
+        practicasSpinner = new JComboBox<>();
+    }
+
+    private void setEstadoSpinner() {
+        estadoSpinner = new JComboBox<>();
+        List<EstadoResultado> estadosList = List.of(EstadoResultado.values());
+        DefaultComboBoxModel<EstadoResultado> estados = new DefaultComboBoxModel<>();
+        estados.addAll(estadosList);
+        estadoSpinner.setModel(estados);
     }
 }

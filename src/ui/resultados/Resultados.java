@@ -3,16 +3,17 @@ package ui.resultados;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
+import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
-import ui.resultados.AgregarResultado;
-import ui.resultados.ResultadosItem;
+import ui.resultados.model.Resultado;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Resultados implements Screen {
@@ -21,8 +22,8 @@ public class Resultados implements Screen {
     private JLabel addPaciente;
     private JPanel panel;
     private JPanel listPanel;
-    private JCheckBox criticosCheckBox;
-    private JList<Peticion> list;
+    private JComboBox<Paciente> pacienteSpinner;
+    private JList<Resultado> list;
 
     public Resultados() {
 
@@ -36,21 +37,8 @@ public class Resultados implements Screen {
     private void createUIComponents() {
         addBackListener();
         addPeticionesListener();
-        showPeticiones();
-        setCriticosCheckBox();
-    }
-
-    private void setCriticosCheckBox() {
-        criticosCheckBox = new JCheckBox();
-        criticosCheckBox.setText("Solo valores criticos");
-
-        criticosCheckBox.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                list.setModel(getPeticionesCriticas());
-            } else {
-                list.setModel(getPeticiones());
-            }
-        });
+        showResultados();
+        setPacientesSpinner();
     }
 
     private void addBackListener() {
@@ -73,56 +61,67 @@ public class Resultados implements Screen {
         });
     }
 
-    private void showPeticiones() {
+    private void setPacientesSpinner() {
+        pacienteSpinner = new JComboBox<>();
+        List<Paciente> pacientes = PacientesTable.getAllPacientes();
+        DefaultComboBoxModel<Paciente> pacientesItem = new DefaultComboBoxModel<>();
+        pacientesItem.addAll(pacientes);
+        pacienteSpinner.setModel(pacientesItem);
+
+        pacienteSpinner.addItemListener(e -> {
+            Paciente paciente = (Paciente) e.getItem();
+            list.setModel(getResultados(paciente));
+        });
+    }
+
+    private void showResultados() {
         listPanel = new JPanel();
-        ListModel<Peticion> peticiones = getPeticiones();
 
         list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
-        list.setCellRenderer(new PeticionesViewHolder());
-        list.setModel(peticiones);
+        list.setCellRenderer(new ResultadosViewHolder());
         list.setSize(300,300);
         listListener(list);
 
         listPanel.add(list);
     }
 
-    private void listListener(JList<Peticion> list) {
+    private void listListener(JList<Resultado> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarResultado((Peticion) target.getModel().getElementAt(index)));
+                    Application.manager.navigateTo(
+                            new AgregarResultado((Resultado) target.getModel().getElementAt(index))
+                    );
                 }
             }
         });
     }
 
-    private ListModel<Peticion> getPeticiones() {
-        List<Peticion> peticiones = PeticionesTable.getAllPeticiones();
-        DefaultListModel<Peticion> peticionesModel = new DefaultListModel<>();
-        peticionesModel.addAll(peticiones);
-        return peticionesModel;
+    private ListModel<Resultado> getResultados(Paciente paciente) {
+        List<Peticion> peticiones = PeticionesTable.getAllPeticionesPaciente(paciente);
+        List<Resultado> resultados = new ArrayList<>();
+        for (Peticion p: peticiones) {
+            resultados.addAll(p.getResultados());
+        }
+
+        DefaultListModel<Resultado> resultadosModel = new DefaultListModel<>();
+        resultadosModel.addAll(resultados);
+        return resultadosModel;
     }
 
-    private ListModel<Peticion> getPeticionesCriticas() {
-        List<Peticion> peticiones = PeticionesTable.getPeticionesCriticas();
-        DefaultListModel<Peticion> peticionesModel = new DefaultListModel<>();
-        peticionesModel.addAll(peticiones);
-        return peticionesModel;
-    }
+    static class ResultadosViewHolder extends JPanel implements ListCellRenderer<Resultado> {
 
-    static class PeticionesViewHolder extends JPanel implements ListCellRenderer<Peticion> {
-
-        public PeticionesViewHolder() {
+        public ResultadosViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Peticion> list,
-            Peticion value,
+            JList<? extends Resultado> list,
+            Resultado value,
             int index,
             boolean isSelected,
             boolean cellHasFocus
