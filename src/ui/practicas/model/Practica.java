@@ -28,6 +28,7 @@ public class Practica {
         this.horas = horas;
         this.valoresCriticos = valoresCriticos;
         this.valoresReservados = valoresReservados;
+        this.horas = horas;
     }
 
     public Long getId() {
@@ -40,6 +41,10 @@ public class Practica {
 
     public int getCodigo() {
         return codigo;
+    }
+
+    public int getHoras() {
+        return horas;
     }
 
     public void setCodigo(int codigo) {
