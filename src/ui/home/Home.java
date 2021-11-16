@@ -1,6 +1,7 @@
 package ui.home;
 
 import models.Rol;
+import navigation.Screen;
 import ui.login.Login;
 import ui.pacientes.Pacientes;
 import ui.peticiones.Peticiones;
@@ -9,14 +10,13 @@ import ui.usuarios.Usuarios;
 import ui.usuarios.model.UsuariosTable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
  * Pantalla principal de medicina binaria
  */
-public class Home {
+public class Home implements Screen {
     private final JFrame frame = new JFrame("Home");
 
     private JLabel exitButton;
@@ -28,27 +28,13 @@ public class Home {
     private JLabel resultadosLogo;
     private JLabel usuariosLogo;
 
-    public Home() {
-        init();
+    @Override
+    public JPanel getPanel() {
+        return panel;
     }
 
-    // Inicializa la ventana
-    private void init() {
-        //Get the screen size
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+    public Home() {
 
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 800);
-        frame.pack();
-
-        //Calculate the frame location
-        int x = (screenSize.width - frame.getWidth()) / 2;
-        int y = (screenSize.height - frame.getHeight()) / 2;
-
-        frame.setLocation(x, y);
-        frame.setVisible(true);
     }
 
     private void createUIComponents() {
