@@ -1,6 +1,7 @@
 package ui.practicas;
 
 import app.Application;
+import models.OperadorRegla;
 import navigation.Screen;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
@@ -8,6 +9,7 @@ import ui.practicas.model.PracticasTable;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class AgregarPractica implements Screen {
 
@@ -21,6 +23,12 @@ public class AgregarPractica implements Screen {
     private JLabel addValorReservado;
     private JLabel removeValorReservado;
     private JCheckBox activoCheckBox;
+    private JComboBox<OperadorRegla> valoresReservadosSpinner;
+    private JTextField valorReservadoMinimo;
+    private JTextField valorReservadoMaximo;
+    private JTextField valorCriticoMinimo;
+    private JTextField valorCriticoMaximo;
+    private JComboBox<OperadorRegla> valoresCriticosSpinner;
 
     private Practica practica;
 
@@ -89,47 +97,47 @@ public class AgregarPractica implements Screen {
     }
 
     private void setValorCriticoSpinner() {
-//        valoresCriticosSpinner = new JComboBox<>();
-//        List<OperadorRegla> operadorReglaList = List.of(OperadorRegla.values());
-//        DefaultComboBoxModel<OperadorRegla> operadorRegla = new DefaultComboBoxModel<>();
-//        operadorRegla.addAll(operadorReglaList);
-//        valoresCriticosSpinner.setModel(operadorRegla);
-//
-//        valoresCriticosSpinner.addItemListener(e -> {
-//            OperadorRegla operadorRegla1 = (OperadorRegla) e.getItem();
-//            switch (operadorRegla1) {
-//                case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> {
-//                    valorCriticoMaximoTextField.setVisible(false);
-//                    valorCriticoMinimoTextField.setVisible(true);
-//                }
-//                default -> {
-//                    valorCriticoMaximoTextField.setVisible(true);
-//                    valorCriticoMinimoTextField.setVisible(true);
-//                }
-//            }
-//        });
+        valoresCriticosSpinner = new JComboBox<>();
+        List<OperadorRegla> operadorReglaList = List.of(OperadorRegla.values());
+        DefaultComboBoxModel<OperadorRegla> operadorRegla = new DefaultComboBoxModel<>();
+        operadorRegla.addAll(operadorReglaList);
+        valoresCriticosSpinner.setModel(operadorRegla);
+
+        valoresCriticosSpinner.addItemListener(e -> {
+            OperadorRegla operadorRegla1 = (OperadorRegla) e.getItem();
+            switch (operadorRegla1) {
+                case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> {
+                    valorCriticoMaximo.setVisible(false);
+                    valorCriticoMinimo.setVisible(true);
+                }
+                default -> {
+                    valorCriticoMaximo.setVisible(true);
+                    valorCriticoMinimo.setVisible(true);
+                }
+            }
+        });
     }
 
     private void setValorReservadoSpinner() {
-//        valoresReservadosSpinner = new JComboBox<>();
-//        List<OperadorRegla> operadorReglaList = List.of(OperadorRegla.values());
-//        DefaultComboBoxModel<OperadorRegla> operadorRegla = new DefaultComboBoxModel<>();
-//        operadorRegla.addAll(operadorReglaList);
-//        valoresReservadosSpinner.setModel(operadorRegla);
-//
-//        valoresReservadosSpinner.addItemListener(e -> {
-//            OperadorRegla operadorRegla1 = (OperadorRegla) e.getItem();
-//            switch (operadorRegla1) {
-//                case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> {
-//                    valorReservadoMinimoTextField.setVisible(false);
-//                    valorReservadoMaximoTextField.setVisible(true);
-//                }
-//                default -> {
-//                    valorReservadoMinimoTextField.setVisible(true);
-//                    valorReservadoMaximoTextField.setVisible(true);
-//                }
-//            }
-//        });
+        valoresReservadosSpinner = new JComboBox<>();
+        List<OperadorRegla> operadorReglaList = List.of(OperadorRegla.values());
+        DefaultComboBoxModel<OperadorRegla> operadorRegla = new DefaultComboBoxModel<>();
+        operadorRegla.addAll(operadorReglaList);
+        valoresReservadosSpinner.setModel(operadorRegla);
+
+        valoresReservadosSpinner.addItemListener(e -> {
+            OperadorRegla operadorRegla1 = (OperadorRegla) e.getItem();
+            switch (operadorRegla1) {
+                case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> {
+                    valorReservadoMinimo.setVisible(false);
+                    valorReservadoMaximo.setVisible(true);
+                }
+                default -> {
+                    valorReservadoMinimo.setVisible(true);
+                    valorReservadoMaximo.setVisible(true);
+                }
+            }
+        });
     }
 
     private void addValoresCriticos() {
