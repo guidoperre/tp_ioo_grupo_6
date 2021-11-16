@@ -78,6 +78,11 @@ public class Practica {
         this.valoresCriticos.add(valorCritico);
     }
 
+    public void removeValorCritico(Regla valorCritico) {
+        this.valoresCriticos.remove(valorCritico);
+    }
+
+
     public void setValoresCriticos(List<Regla> valoresCriticos) {
         this.valoresCriticos = valoresCriticos;
     }
@@ -88,6 +93,10 @@ public class Practica {
 
     public void addValorReservado(Regla valorReservado) {
         this.valoresReservados.add(valorReservado);
+    }
+
+    public void removeValorReservado(Regla valorReservado) {
+        this.valoresReservados.remove(valorReservado);
     }
 
     public void setValoresReservados(List<Regla> valoresReservados) {
