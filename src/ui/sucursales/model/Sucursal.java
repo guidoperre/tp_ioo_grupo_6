@@ -57,7 +57,7 @@ public class Sucursal {
         this.peticiones.addAll(peticiones);
     }
 
-    private void movePeticiones(Sucursal destino) {
+    public void movePeticiones(Sucursal destino) {
         for (Peticion peticion: this.peticiones) {
             if (peticion.isActiva())
                 destino.addPeticion(peticion);
