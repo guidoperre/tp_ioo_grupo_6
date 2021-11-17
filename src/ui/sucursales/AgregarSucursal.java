@@ -2,7 +2,6 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
-import ui.peticiones.model.Peticion;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.sucursales.controlador.SucursalesController;
@@ -113,7 +112,7 @@ public class AgregarSucursal implements Screen {
                     }
                 }
 
-                if (movido == false) {
+                if (!movido) {
                     JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE NO HAY SUCURSALES DISPONIBLES PARA TRANSFERIR LAS PETICIONES", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }

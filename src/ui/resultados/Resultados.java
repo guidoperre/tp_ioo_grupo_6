@@ -7,6 +7,8 @@ import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
+import ui.practicas.model.Practica;
+import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
 
 import javax.swing.*;
@@ -93,9 +95,22 @@ public class Resultados implements Screen {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(
-                            new AgregarResultado((Resultado) target.getModel().getElementAt(index))
-                    );
+                    Resultado resultado = (Resultado) target.getModel().getElementAt(index);
+                    Practica practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
+                    if (practica != null) {
+                        if (practica.isValorReservado(resultado.getValor())) {
+                            JOptionPane.showMessageDialog(
+                                    panel,
+                                    "RETIRAR POR SUCURSAL",
+                                    "ERROR",
+                                    JOptionPane.WARNING_MESSAGE
+                            );
+                        } else {
+                            Application.manager.navigateTo(
+                                new AgregarResultado(resultado)
+                            );
+                        }
+                    }
                 }
             }
         });

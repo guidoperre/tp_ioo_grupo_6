@@ -5,6 +5,7 @@ import models.Rol;
 import navigation.Screen;
 import ui.login.Login;
 import ui.pacientes.Pacientes;
+import ui.practicas.Practicas;
 import ui.peticiones.Peticiones;
 import ui.resultados.Resultados;
 import ui.sucursales.Sucursales;
@@ -126,7 +127,7 @@ public class Home implements Screen {
             practicaLogo.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-
+                    Application.manager.navigateTo(new Practicas());
                 }
             });
         } else {
@@ -144,4 +145,5 @@ public class Home implements Screen {
             }
         });
     }
+
 }
