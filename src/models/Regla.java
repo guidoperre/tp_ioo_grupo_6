@@ -48,20 +48,20 @@ public class Regla {
 
     public Boolean isValorCritico(float valor) {
         switch (operador) {
-            case MAYOR_IGUAL -> {
-                if (this.max >= valor)
-                    return true;
-            } case MAYOR -> {
-                if (this.max > valor)
-                    return true;
-            } case MENOR_IGUAL -> {
-                if (this.min <= valor)
+            case MENOR_IGUAL -> {
+                if (this.min >= valor)
                     return true;
             } case MENOR -> {
+                if (this.min > valor)
+                    return true;
+            } case MAYOR_IGUAL -> {
+                if (this.min <= valor)
+                    return true;
+            } case MAYOR -> {
                 if (this.min < valor)
                     return true;
             } case IGUAL -> {
-                if (this.min == valor && this.max == valor)
+                if (this.min == valor)
                     return true;
             } case ENTRE -> {
                 if (this.min >= valor && this.max <= valor)
@@ -71,5 +71,13 @@ public class Regla {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return switch (operador) {
+            case MAYOR_IGUAL, MAYOR, MENOR, MENOR_IGUAL, IGUAL -> operador + " a " + min;
+            default -> operador + " " + min + " y " + max;
+        };
     }
 }

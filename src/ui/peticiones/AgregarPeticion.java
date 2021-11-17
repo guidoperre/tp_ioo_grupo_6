@@ -14,8 +14,8 @@ import ui.sucursales.model.SucursalesTable;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 public class AgregarPeticion implements Screen {
@@ -80,9 +80,9 @@ public class AgregarPeticion implements Screen {
         String obraSocial = obraSocialTextField.getText();
 
         if (
-                !obraSocial.equals("") &&
-                pacientesSpinner.getSelectedItem() != null &&
-                sucursalSpinner.getSelectedItem() != null
+            !obraSocial.equals("") &&
+            pacientesSpinner.getSelectedItem() != null &&
+            sucursalSpinner.getSelectedItem() != null
         ) {
             return true;
         } else {
@@ -136,16 +136,28 @@ public class AgregarPeticion implements Screen {
     }
 
     private ListModel<Practica> getPracticas(List<Practica> practicas) {
+        List<Practica> practicasActivas = new ArrayList<>();
+        for (Practica p: practicas) {
+            if (p.getActivo()) {
+                practicasActivas.add(p);
+            }
+        }
         DefaultListModel<Practica> practicasModel = new DefaultListModel<>();
-        practicasModel.addAll(practicas);
+        practicasModel.addAll(practicasActivas);
         return practicasModel;
     }
 
     private void setPracticasSpinner() {
         practicasSpinner = new JComboBox<>();
         List<Practica> practicas = PracticasTable.getAllPracticas();
+        List<Practica> practicasActivas = new ArrayList<>();
+        for (Practica p: practicas) {
+            if (p.getActivo()) {
+                practicasActivas.add(p);
+            }
+        }
         DefaultComboBoxModel<Practica> practicasItem = new DefaultComboBoxModel<>();
-        practicasItem.addAll(practicas);
+        practicasItem.addAll(practicasActivas);
         practicasSpinner.setModel(practicasItem);
     }
 
