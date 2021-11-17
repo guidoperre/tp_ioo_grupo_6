@@ -25,8 +25,8 @@ public class UsuarioController extends Usuario {
         return usuario.getNombre();
     }
 
-    public static String getRol(Usuario usuario) {
-        return usuario.getRol().name();
+    public static Rol getRol(Usuario usuario) {
+        return usuario.getRol();
     }
 
     public static String getDni(Usuario usuario) {

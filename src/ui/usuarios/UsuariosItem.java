@@ -26,7 +26,7 @@ public class UsuariosItem {
 
     public void setComponents(Usuario usuario) {
         nombreUsuario.setText(UsuarioController.getNombre(usuario));
-        rolUsuario.setText(UsuarioController.getRol(usuario));
+        rolUsuario.setText(UsuarioController.getRol(usuario).name());
         dniUsuario.setText(UsuarioController.getDni(usuario));
         direccionUsuario.setText(UsuarioController.getDomicilio(usuario));
         edadUsuario.setText(UsuarioController.getEdad(usuario));
