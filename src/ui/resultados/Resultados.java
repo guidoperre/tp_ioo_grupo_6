@@ -8,6 +8,7 @@ import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
 import ui.resultados.model.Resultado;
+import ui.resultados.controlador.ResultadosController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +64,7 @@ public class Resultados implements Screen {
 
     private void setPacientesSpinner() {
         pacienteSpinner = new JComboBox<>();
-        List<Paciente> pacientes = PacientesTable.getAllPacientes();
+        List<Paciente> pacientes = ResultadosController.getAllPacientes();
         DefaultComboBoxModel<Paciente> pacientesItem = new DefaultComboBoxModel<>();
         pacientesItem.addAll(pacientes);
         pacienteSpinner.setModel(pacientesItem);
