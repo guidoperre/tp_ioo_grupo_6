@@ -113,6 +113,15 @@ public class Practica {
         return critico;
     }
 
+    public Boolean isValorReservado(float valor) {
+        boolean reservado = false;
+        for (Regla regla: this.valoresReservados) {
+            if (regla.isValorCritico(valor))
+                reservado = true;
+        }
+        return reservado;
+    }
+
     @Override
     public String toString() {
         return nombre;
