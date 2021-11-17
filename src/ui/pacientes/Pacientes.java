@@ -3,6 +3,7 @@ package ui.pacientes;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
+import ui.pacientes.controlador.PacienteControler;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
 
@@ -82,7 +83,7 @@ public class Pacientes implements Screen {
     }
 
     private ListModel<Paciente> getPacientes() {
-        List<Paciente> pacientes = PacientesTable.getAllPacientes();
+        List<Paciente> pacientes = PacienteControler.getPacientes();
         DefaultListModel<Paciente> pacientesModel = new DefaultListModel<>();
         pacientesModel.addAll(pacientes);
         return pacientesModel;
