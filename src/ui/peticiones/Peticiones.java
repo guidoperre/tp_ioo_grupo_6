@@ -3,6 +3,7 @@ package ui.peticiones;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
+import ui.peticiones.controlador.PeticionControler;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
 
@@ -99,14 +100,14 @@ public class Peticiones implements Screen {
     }
 
     private ListModel<Peticion> getPeticiones() {
-        List<Peticion> peticiones = PeticionesTable.getAllPeticiones();
+        List<Peticion> peticiones = PeticionControler.getPeticiones();
         DefaultListModel<Peticion> peticionesModel = new DefaultListModel<>();
         peticionesModel.addAll(peticiones);
         return peticionesModel;
     }
 
     private ListModel<Peticion> getPeticionesCriticas() {
-        List<Peticion> peticiones = PeticionesTable.getPeticionesCriticas();
+        List<Peticion> peticiones = PeticionControler.getPeticionesCriticas();
         DefaultListModel<Peticion> peticionesModel = new DefaultListModel<>();
         peticionesModel.addAll(peticiones);
         return peticionesModel;
