@@ -22,4 +22,16 @@ public class PeticionControler extends Peticion {
     public static List<Peticion> getPeticiones(){
         return PeticionesTable.getAllPeticiones();
     }
+
+    public static List<Peticion> getAllPeticiones() {
+        return getPeticiones();
+    }
+
+    public static void modifyPeticiones(Peticion peticion) {
+        PeticionesTable.modifyPeticiones(peticion);
+    }
+
+    public static List<Peticion> getAllPeticionesPaciente(Paciente paciente) {
+        return PeticionesTable.getAllPeticionesPaciente(paciente);
+    }
 }
