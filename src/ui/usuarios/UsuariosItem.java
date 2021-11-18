@@ -1,6 +1,7 @@
 package ui.usuarios;
 
 import ui.usuarios.model.Usuario;
+import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,12 +25,12 @@ public class UsuariosItem {
     }
 
     public void setComponents(Usuario usuario) {
-        nombreUsuario.setText(usuario.getNombre());
-        rolUsuario.setText(usuario.getRol().name());
-        dniUsuario.setText(String.valueOf(usuario.getDni()));
-        direccionUsuario.setText(usuario.getDomicilio());
-        edadUsuario.setText(usuario.getEdad() + " años");
-        emailUsuario.setText(usuario.getMail());
+        nombreUsuario.setText(UsuarioController.getNombre(usuario));
+        rolUsuario.setText(UsuarioController.getRol(usuario).name());
+        dniUsuario.setText(UsuarioController.getDni(usuario));
+        direccionUsuario.setText(UsuarioController.getDomicilio(usuario));
+        edadUsuario.setText(UsuarioController.getEdad(usuario));
+        emailUsuario.setText(UsuarioController.getMail(usuario));
     }
 
     private void createUIComponents() {

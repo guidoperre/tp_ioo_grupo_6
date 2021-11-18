@@ -5,6 +5,7 @@ import models.Rol;
 import navigation.Screen;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
+import ui.usuarios.controlador.UsuarioController;
 import utils.DataUtils;
 
 import javax.swing.*;
@@ -50,14 +51,14 @@ public class AgregarUsuario implements Screen {
         addButton.setText("Editar");
         deleteButton.setVisible(true);
 
-        nombreTextField.setText(usuario.getNombre());
-        dniTextField.setText(String.valueOf(usuario.getDni()));
-        domicilioTextField.setText(usuario.getDomicilio());
-        fechaNacimientoTextField.setText(DataUtils.getFechaFromDate(usuario.getFechaNacimiento()));
-        emailTextField.setText(usuario.getMail());
-        usuarioTextField.setText(usuario.getUsername());
-        contrasenaTextField.setText(usuario.getPassword());
-        rolSpinner.setSelectedItem(usuario.getRol());
+        nombreTextField.setText(UsuarioController.getNombre(usuario));
+        dniTextField.setText(UsuarioController.getDni(usuario));
+        domicilioTextField.setText(UsuarioController.getDomicilio(usuario));
+        fechaNacimientoTextField.setText(UsuarioController.getFechaNacimiento(usuario));
+        emailTextField.setText(UsuarioController.getMail(usuario));
+        usuarioTextField.setText(UsuarioController.getUsername(usuario));
+        contrasenaTextField.setText(UsuarioController.getPassword(usuario));
+        rolSpinner.setSelectedItem(UsuarioController.getRol(usuario));
 
         deleteListener();
     }
@@ -110,17 +111,17 @@ public class AgregarUsuario implements Screen {
         addButton.addActionListener(e -> {
             if (checkFields()) {
                 if (usuario != null) {
-                    usuario.setNombre(nombreTextField.getText());
-                    usuario.setDni(Integer.parseInt(dniTextField.getText()));
-                    usuario.setDomicilio(domicilioTextField.getText());
-                    usuario.setFechaNacimiento(DataUtils.getFechaFromString(fechaNacimientoTextField.getText()));
-                    usuario.setMail(emailTextField.getText());
-                    usuario.setUsername(usuarioTextField.getText());
-                    usuario.setPassword(contrasenaTextField.getText());
-                    usuario.setRol((Rol) rolSpinner.getSelectedItem());
-                    UsuariosTable.modifyUsuario(usuario);
+                    UsuarioController.setNombre(usuario, nombreTextField.getText());
+                    UsuarioController.setDni(usuario, Integer.parseInt(dniTextField.getText()));
+                    UsuarioController.setDomicilio(usuario, domicilioTextField.getText());
+                    UsuarioController.setFechaNacimiento(usuario, DataUtils.getFechaFromString(fechaNacimientoTextField.getText()));
+                    UsuarioController.setMail(usuario, emailTextField.getText());
+                    UsuarioController.setUsername(usuario, usuarioTextField.getText());
+                    UsuarioController.setPassword(usuario, contrasenaTextField.getText());
+                    UsuarioController.setRol(usuario, (Rol) rolSpinner.getSelectedItem());
+                    UsuarioController.modifyUsuario(usuario);
                 } else {
-                    UsuariosTable.addUsuario(new Usuario(
+                    UsuarioController.addUsuario(new Usuario(
                             nombreTextField.getText(),
                             Integer.parseInt(dniTextField.getText()),
                             domicilioTextField.getText(),
@@ -138,7 +139,7 @@ public class AgregarUsuario implements Screen {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            UsuariosTable.deleteUsuario(usuario);
+            UsuarioController.deleteUsuario(usuario);
             Application.manager.navigateTo(new Usuarios());
         });
     }

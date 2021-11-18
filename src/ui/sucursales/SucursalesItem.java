@@ -1,6 +1,7 @@
 package ui.sucursales;
 
 import ui.sucursales.model.Sucursal;
+import ui.sucursales.controlador.SucursalesController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,9 +22,9 @@ public class SucursalesItem {
     }
 
     public void setComponents(Sucursal sucursal) {
-        numeroSucursal.setText("Sucursal " + sucursal.getId());
-        direccionSucursal.setText(sucursal.getDireccion());
-        responsableSucursal.setText(sucursal.getResponsable().getNombre());
+        numeroSucursal.setText("Sucursal " + Long.toString(SucursalesController.getId(sucursal)));
+        direccionSucursal.setText(SucursalesController.getDireccion(sucursal));
+        responsableSucursal.setText(SucursalesController.getResponsable(sucursal));
     }
 
     private void createUIComponents() {

@@ -5,6 +5,7 @@ import models.EstadoResultado;
 import navigation.Screen;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacientesTable;
+import ui.peticiones.controlador.PeticionControler;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
@@ -52,7 +53,7 @@ public class AgregarResultado implements Screen {
     }
 
     private Peticion getPeticion() {
-        List<Peticion> peticions = PeticionesTable.getAllPeticiones();
+        List<Peticion> peticions = PeticionControler.getAllPeticiones();
         for (Peticion p: peticions) {
             for (Resultado resultado: p.getResultados()) {
                 if (resultado.getId().equals(this.resultado.getId())) {
@@ -141,12 +142,12 @@ public class AgregarResultado implements Screen {
                 if (peticion != null) {
                     peticion.removeResultado(resultadoViejo);
                     peticion.addResultado(resultado);
-                    PeticionesTable.modifyPeticiones(peticion);
+                    PeticionControler.modifyPeticiones(peticion);
                 } else {
                     Peticion aux = (Peticion) peticionesSpinner.getSelectedItem();
                     if (aux != null) {
                         aux.addResultado(resultado);
-                        PeticionesTable.modifyPeticiones(aux);
+                        PeticionControler.modifyPeticiones(aux);
                     } else {
                         JOptionPane.showMessageDialog(
                                 panel,
@@ -164,7 +165,7 @@ public class AgregarResultado implements Screen {
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
             peticion.removeResultado(resultado);
-            PeticionesTable.modifyPeticiones(peticion);
+            PeticionControler.modifyPeticiones(peticion);
             Application.manager.navigateTo(new Resultados());
         });
     }
@@ -178,7 +179,7 @@ public class AgregarResultado implements Screen {
 
         pacientesSpinner.addItemListener(e -> {
             Paciente paciente = (Paciente) e.getItem();
-            List<Peticion> peticionesPaciente = PeticionesTable.getAllPeticionesPaciente(paciente);
+            List<Peticion> peticionesPaciente = PeticionControler.getAllPeticionesPaciente(paciente);
             DefaultComboBoxModel<Peticion> peticionesPacienteItem = new DefaultComboBoxModel<>();
             peticionesPacienteItem.addAll(peticionesPaciente);
             peticionesSpinner.setModel(peticionesPacienteItem);

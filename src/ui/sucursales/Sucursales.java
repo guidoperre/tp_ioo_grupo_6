@@ -4,7 +4,7 @@ import app.Application;
 import navigation.Screen;
 import ui.sucursales.model.Sucursal;
 import ui.home.Home;
-import ui.sucursales.model.SucursalesTable;
+import ui.sucursales.controlador.SucursalesController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,7 +82,7 @@ public class Sucursales implements Screen {
     }
 
     private ListModel<Sucursal> getSucursales() {
-        List<Sucursal> sucursales = SucursalesTable.getAllSucursales();
+        List<Sucursal> sucursales = SucursalesController.getAllSucursales();
         DefaultListModel<Sucursal> sucursalesModel = new DefaultListModel<>();
         sucursalesModel.addAll(sucursales);
         return sucursalesModel;

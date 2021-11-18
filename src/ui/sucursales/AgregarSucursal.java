@@ -4,6 +4,8 @@ import app.Application;
 import navigation.Screen;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
+import ui.sucursales.controlador.SucursalesController;
+import ui.usuarios.controlador.UsuarioController;
 import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalesTable;
 
@@ -80,11 +82,11 @@ public class AgregarSucursal implements Screen {
         addButton.addActionListener(e -> {
             if (checkFields()) {
                 if (sucursal != null) {
-                    sucursal.setDireccion(direccionTextField.getText());
-                    sucursal.setResponsable((Usuario) responsableSpinner.getSelectedItem());
-                    SucursalesTable.modifySucursal(sucursal);
+                    SucursalesController.setDireccion(sucursal, direccionTextField.getText());
+                    SucursalesController.setResponsable(sucursal, (Usuario) responsableSpinner.getSelectedItem());
+                    SucursalesController.modifySucursal(sucursal);
                 } else {
-                    SucursalesTable.addSucursal(new Sucursal(
+                    SucursalesController.addSucursal(new Sucursal(
                             direccionTextField.getText(),
                             (Usuario) responsableSpinner.getSelectedItem()
                     ));
@@ -99,12 +101,12 @@ public class AgregarSucursal implements Screen {
             if (sucursal.getPeticionesFinalizadas().size() > 0) {
                 JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                boolean movido = false;
-                for (Sucursal sucursalItem: SucursalesTable.getAllSucursales()) {
-                    if (!sucursalItem.getId().equals(sucursal.getId())) {
-                        sucursal.movePeticiones(sucursalItem);
+                Boolean movido = false;
+                for (Sucursal sucursalItem: SucursalesController.getAllSucursales()) {
+                    if (sucursalItem.getId() != SucursalesController.getId(sucursal)) {
+                        SucursalesController.movePeticiones(sucursal, sucursalItem);
                         movido = true;
-                        SucursalesTable.deleteSucursal(sucursal);
+                        SucursalesController.deleteSucursal(sucursal);
                         JOptionPane.showMessageDialog(panel, "LAS PETICIONES ACTIVAS SE HAN MOVIDO A LA SUCURSAL: Sucursal " + sucursalItem.getId(), "CORRECTO", JOptionPane.PLAIN_MESSAGE);
                         break;
                     }
@@ -120,7 +122,7 @@ public class AgregarSucursal implements Screen {
 
     private void setResponsable() {
         responsableSpinner = new JComboBox<>();
-        List<Usuario> usuarios = UsuariosTable.getAllUsuarios();
+        List<Usuario> usuarios = UsuarioController.getAllUsuarios();
         DefaultComboBoxModel<Usuario> usuarioSpinner = new DefaultComboBoxModel<>();
         usuarioSpinner.addAll(usuarios);
         responsableSpinner.setModel(usuarioSpinner);
