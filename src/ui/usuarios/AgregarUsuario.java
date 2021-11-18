@@ -3,6 +3,7 @@ package ui.usuarios;
 import app.Application;
 import models.Rol;
 import navigation.Screen;
+import ui.usuarios.controlador.UsuarioDTO;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.usuarios.controlador.UsuarioController;
@@ -29,13 +30,13 @@ public class AgregarUsuario implements Screen {
     private JTextField usuarioTextField;
     private JTextField contrasenaTextField;
 
-    private Usuario usuario;
+    private UsuarioDTO usuario;
 
     public AgregarUsuario() {
         addListener();
     }
 
-    public AgregarUsuario(Usuario usuario) {
+    public AgregarUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
         addListener();
         initUsuario();
@@ -121,7 +122,7 @@ public class AgregarUsuario implements Screen {
                     UsuarioController.setRol(usuario, (Rol) rolSpinner.getSelectedItem());
                     UsuarioController.modifyUsuario(usuario);
                 } else {
-                    UsuarioController.addUsuario(new Usuario(
+                    UsuarioController.addUsuario(new UsuarioDTO(
                             nombreTextField.getText(),
                             Integer.parseInt(dniTextField.getText()),
                             domicilioTextField.getText(),

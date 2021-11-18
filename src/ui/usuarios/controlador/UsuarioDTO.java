@@ -1,35 +1,72 @@
-package ui.usuarios.model;
+package ui.usuarios.controlador;
 
-import models.Persona;
 import models.Rol;
-import ui.usuarios.controlador.UsuarioDTO;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-public class Usuario extends Persona {
+public class UsuarioDTO {
 
+    private Long id;
+    private String nombre;
+    private int dni;
+    private String domicilio;
+    private String mail;
     private String username;
     private String password;
     private Date fechaNacimiento;
     private Rol rol;
 
-    public Usuario(String nombre, int dni, String domicilio, String mail, String username, String password, Date fecnac, Rol rol) {
-        super(nombre, dni, domicilio, mail);
+    public UsuarioDTO(String nombre, int dni, String domicilio, String mail, String username, String password, Date fechaNacimiento, Rol rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.dni = dni;
+        this.domicilio = domicilio;
+        this.mail = mail;
         this.username = username;
         this.password = password;
-        this.fechaNacimiento = fecnac;
+        this.fechaNacimiento = fechaNacimiento;
         this.rol = rol;
     }
 
-    public static UsuarioDTO login(String username, String password) {
-        List<UsuarioDTO> usuarios = UsuariosTable.getAllUsuarios();
-        for (UsuarioDTO usuario: usuarios) {
-            if (usuario.getUsername().equals(username) && usuario.getUsername().equals(password))
-                return usuario;
-        }
-        return null;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getUsername() {

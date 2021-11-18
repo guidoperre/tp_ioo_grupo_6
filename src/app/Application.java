@@ -10,6 +10,7 @@ import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
 import ui.sucursales.model.Sucursal;
+import ui.usuarios.controlador.UsuarioDTO;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.login.Login;
@@ -63,7 +64,7 @@ public class Application {
         createUsuarios();
         createPacientes();
         createPracticas();
-        createSucursales();
+        /*createSucursales();*/
         createPeticiones();
     }
 
@@ -71,7 +72,7 @@ public class Application {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(DataUtils.getFechaFromString("3/3/2000"));
         UsuariosTable.addUsuario(
-                new Usuario(
+                new UsuarioDTO(
                         "Admin",
                         12345678,
                         "Calle 123",
@@ -83,7 +84,7 @@ public class Application {
                 )
         );
         UsuariosTable.addUsuario(
-                new Usuario(
+                new UsuarioDTO(
                         "Admin",
                         12345678,
                         "Calle 123",
@@ -95,7 +96,7 @@ public class Application {
                 )
         );
         UsuariosTable.addUsuario(
-                new Usuario(
+                new UsuarioDTO(
                         "Admin",
                         12345678,
                         "Calle 123",
@@ -174,7 +175,7 @@ public class Application {
         );
     }
 
-    private static void createSucursales() {
+    /*private static void createSucursales() {
         Usuario usuario = UsuariosTable.getAllUsuarios().get(0);
         SucursalesTable.addSucursal(
             new Sucursal(
@@ -197,7 +198,7 @@ public class Application {
                         new ArrayList<>()
                 )
         );
-    }
+    }*/
 
     private static void createPeticiones() {
         List<Practica> practias = PracticasTable.getAllPracticas();

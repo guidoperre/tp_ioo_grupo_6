@@ -2,6 +2,7 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
+import ui.usuarios.controlador.UsuarioDTO;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuariosTable;
 import ui.sucursales.controlador.SucursalesController;
@@ -21,7 +22,7 @@ public class AgregarSucursal implements Screen {
     private JPanel panel;
     private JTextField direccionTextField;
     private JButton addButton;
-    private JComboBox<Usuario> responsableSpinner;
+    private JComboBox<UsuarioDTO> responsableSpinner;
     private JButton deleteButton;
 
     private Sucursal sucursal;
@@ -122,8 +123,8 @@ public class AgregarSucursal implements Screen {
 
     private void setResponsable() {
         responsableSpinner = new JComboBox<>();
-        List<Usuario> usuarios = UsuarioController.getAllUsuarios();
-        DefaultComboBoxModel<Usuario> usuarioSpinner = new DefaultComboBoxModel<>();
+        List<UsuarioDTO> usuarios = UsuarioController.getAllUsuarios();
+        DefaultComboBoxModel<UsuarioDTO> usuarioSpinner = new DefaultComboBoxModel<>();
         usuarioSpinner.addAll(usuarios);
         responsableSpinner.setModel(usuarioSpinner);
     }

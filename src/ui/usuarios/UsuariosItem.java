@@ -1,5 +1,6 @@
 package ui.usuarios;
 
+import ui.usuarios.controlador.UsuarioDTO;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.controlador.UsuarioController;
 
@@ -24,7 +25,7 @@ public class UsuariosItem {
         return pacienteItem;
     }
 
-    public void setComponents(Usuario usuario) {
+    public void setComponents(UsuarioDTO usuario) {
         nombreUsuario.setText(UsuarioController.getNombre(usuario));
         rolUsuario.setText(UsuarioController.getRol(usuario).name());
         dniUsuario.setText(UsuarioController.getDni(usuario));

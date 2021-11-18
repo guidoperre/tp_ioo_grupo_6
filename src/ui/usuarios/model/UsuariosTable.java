@@ -1,25 +1,27 @@
 package ui.usuarios.model;
 
+import ui.usuarios.controlador.UsuarioDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class UsuariosTable {
-    public static Usuario usuario = null;
+    public static UsuarioDTO usuario = null;
 
-    private static ArrayList<Usuario> usuarios;
+    private static ArrayList<UsuarioDTO> usuarios;
     private static Long indexCount = 0L;
 
     public static void init() {
         usuarios = new ArrayList<>();
     }
 
-    public static List<Usuario> getAllUsuarios() {
+    public static List<UsuarioDTO> getAllUsuarios() {
         return usuarios;
     }
 
-    public static Usuario getUsuario(String nombre) {
-        for (Usuario p: usuarios) {
+    public static UsuarioDTO getUsuario(String nombre) {
+        for (UsuarioDTO p: usuarios) {
             if (p.getNombre().equals(nombre)) {
                 return p;
             }
@@ -28,15 +30,15 @@ public class UsuariosTable {
     }
 
 
-    public static void addUsuario(Usuario usuario) {
+    public static void addUsuario(UsuarioDTO usuario) {
         usuario.setId(indexCount);
         usuarios.add(usuario);
         indexCount++;
     }
 
-    public static void modifyUsuario(Usuario usuario) {
+    public static void modifyUsuario(UsuarioDTO usuario) {
         for (int i = 0; i < usuarios.size(); i++) {
-            Usuario aux = usuarios.get(i);
+            UsuarioDTO aux = usuarios.get(i);
             if (Objects.equals(aux.getId(), usuario.getId())) {
                 usuarios.remove(i);
                 usuarios.add(usuario);
@@ -45,9 +47,9 @@ public class UsuariosTable {
         }
     }
 
-    public static void deleteUsuario(Usuario usuario) {
+    public static void deleteUsuario(UsuarioDTO usuario) {
         for (int i = 0; i < usuarios.size(); i++) {
-            Usuario aux = usuarios.get(i);
+            UsuarioDTO aux = usuarios.get(i);
             if (Objects.equals(aux.getId(), usuario.getId())) {
                 usuarios.remove(i);
                 break;

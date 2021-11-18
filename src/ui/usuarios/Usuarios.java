@@ -3,6 +3,7 @@ package ui.usuarios;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
+import ui.usuarios.controlador.UsuarioDTO;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.controlador.UsuarioController;
 
@@ -56,9 +57,9 @@ public class Usuarios implements Screen {
 
     private void showUsuarios() {
         listPanel = new JPanel();
-        ListModel<Usuario> usuarios = getUsuarios();
+        ListModel<UsuarioDTO> usuarios = getUsuarios();
 
-        JList<Usuario> list = new JList<>();
+        JList<UsuarioDTO> list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setCellRenderer(new UsuariosViewHolder());
@@ -69,34 +70,34 @@ public class Usuarios implements Screen {
         listPanel.add(list);
     }
 
-    private void listListener(JList<Usuario> list) {
+    private void listListener(JList<UsuarioDTO> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarUsuario((Usuario) target.getModel().getElementAt(index)));
+                    Application.manager.navigateTo(new AgregarUsuario((UsuarioDTO) target.getModel().getElementAt(index)));
                 }
             }
         });
     }
 
-    private ListModel<Usuario> getUsuarios() {
-        List<Usuario> usuarios = UsuarioController.getAllUsuarios();
-        DefaultListModel<Usuario> usuariosModel = new DefaultListModel<>();
+    private ListModel<UsuarioDTO> getUsuarios() {
+        List<UsuarioDTO> usuarios = UsuarioController.getAllUsuarios();
+        DefaultListModel<UsuarioDTO> usuariosModel = new DefaultListModel<>();
         usuariosModel.addAll(usuarios);
         return usuariosModel;
     }
 
-    static class UsuariosViewHolder extends JPanel implements ListCellRenderer<Usuario> {
+    static class UsuariosViewHolder extends JPanel implements ListCellRenderer<UsuarioDTO> {
 
         public UsuariosViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Usuario> list,
-            Usuario value,
+            JList<? extends UsuarioDTO> list,
+            UsuarioDTO value,
             int index,
             boolean isSelected,
             boolean cellHasFocus
