@@ -19,7 +19,7 @@ public class DataUtils {
         Date date;
         try {
             date = format.parse(string);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             date = null;
         }
         return date;

@@ -84,14 +84,14 @@ public class AgregarUsuario implements Screen {
                 !nombre.equals("") &&
                 !dni.equals("") &&
                 !direccion.equals("") &&
-                !fechaNacimiento.equals("") &&
+                DataUtils.getFechaFromString(fechaNacimiento) != null &&
                 !email.equals("") &&
                 !usuario.equals("") &&
                 !contrasena.equals("") &&
                 rolSpinner.getSelectedItem() != null
         ) {
             return true;
-        } else if (DataUtils.getFechaFromString(fechaNacimiento) == null) {
+        } else if (!fechaNacimiento.equals("") && DataUtils.getFechaFromString(fechaNacimiento) == null) {
             JOptionPane.showMessageDialog(panel, "EL FORMATO DE FECHA DEBE SER DD/MM/AAAA", "ERROR", JOptionPane.WARNING_MESSAGE);
             return false;
         } else {
