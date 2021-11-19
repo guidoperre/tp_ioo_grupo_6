@@ -44,7 +44,16 @@ public class Login implements Screen {
                 if (user == null) {
                     errorLbl.setText("Credenciales incorrectas");
                 } else {
-                    UsuariosTable.usuario = user;
+                    UsuariosTable.usuario = new Usuario(
+                            user.getNombre(),
+                            user.getDni(),
+                            user.getDomicilio(),
+                            user.getMail(),
+                            user.getUsername(),
+                            user.getPassword(),
+                            user.getFechaNacimiento(),
+                            user.getRol()
+                    );
                     Application.manager.navigateTo(new Home());
                 }
             }
