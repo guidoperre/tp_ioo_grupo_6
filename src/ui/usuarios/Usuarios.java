@@ -3,8 +3,7 @@ package ui.usuarios;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
-import ui.usuarios.controlador.UsuarioDTO;
-import ui.usuarios.model.Usuario;
+import ui.usuarios.model.UsuarioDTO;
 import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
@@ -19,6 +18,9 @@ public class Usuarios implements Screen {
     private JLabel addPaciente;
     private JPanel panel;
     private JPanel listPanel;
+    private JList<UsuarioDTO> usuariosList;
+
+    final private UsuarioController controller;
 
     @Override
     public JPanel getPanel() {
@@ -26,13 +28,14 @@ public class Usuarios implements Screen {
     }
 
     public Usuarios() {
-
+        controller = new UsuarioController();
+        usuariosList.setModel(getUsuarios());
     }
 
     private void createUIComponents() {
         addBackListener();
         addUsuariosListener();
-        showUsuarios();
+        setUsuariosList();
     }
 
     private void addBackListener() {
@@ -50,24 +53,20 @@ public class Usuarios implements Screen {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Application.manager.navigateTo(new AgregarUsuario());
+                Application.manager.navigateTo(new AgregarUsuario(controller));
             }
         });
     }
 
-    private void showUsuarios() {
+    private void setUsuariosList() {
         listPanel = new JPanel();
-        ListModel<UsuarioDTO> usuarios = getUsuarios();
-
-        JList<UsuarioDTO> list = new JList<>();
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setLayoutOrientation(JList.VERTICAL);
-        list.setCellRenderer(new UsuariosViewHolder());
-        list.setModel(usuarios);
-        list.setSize(300,300);
-        listListener(list);
-
-        listPanel.add(list);
+        usuariosList = new JList<>();
+        usuariosList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        usuariosList.setLayoutOrientation(JList.VERTICAL);
+        usuariosList.setCellRenderer(new UsuariosViewHolder());
+        usuariosList.setSize(300,300);
+        listListener(usuariosList);
+        listPanel.add(usuariosList);
     }
 
     private void listListener(JList<UsuarioDTO> list) {
@@ -76,14 +75,15 @@ public class Usuarios implements Screen {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarUsuario((UsuarioDTO) target.getModel().getElementAt(index)));
+                    controller.setUsuario((UsuarioDTO) target.getModel().getElementAt(index));
+                    Application.manager.navigateTo(new AgregarUsuario(controller));
                 }
             }
         });
     }
 
     private ListModel<UsuarioDTO> getUsuarios() {
-        List<UsuarioDTO> usuarios = UsuarioController.getAllUsuarios();
+        List<UsuarioDTO> usuarios = controller.getAllUsuarios();
         DefaultListModel<UsuarioDTO> usuariosModel = new DefaultListModel<>();
         usuariosModel.addAll(usuarios);
         return usuariosModel;

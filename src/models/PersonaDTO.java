@@ -1,6 +1,6 @@
 package models;
 
-public class Persona {
+public class PersonaDTO {
 
     private Long id;
     private String nombre;
@@ -8,7 +8,7 @@ public class Persona {
     private String domicilio;
     private String mail;
 
-    public Persona(String nombre, int dni, String domicilio, String mail) {
+    public PersonaDTO(String nombre, int dni, String domicilio, String mail) {
         super();
         this.nombre = nombre;
         this.dni = dni;

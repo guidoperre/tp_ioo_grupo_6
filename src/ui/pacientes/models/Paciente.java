@@ -1,6 +1,6 @@
 package ui.pacientes.models;
 
-import models.Persona;
+import models.PersonaDTO;
 import models.Sexo;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Paciente extends Persona {
+public class Paciente extends PersonaDTO {
 
     private int edad;
     private Sexo sexo;

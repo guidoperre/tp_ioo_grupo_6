@@ -1,6 +1,8 @@
 package ui.usuarios.controlador;
 
 import models.Rol;
+import ui.usuarios.model.Usuario;
+import ui.usuarios.model.UsuarioDTO;
 import ui.usuarios.model.UsuariosTable;
 import utils.DataUtils;
 
@@ -9,88 +11,41 @@ import java.util.List;
 
 public class UsuarioController {
 
-    public static List<UsuarioDTO> getAllUsuarios() {
+    UsuarioDTO usuario;
 
+    public UsuarioController() {
+        // no-op
+    }
+
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
+
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    public List<UsuarioDTO> getAllUsuarios() {
         return UsuariosTable.getAllUsuarios();
     }
 
-    public static String getNombre(UsuarioDTO usuario) {
-        return usuario.getNombre();
+    public void addUsuario(String nombre, int dni, String domicilio, Date fecnac, String email, String username, String password, Rol rol) {
+        if (usuario != null) {
+            usuario.setNombre(nombre);
+            usuario.setDni(dni);
+            usuario.setDomicilio(domicilio);
+            usuario.setFechaNacimiento(fecnac);
+            usuario.setMail(email);
+            usuario.setUsername(username);
+            usuario.setPassword(password);
+            usuario.setRol(rol);
+            UsuariosTable.modifyUsuario(usuario);
+        } else {
+            UsuariosTable.addUsuario(new UsuarioDTO(nombre, dni, domicilio, email, username, password, fecnac, rol));
+        }
     }
 
-    public static Rol getRol(UsuarioDTO usuario) {
-        return usuario.getRol();
-    }
-
-    public static String getDni(UsuarioDTO usuario) {
-        return String.valueOf(usuario.getDni());
-    }
-
-    public static String getDomicilio(UsuarioDTO usuario) {
-        return usuario.getDomicilio();
-    }
-
-    public static String getEdad(UsuarioDTO usuario) {
-        return Integer.toString(usuario.getEdad()) + " años";
-    }
-
-    public static String getMail(UsuarioDTO usuario) {
-        return usuario.getMail();
-    }
-
-    public static String getUsername(UsuarioDTO usuario) {
-        return usuario.getUsername();
-    }
-
-    public static String getPassword(UsuarioDTO usuario) {
-        return usuario.getPassword();
-    }
-
-    public static String getFechaNacimiento(UsuarioDTO usuario) {
-        return DataUtils.getFechaFromDate(usuario.getFechaNacimiento());
-    }
-
-    public static void setNombre(UsuarioDTO usuario, String name) {
-        usuario.setNombre(name);
-    }
-
-    public static void setDni(UsuarioDTO usuario, int dni) {
-        usuario.setDni(dni);
-    }
-
-    public static void setDomicilio(UsuarioDTO usuario, String domicilio) {
-        usuario.setDomicilio(domicilio);
-    }
-
-    public static void setFechaNacimiento(UsuarioDTO usuario, Date fecha) {
-        usuario.setFechaNacimiento(fecha);
-    }
-
-    public static void setMail(UsuarioDTO usuario, String mail) {
-        usuario.setMail(mail);
-    }
-
-    public static void setUsername(UsuarioDTO usuario, String username) {
-        usuario.setUsername(username);
-    }
-
-    public static void setPassword(UsuarioDTO usuario, String password) {
-        usuario.setPassword(password);
-    }
-
-    public static void setRol(UsuarioDTO usuario, Rol rol) {
-        usuario.setRol(rol);
-    }
-
-    public static void modifyUsuario(UsuarioDTO usuario) {
-        UsuariosTable.modifyUsuario(usuario);
-    }
-
-    public static void addUsuario(UsuarioDTO usuario) {
-        UsuariosTable.addUsuario(usuario);
-    }
-
-    public static void deleteUsuario(UsuarioDTO usuario) {
+    public void deleteUsuario() {
         UsuariosTable.deleteUsuario(usuario);
     }
 }

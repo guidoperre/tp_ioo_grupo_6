@@ -2,13 +2,11 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
-import ui.usuarios.controlador.UsuarioDTO;
+import ui.usuarios.model.UsuarioDTO;
 import ui.usuarios.model.Usuario;
-import ui.usuarios.model.UsuariosTable;
 import ui.sucursales.controlador.SucursalesController;
 import ui.usuarios.controlador.UsuarioController;
 import ui.sucursales.model.Sucursal;
-import ui.sucursales.model.SucursalesTable;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -26,13 +24,16 @@ public class AgregarSucursal implements Screen {
     private JButton deleteButton;
 
     private Sucursal sucursal;
+    private final UsuarioController usuarioController;
 
     public AgregarSucursal() {
+        usuarioController = new UsuarioController();
         addListener();
     }
 
     public AgregarSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
+        usuarioController = new UsuarioController();
         addListener();
         initSucursal();
     }
@@ -123,7 +124,7 @@ public class AgregarSucursal implements Screen {
 
     private void setResponsable() {
         responsableSpinner = new JComboBox<>();
-        List<UsuarioDTO> usuarios = UsuarioController.getAllUsuarios();
+        List<UsuarioDTO> usuarios = usuarioController.getAllUsuarios();
         DefaultComboBoxModel<UsuarioDTO> usuarioSpinner = new DefaultComboBoxModel<>();
         usuarioSpinner.addAll(usuarios);
         responsableSpinner.setModel(usuarioSpinner);

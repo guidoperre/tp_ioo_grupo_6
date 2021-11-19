@@ -2,7 +2,7 @@ package ui.login;
 
 import app.Application;
 import navigation.Screen;
-import ui.usuarios.controlador.UsuarioDTO;
+import ui.usuarios.model.UsuarioDTO;
 import ui.usuarios.model.Usuario;
 import ui.home.Home;
 import ui.usuarios.model.UsuariosTable;
