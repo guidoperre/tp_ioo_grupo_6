@@ -12,7 +12,9 @@ import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
 import ui.resultados.controlador.ResultadosController;
+import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +30,12 @@ public class Resultados implements Screen {
     private JPanel panel;
     private JPanel listPanel;
     private JComboBox<PacienteDTO> pacienteSpinner;
-    private JList<Resultado> list;
+    private JList<ResultadoDTO> list;
+
+    final private ResultadosController controller;
 
     public Resultados() {
-
+        controller = new ResultadosController();
     }
 
     @Override
@@ -92,13 +96,13 @@ public class Resultados implements Screen {
         listPanel.add(list);
     }
 
-    private void listListener(JList<Resultado> list) {
+    private void listListener(JList<ResultadoDTO> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Resultado resultado = (Resultado) target.getModel().getElementAt(index);
+                    ResultadoDTO resultado = (ResultadoDTO) target.getModel().getElementAt(index);
                     Practica practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
                     if (practica != null) {
                         if (practica.isValorReservado(resultado.getValor())) {
@@ -110,7 +114,7 @@ public class Resultados implements Screen {
                             );
                         } else {
                             Application.manager.navigateTo(
-                                new AgregarResultado(resultado)
+                                new AgregarResultado()
                             );
                         }
                     }
@@ -119,27 +123,27 @@ public class Resultados implements Screen {
         });
     }
 
-    private ListModel<Resultado> getResultados(PacienteDTO paciente) {
+    private ListModel<ResultadoDTO> getResultados(PacienteDTO paciente) {
         List<PeticionDTO> peticiones = PeticionesTable.getAllPeticionesPaciente(paciente);
-        List<Resultado> resultados = new ArrayList<>();
+        List<ResultadoDTO> resultados = new ArrayList<>();
         for (PeticionDTO p: peticiones) {
             resultados.addAll(p.getResultados());
         }
 
-        DefaultListModel<Resultado> resultadosModel = new DefaultListModel<>();
+        DefaultListModel<ResultadoDTO> resultadosModel = new DefaultListModel<>();
         resultadosModel.addAll(resultados);
         return resultadosModel;
     }
 
-    static class ResultadosViewHolder extends JPanel implements ListCellRenderer<Resultado> {
+    static class ResultadosViewHolder extends JPanel implements ListCellRenderer<ResultadoDTO> {
 
         public ResultadosViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Resultado> list,
-            Resultado value,
+            JList<? extends ResultadoDTO> list,
+            ResultadoDTO value,
             int index,
             boolean isSelected,
             boolean cellHasFocus

@@ -3,6 +3,7 @@ package ui.resultados;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +22,7 @@ public class ResultadosItem {
         return pacienteItem;
     }
 
-    public void setComponents(Resultado resultado) {
+    public void setComponents(ResultadoDTO resultado) {
         Practica practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
         if (practica != null) {
             nombrePractica.setText(practica.getNombre());

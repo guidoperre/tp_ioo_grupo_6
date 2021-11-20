@@ -13,6 +13,8 @@ import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
+import ui.resultados.controlador.ResultadosController;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -34,16 +36,16 @@ public class AgregarResultado implements Screen {
     private JTextField resultadoValorTextField;
 
     private PeticionDTO peticion;
-    private final Resultado resultado;
+    private final ResultadosController resultado;
     final private PeticionControler peticionController;
 
     public AgregarResultado() {
         peticionController = new PeticionControler();
-        this.resultado = new Resultado();
+        this.resultado = new ResultadosController();
         addListener();
     }
 
-    public AgregarResultado(Resultado resultado) {
+    public AgregarResultado(ResultadosController resultado) {
         peticionController = new PeticionControler();
         this.resultado = resultado;
         this.peticion = getPeticion();
@@ -59,13 +61,13 @@ public class AgregarResultado implements Screen {
 
     private PeticionDTO getPeticion() {
         List<PeticionDTO> peticions = peticionController.getAllPeticiones();
-        for (PeticionDTO p: peticions) {
-            for (Resultado resultado: p.getResultados()) {
-                if (resultado.getId().equals(this.resultado.getId())) {
-                    return p;
-                }
-            }
-        }
+//        for (PeticionDTO p: peticions) {
+//            for (ResultadoDTO resultado: p.getResultados()) {
+//                if (resultado.getId().equals(resultado.getId(resultado))) {
+//                    return p;
+//                }
+//            }
+//        }
         return null;
     }
 
@@ -127,7 +129,7 @@ public class AgregarResultado implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                Resultado resultadoViejo = resultado;
+                ResultadoDTO resultadoViejo = resultado;
                 PeticionDTO peticion = this.peticion;
 
                 try {
