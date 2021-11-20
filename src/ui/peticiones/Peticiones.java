@@ -25,7 +25,7 @@ public class Peticiones implements Screen {
     final private PeticionController controllerPeticion;
 
     public Peticiones() {
-        controllerPeticion = new PeticionController();
+        controllerPeticion = PeticionController.getInstance();
         list.setModel(getPeticiones());
     }
 
@@ -59,6 +59,7 @@ public class Peticiones implements Screen {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                controllerPeticion.setPeticion(null);
                 Application.manager.navigateTo(new Home());
             }
         });
@@ -69,6 +70,7 @@ public class Peticiones implements Screen {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                controllerPeticion.setPeticion(new PeticionDTO());
                 Application.manager.navigateTo(new AgregarPeticion());
             }
         });
@@ -93,7 +95,8 @@ public class Peticiones implements Screen {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarPeticion((PeticionDTO) target.getModel().getElementAt(index)));
+                    controllerPeticion.setPeticion((PeticionDTO) target.getModel().getElementAt(index));
+                    Application.manager.navigateTo(new AgregarPeticion());
                 }
             }
         });

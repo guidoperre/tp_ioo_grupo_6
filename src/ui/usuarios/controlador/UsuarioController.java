@@ -14,7 +14,7 @@ public class  UsuarioController {
 
     UsuarioDTO usuario;
 
-    public UsuarioController() {
+    private UsuarioController() {
         // no-op
     }
 

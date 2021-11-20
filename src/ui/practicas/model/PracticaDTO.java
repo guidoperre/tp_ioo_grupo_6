@@ -107,4 +107,9 @@ public class PracticaDTO {
         }
         return reservado;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

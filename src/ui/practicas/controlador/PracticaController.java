@@ -2,8 +2,10 @@ package ui.practicas.controlador;
 
 import models.Regla;
 import ui.pacientes.controlador.PacienteControler;
+import ui.pacientes.models.Paciente;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticaDTO;
+import ui.practicas.model.PracticasTable;
 
 import java.util.List;
 
@@ -18,6 +20,10 @@ public class PracticaController {
             instance = new PracticaController();
         }
         return instance;
+    }
+
+    public List<PracticaDTO> getAllPracticas() {
+        return PracticasTable.getAllPracticas();
     }
 
     public List<Regla> getValoresReservados(PracticaDTO practica) {

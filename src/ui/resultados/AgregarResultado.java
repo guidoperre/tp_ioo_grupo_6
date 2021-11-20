@@ -42,14 +42,16 @@ public class AgregarResultado implements Screen {
     final private PeticionController peticionController;
 
     public AgregarResultado() {
-        peticionController = new PeticionController();
-        this.controller = new ResultadosController();
+        peticionController = PeticionController.getInstance();
+        this.controller = ResultadosController.getInstance();
+
         addListener();
     }
 
     public AgregarResultado(ResultadoDTO resultado) {
-        peticionController = new PeticionController();
-        this.controller = new ResultadosController();
+        peticionController = PeticionController.getInstance();
+        this.controller = ResultadosController.getInstance();
+
         this.resultado = resultado;
         this.peticion = getPeticion();
         addListener();
@@ -151,12 +153,12 @@ public class AgregarResultado implements Screen {
                 if (peticion != null) {
                     peticion.removeResultado(resultadoViejo);
                     peticion.addResultado(resultado);
-                    peticionController.modifyPeticiones(peticion);
+                    peticionController.modifyPeticion(peticion);
                 } else {
                     PeticionDTO aux = (PeticionDTO) peticionesSpinner.getSelectedItem();
                     if (aux != null) {
                         aux.addResultado(resultado);
-                        peticionController.modifyPeticiones(aux);
+                        peticionController.modifyPeticion(aux);
                     } else {
                         JOptionPane.showMessageDialog(
                                 panel,
@@ -174,7 +176,7 @@ public class AgregarResultado implements Screen {
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
             peticion.removeResultado(resultado);
-            peticionController.modifyPeticiones(peticion);
+            peticionController.modifyPeticion(peticion);
             Application.manager.navigateTo(new Resultados());
         });
     }

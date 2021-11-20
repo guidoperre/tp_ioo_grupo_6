@@ -29,10 +29,9 @@ public class AgregarUsuario implements Screen {
     private JTextField usuarioTextField;
     private JTextField contrasenaTextField;
 
-    private final UsuarioController controller;
+    private final UsuarioController controller = UsuarioController.getInstance();
 
-    public AgregarUsuario(UsuarioController controller) {
-        this.controller = controller;
+    public AgregarUsuario() {
         addListener();
         initUsuario();
     }
