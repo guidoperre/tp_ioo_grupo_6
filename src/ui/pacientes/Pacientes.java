@@ -4,11 +4,7 @@ import app.Application;
 import navigation.Screen;
 import ui.home.Home;
 import ui.pacientes.controlador.PacienteControler;
-import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
-import ui.pacientes.models.PacientesTable;
-import ui.sucursales.model.SucursalDTO;
-import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +19,7 @@ public class Pacientes implements Screen {
     private JPanel panel;
     private JPanel listPanel;
 
-    final private PacienteControler controller;
+    private PacienteControler controller;
 
     @Override
     public JPanel getPanel() {
@@ -35,6 +31,8 @@ public class Pacientes implements Screen {
     }
 
     private void createUIComponents() {
+        controller = PacienteControler.getInstance();
+
         addBackListener();
         addPacienteListener();
         showPacientes();
