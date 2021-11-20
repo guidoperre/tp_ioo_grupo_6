@@ -1,6 +1,7 @@
 package ui.practicas;
 
 import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class PracticasItem {
         return practicaItem;
     }
 
-    public void setComponents(Practica practica) {
+    public void setComponents(PracticaDTO practica) {
         nombrePractica.setText(practica.getNombre());
         codigoPractica.setText("Codigo " + practica.getCodigo());
         if (practica.getActivo()) {

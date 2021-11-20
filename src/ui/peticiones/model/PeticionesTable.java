@@ -2,6 +2,8 @@ package ui.peticiones.model;
 
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
+import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.Sucursal;
@@ -45,6 +47,17 @@ public class PeticionesTable {
                         resultadoDTO.getCodigoPractica()
                 ));
             }
+            ArrayList<Practica> practicas = new ArrayList<>();
+            for (PracticaDTO practica: peticion.getPracticas()) {
+                practicas.add(new Practica(
+                        practica.getCodigo(),
+                        practica.getActivo(),
+                        practica.getNombre(),
+                        practica.getHoras(),
+                        practica.getValoresCriticos(),
+                        practica.getValoresReservados()
+                ));
+            }
             if (new Peticion(
                     new Paciente(peticion.getPaciente().getNombre(), peticion.getPaciente().getDni(), peticion.getPaciente().getDomicilio(), peticion.getPaciente().getMail(), peticion.getPaciente().getEdad(), peticion.getPaciente().getSexo()),
                     peticion.getObraSocial(),
@@ -63,7 +76,7 @@ public class PeticionesTable {
                     ),
                     peticion.getFechaCarga(),
                     peticion.getFechaEntrega(),
-                    peticion.getPracticas(),
+                    practicas,
                     resultados
             ).isCritica()) {
                 aux.add(peticion);

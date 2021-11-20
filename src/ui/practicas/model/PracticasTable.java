@@ -6,19 +6,19 @@ import java.util.Objects;
 
 public class PracticasTable {
 
-    private static ArrayList<Practica> practicas;
+    private static ArrayList<PracticaDTO> practicas;
     private static Long indexCount = 0L;
 
     public static void init() {
         practicas = new ArrayList<>();
     }
 
-    public static List<Practica> getAllPracticas() {
+    public static List<PracticaDTO> getAllPracticas() {
         return practicas;
     }
 
-    public static Practica getPracticas(int codigo) {
-        for (Practica p: practicas) {
+    public static PracticaDTO getPracticas(int codigo) {
+        for (PracticaDTO p: practicas) {
             if (p.getCodigo() == codigo) {
                 return p;
             }
@@ -26,15 +26,15 @@ public class PracticasTable {
         return null;
     }
 
-    public static void addPractica(Practica practica) {
+    public static void addPractica(PracticaDTO practica) {
         practica.setId(indexCount);
         practicas.add(practica);
         indexCount++;
     }
 
-    public static void modifyPractica(Practica practica) {
+    public static void modifyPractica(PracticaDTO practica) {
         for (int i = 0; i < practicas.size(); i++) {
-            Practica aux = practicas.get(i);
+            PracticaDTO aux = practicas.get(i);
             if (Objects.equals(aux.getId(), practica.getId())) {
                 practicas.remove(i);
                 practicas.add(practica);
@@ -43,9 +43,9 @@ public class PracticasTable {
         }
     }
 
-    public static void deletePractica(Practica practica) {
+    public static void deletePractica(PracticaDTO practica) {
         for (int i = 0; i < practicas.size(); i++) {
-            Practica aux = practicas.get(i);
+            PracticaDTO aux = practicas.get(i);
             if (Objects.equals(aux.getId(), practica.getId())) {
                 practicas.remove(i);
                 break;

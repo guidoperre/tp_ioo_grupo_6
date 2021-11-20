@@ -4,6 +4,7 @@ import app.Application;
 import navigation.Screen;
 import ui.home.Home;
 import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
 
 import javax.swing.*;
@@ -57,9 +58,9 @@ public class Practicas implements Screen {
 
     private void showPracticas() {
         listPanel = new JPanel();
-        ListModel<Practica> practicas = getPracticas();
+        ListModel<PracticaDTO> practicas = getPracticas();
 
-        JList<Practica> list = new JList<>();
+        JList<PracticaDTO> list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setCellRenderer(new PracticasViewHolder());
@@ -70,34 +71,34 @@ public class Practicas implements Screen {
         listPanel.add(list);
     }
 
-    private void listListener(JList<Practica> list) {
+    private void listListener(JList<PracticaDTO> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarPractica((Practica) target.getModel().getElementAt(index)));
+                    Application.manager.navigateTo(new AgregarPractica((PracticaDTO) target.getModel().getElementAt(index)));
                 }
             }
         });
     }
 
-    private ListModel<Practica> getPracticas() {
-        List<Practica> practicas = PracticasTable.getAllPracticas();
-        DefaultListModel<Practica> practicasModel = new DefaultListModel<>();
+    private ListModel<PracticaDTO> getPracticas() {
+        List<PracticaDTO> practicas = PracticasTable.getAllPracticas();
+        DefaultListModel<PracticaDTO> practicasModel = new DefaultListModel<>();
         practicasModel.addAll(practicas);
         return practicasModel;
     }
 
-    static class PracticasViewHolder extends JPanel implements ListCellRenderer<Practica> {
+    static class PracticasViewHolder extends JPanel implements ListCellRenderer<PracticaDTO> {
 
         public PracticasViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Practica> list,
-            Practica value,
+            JList<? extends PracticaDTO> list,
+            PracticaDTO value,
             int index,
             boolean isSelected,
             boolean cellHasFocus

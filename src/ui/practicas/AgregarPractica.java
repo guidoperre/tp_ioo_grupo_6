@@ -7,9 +7,12 @@ import navigation.Screen;
 import ui.pacientes.models.Paciente;
 import ui.peticiones.Peticiones;
 import ui.peticiones.model.PeticionesTable;
+import ui.practicas.controlador.PracticaController;
 import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
 import ui.sucursales.model.Sucursal;
+import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -39,7 +42,8 @@ public class AgregarPractica implements Screen {
     private JTextField nombreTextField;
     private JTextField horasTextField;
 
-    private final Practica practica;
+    private final PracticaDTO practica;
+    private final PracticaController controller;
 
     @Override
     public JPanel getPanel() {
@@ -47,18 +51,20 @@ public class AgregarPractica implements Screen {
     }
 
     public AgregarPractica() {
-        this.practica = new Practica();
+        this.controller = new PracticaController();
+        this.practica = new PracticaDTO();
         addListener();
-        valoresReservadosList.setModel(getValores(practica.getValoresReservados()));
-        valoresCriticosList.setModel(getValores(practica.getValoresCriticos()));
+        valoresReservadosList.setModel(getValores(controller.getValoresReservados(practica)));
+        valoresCriticosList.setModel(getValores(controller.getValoresCriticos(practica)));
     }
 
-    public AgregarPractica(Practica practica) {
+    public AgregarPractica(PracticaDTO practica) {
+        this.controller = new PracticaController();
         this.practica = practica;
         initPractica();
         addListener();
-        valoresReservadosList.setModel(getValores(practica.getValoresReservados()));
-        valoresCriticosList.setModel(getValores(practica.getValoresCriticos()));
+        valoresReservadosList.setModel(getValores(controller.getValoresReservados(practica)));
+        valoresCriticosList.setModel(getValores(controller.getValoresCriticos(practica)));
     }
 
     private void initPractica() {
@@ -217,8 +223,8 @@ public class AgregarPractica implements Screen {
                                     operadorRegla
                             );
                         };
-                        practica.addValorCritico(regla);
-                        valoresCriticosList.setModel(getValores(practica.getValoresCriticos()));
+                        controller.addValorCritico(practica, regla);
+                        valoresCriticosList.setModel(getValores(controller.getValoresCriticos(practica)));
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(
                                 panel,
@@ -259,8 +265,8 @@ public class AgregarPractica implements Screen {
                                     operadorRegla
                             );
                         };
-                        practica.addValorReservado(regla);
-                        valoresReservadosList.setModel(getValores(practica.getValoresReservados()));
+                        controller.addValorReservado(practica, regla);
+                        valoresReservadosList.setModel(getValores(controller.getValoresReservados(practica)));
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(
                                 panel,
@@ -288,8 +294,8 @@ public class AgregarPractica implements Screen {
             public void mouseClicked(MouseEvent e) {
                 Regla regla = valoresCriticosList.getSelectedValue();
                 if (regla != null) {
-                    practica.removeValorReservado(regla);
-                    valoresCriticosList.setModel(getValores(practica.getValoresCriticos()));
+                    controller.removeValorReservado(practica, regla);
+                    valoresCriticosList.setModel(getValores(controller.getValoresCriticos(practica)));
                 } else {
                     JOptionPane.showMessageDialog(
                             panel,
@@ -309,8 +315,8 @@ public class AgregarPractica implements Screen {
             public void mouseClicked(MouseEvent e) {
                 Regla regla = valoresReservadosList.getSelectedValue();
                 if (regla != null) {
-                    practica.removeValorReservado(regla);
-                    valoresReservadosList.setModel(getValores(practica.getValoresReservados()));
+                    controller.removeValorReservado(practica, regla);
+                    valoresReservadosList.setModel(getValores(controller.getValoresReservados(practica)));
                 } else {
                     JOptionPane.showMessageDialog(
                             panel,

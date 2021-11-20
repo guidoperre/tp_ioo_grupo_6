@@ -9,6 +9,7 @@ import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
@@ -115,7 +116,7 @@ public class Application {
 
     private static void createPracticas(){
         PracticasTable.addPractica(
-                new Practica(
+                new PracticaDTO(
                         1,
                         true,
                         "Analisis de sangre",
@@ -125,7 +126,7 @@ public class Application {
                 )
         );
         PracticasTable.addPractica(
-                new Practica(
+                new PracticaDTO(
                         2,
                         true,
                         "Analisis globulos rojos",
@@ -135,7 +136,7 @@ public class Application {
                 )
         );
         PracticasTable.addPractica(
-                new Practica(
+                new PracticaDTO(
                         3,
                         true,
                         "Radiografia torax",
@@ -206,7 +207,7 @@ public class Application {
     }
 
     private static void createPeticiones() {
-        List<Practica> practias = PracticasTable.getAllPracticas();
+        List<PracticaDTO> practias = PracticasTable.getAllPracticas();
         List<PacienteDTO> pacientes = PacientesTable.getAllPacientes();
         SucursalDTO sucursal = SucursalesTable.getAllSucursales().get(0);
 
@@ -219,7 +220,7 @@ public class Application {
                 )
         );
 
-        List<Practica> PracticaPeticion1 = new ArrayList<>();
+        List<PracticaDTO> PracticaPeticion1 = new ArrayList<>();
         PracticaPeticion1.addAll(practias);
 
         PeticionesTable.addPeticiones(
@@ -234,7 +235,7 @@ public class Application {
             )
         );
 
-        List<Practica> PracticaPeticion2 = new ArrayList<>();
+        List<PracticaDTO> PracticaPeticion2 = new ArrayList<>();
         PracticaPeticion2.addAll(practias);
 
         List<ResultadoDTO> resultados2 = new ArrayList<>();
@@ -257,7 +258,7 @@ public class Application {
                 )
         );
 
-        List<Practica> PracticaPeticion3 = new ArrayList<>();
+        List<PracticaDTO> PracticaPeticion3 = new ArrayList<>();
         PracticaPeticion3.addAll(practias);
 
         List<ResultadoDTO> resultados3 = new ArrayList<>();

@@ -10,6 +10,7 @@ import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
@@ -103,7 +104,7 @@ public class Resultados implements Screen {
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
                     ResultadoDTO resultado = (ResultadoDTO) target.getModel().getElementAt(index);
-                    Practica practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
+                    PracticaDTO practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
                     if (practica != null) {
                         if (practica.isValorReservado(resultado.getValor())) {
                             JOptionPane.showMessageDialog(

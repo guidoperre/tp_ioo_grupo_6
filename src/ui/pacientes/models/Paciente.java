@@ -5,6 +5,8 @@ import models.Sexo;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
+import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.Sucursal;
@@ -75,6 +77,17 @@ public class Paciente extends PersonaDTO {
                         resultadoDTO.getCodigoPractica()
                 ));
             }
+            ArrayList<Practica> practicas = new ArrayList<>();
+            for (PracticaDTO practica: peticionDTO.getPracticas()) {
+                practicas.add(new Practica(
+                        practica.getCodigo(),
+                        practica.getActivo(),
+                        practica.getNombre(),
+                        practica.getHoras(),
+                        practica.getValoresCriticos(),
+                        practica.getValoresReservados()
+                ));
+            }
             Peticion peticion = new Peticion(
                     new Paciente(
                             peticionDTO.getPaciente().getNombre(),
@@ -99,7 +112,7 @@ public class Paciente extends PersonaDTO {
                     ),
                     peticionDTO.getFechaCarga(),
                     peticionDTO.getFechaEntrega(),
-                    peticionDTO.getPracticas(),
+                    practicas,
                     resultados
 
             );

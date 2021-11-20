@@ -3,6 +3,7 @@ package ui.peticiones.model;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.Sucursal;
@@ -20,7 +21,7 @@ public class PeticionDTO {
     private SucursalDTO sucursal;
     private Date fechaCarga;
     private Date fechaEntrega;
-    private List<Practica> practicas; // Change to DTO
+    private List<PracticaDTO> practicas; // Change to DTO
     private List<ResultadoDTO> resultados; // Change to DTO
 
     public PeticionDTO() {
@@ -28,7 +29,7 @@ public class PeticionDTO {
         this.resultados = new ArrayList<>();
     }
 
-    public PeticionDTO(PacienteDTO paciente, String obraSocial, SucursalDTO sucursal, Date fechaCarga, Date fechaEntrega, List<Practica> practicas, List<ResultadoDTO> resultados) {
+    public PeticionDTO(PacienteDTO paciente, String obraSocial, SucursalDTO sucursal, Date fechaCarga, Date fechaEntrega, List<PracticaDTO> practicas, List<ResultadoDTO> resultados) {
         this.paciente = paciente;
         this.obraSocial = obraSocial;
         this.fechaCarga = fechaCarga;
@@ -90,7 +91,7 @@ public class PeticionDTO {
 
     public Date getFechaEntrega() {
         int max = 0;
-        for (Practica practica: this.practicas) {
+        for (PracticaDTO practica: this.practicas) {
             if (practica.getHoras() > max)
                 max = practica.getHoras();
         }
@@ -106,19 +107,19 @@ public class PeticionDTO {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public List<Practica> getPracticas() {
+    public List<PracticaDTO> getPracticas() {
         return practicas;
     }
 
-    public void setPracticas(List<Practica> practicas) {
+    public void setPracticas(List<PracticaDTO> practicas) {
         this.practicas = practicas;
     }
 
-    public void addPractica(Practica practica) {
+    public void addPractica(PracticaDTO practica) {
         this.practicas.add(practica);
     }
 
-    public void removePractica(Practica practica) {
+    public void removePractica(PracticaDTO practica) {
         this.practicas.remove(practica);
     }
 

@@ -9,6 +9,8 @@ import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
+import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
 
@@ -39,7 +41,18 @@ public class PacienteControler {
                         resultado.getCodigoPractica()
                 ));
             }
-            res.add(new PeticionDTO(paciente, peticion.getObraSocial(), peticion.getSucursal(), peticion.getFechaCarga(), peticion.getFechaEntrega(), peticion.getPracticas(), resultados));
+            ArrayList<PracticaDTO> practicas = new ArrayList<>();
+            for (Practica practica: peticion.getPracticas()) {
+                practicas.add(new PracticaDTO(
+                        practica.getCodigo(),
+                        practica.getActivo(),
+                        practica.getNombre(),
+                        practica.getHoras(),
+                        practica.getValoresCriticos(),
+                        practica.getValoresReservados()
+                ));
+            }
+            res.add(new PeticionDTO(paciente, peticion.getObraSocial(), peticion.getSucursal(), peticion.getFechaCarga(), peticion.getFechaEntrega(), practicas, resultados));
         }
         return res;
     }

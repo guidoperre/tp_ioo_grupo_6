@@ -10,6 +10,7 @@ import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
 import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalDTO;
@@ -30,11 +31,11 @@ public class AgregarPeticion implements Screen {
     private JButton addButton;
     private JButton deleteButton;
     private JTextField obraSocialTextField;
-    private JList<Practica> practicasList;
+    private JList<PracticaDTO> practicasList;
     private JLabel addPractica;
     private JComboBox<PacienteDTO> pacientesSpinner;
     private JComboBox<Sucursal> sucursalSpinner;
-    private JComboBox<Practica> practicasSpinner;
+    private JComboBox<PracticaDTO> practicasSpinner;
     private JLabel removePractica;
 
     private final PeticionDTO peticion;
@@ -142,28 +143,28 @@ public class AgregarPeticion implements Screen {
         practicasList.setSize(300,300);
     }
 
-    private ListModel<Practica> getPracticas(List<Practica> practicas) {
-        List<Practica> practicasActivas = new ArrayList<>();
-        for (Practica p: practicas) {
+    private ListModel<PracticaDTO> getPracticas(List<PracticaDTO> practicas) {
+        List<PracticaDTO> practicasActivas = new ArrayList<>();
+        for (PracticaDTO p: practicas) {
             if (p.getActivo()) {
                 practicasActivas.add(p);
             }
         }
-        DefaultListModel<Practica> practicasModel = new DefaultListModel<>();
+        DefaultListModel<PracticaDTO> practicasModel = new DefaultListModel<>();
         practicasModel.addAll(practicasActivas);
         return practicasModel;
     }
 
     private void setPracticasSpinner() {
         practicasSpinner = new JComboBox<>();
-        List<Practica> practicas = PracticasTable.getAllPracticas();
-        List<Practica> practicasActivas = new ArrayList<>();
-        for (Practica p: practicas) {
+        List<PracticaDTO> practicas = PracticasTable.getAllPracticas();
+        List<PracticaDTO> practicasActivas = new ArrayList<>();
+        for (PracticaDTO p: practicas) {
             if (p.getActivo()) {
                 practicasActivas.add(p);
             }
         }
-        DefaultComboBoxModel<Practica> practicasItem = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<PracticaDTO> practicasItem = new DefaultComboBoxModel<>();
         practicasItem.addAll(practicasActivas);
         practicasSpinner.setModel(practicasItem);
     }
@@ -173,7 +174,7 @@ public class AgregarPeticion implements Screen {
         addPractica.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Practica practica = (Practica) practicasSpinner.getSelectedItem();
+                PracticaDTO practica = (PracticaDTO) practicasSpinner.getSelectedItem();
                 if (practica != null) {
                     peticion.addPractica(practica);
                     practicasList.setModel(getPracticas(peticion.getPracticas()));
@@ -194,7 +195,7 @@ public class AgregarPeticion implements Screen {
         removePractica.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Practica practica = practicasList.getSelectedValue();
+                PracticaDTO practica = practicasList.getSelectedValue();
                 if (practica != null) {
                     peticion.removePractica(practica);
                     practicasList.setModel(getPracticas(peticion.getPracticas()));

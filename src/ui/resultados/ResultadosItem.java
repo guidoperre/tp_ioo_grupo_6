@@ -1,6 +1,7 @@
 package ui.resultados;
 
 import ui.practicas.model.Practica;
+import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
@@ -23,7 +24,7 @@ public class ResultadosItem {
     }
 
     public void setComponents(ResultadoDTO resultado) {
-        Practica practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
+        PracticaDTO practica = PracticasTable.getPracticas(resultado.getCodigoPractica());
         if (practica != null) {
             nombrePractica.setText(practica.getNombre());
         }
