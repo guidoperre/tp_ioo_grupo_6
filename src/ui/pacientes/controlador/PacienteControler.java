@@ -29,7 +29,7 @@ public class PacienteControler {
                 paciente.getSexo()).getPeticionesFinalizadas();
 
         for (Peticion peticion: peticiones) {
-            res.add(new PeticionDTO());
+            res.add(new PeticionDTO(paciente, peticion.getObraSocial(), peticion.getSucursal(), peticion.getFechaCarga(), peticion.getFechaEntrega(), peticion.getPracticas(), peticion.getResultados()));
         }
         return res;
     }

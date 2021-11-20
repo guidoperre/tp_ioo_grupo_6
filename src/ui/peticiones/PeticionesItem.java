@@ -1,6 +1,7 @@
 package ui.peticiones;
 
 import ui.peticiones.model.Peticion;
+import ui.peticiones.model.PeticionDTO;
 import utils.DataUtils;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class PeticionesItem {
         return pacienteItem;
     }
 
-    public void setComponents(Peticion peticion) {
+    public void setComponents(PeticionDTO peticion) {
         nombrePeticion.setText(peticion.getPaciente().getNombre());
         obraSocialPeticion.setText(peticion.getObraSocial());
         fechaCargaPeticion.setText("Fecha de carga: " + DataUtils.getFechaFromDate(peticion.getFechaCarga()));

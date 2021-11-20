@@ -3,8 +3,10 @@ package ui.peticiones;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
+import ui.pacientes.controlador.PacienteControler;
 import ui.peticiones.controlador.PeticionControler;
 import ui.peticiones.model.Peticion;
+import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 
 import javax.swing.*;
@@ -21,10 +23,12 @@ public class Peticiones implements Screen {
     private JPanel panel;
     private JPanel listPanel;
     private JCheckBox criticosCheckBox;
-    private JList<Peticion> list;
+    private JList<PeticionDTO> list;
+
+    final private PeticionControler controller;
 
     public Peticiones() {
-
+        controller = new PeticionControler();
     }
 
     @Override
@@ -74,7 +78,7 @@ public class Peticiones implements Screen {
 
     private void showPeticiones() {
         listPanel = new JPanel();
-        ListModel<Peticion> peticiones = getPeticiones();
+        ListModel<PeticionDTO> peticiones = getPeticiones();
 
         list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -87,41 +91,41 @@ public class Peticiones implements Screen {
         listPanel.add(list);
     }
 
-    private void listListener(JList<Peticion> list) {
+    private void listListener(JList<PeticionDTO> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarPeticion((Peticion) target.getModel().getElementAt(index)));
+                    Application.manager.navigateTo(new AgregarPeticion((PeticionDTO) target.getModel().getElementAt(index)));
                 }
             }
         });
     }
 
-    private ListModel<Peticion> getPeticiones() {
-        List<Peticion> peticiones = PeticionControler.getPeticiones();
-        DefaultListModel<Peticion> peticionesModel = new DefaultListModel<>();
+    private ListModel<PeticionDTO> getPeticiones() {
+        List<PeticionDTO> peticiones = controller.getPeticiones();
+        DefaultListModel<PeticionDTO> peticionesModel = new DefaultListModel<>();
         peticionesModel.addAll(peticiones);
         return peticionesModel;
     }
 
-    private ListModel<Peticion> getPeticionesCriticas() {
-        List<Peticion> peticiones = PeticionControler.getPeticionesCriticas();
-        DefaultListModel<Peticion> peticionesModel = new DefaultListModel<>();
+    private ListModel<PeticionDTO> getPeticionesCriticas() {
+        List<PeticionDTO> peticiones = PeticionControler.getPeticionesCriticas();
+        DefaultListModel<PeticionDTO> peticionesModel = new DefaultListModel<>();
         peticionesModel.addAll(peticiones);
         return peticionesModel;
     }
 
-    static class PeticionesViewHolder extends JPanel implements ListCellRenderer<Peticion> {
+    static class PeticionesViewHolder extends JPanel implements ListCellRenderer<PeticionDTO> {
 
         public PeticionesViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Peticion> list,
-            Peticion value,
+            JList<? extends PeticionDTO> list,
+            PeticionDTO value,
             int index,
             boolean isSelected,
             boolean cellHasFocus
