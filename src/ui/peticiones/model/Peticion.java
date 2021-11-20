@@ -3,6 +3,7 @@ package ui.peticiones.model;
 import ui.practicas.model.Practica;
 import ui.resultados.model.Resultado;
 import ui.pacientes.models.Paciente;
+import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.Sucursal;
 
 import java.util.ArrayList;
@@ -141,7 +142,7 @@ public class Peticion {
 
     public Boolean isActiva() {
         boolean activa = false;
-        for (Resultado resultado: this.resultados) {
+        for (ResultadoDTO resultado: this.resultados) {
             if (resultado.isActivo())
                 activa = true;
         }
@@ -150,7 +151,7 @@ public class Peticion {
 
     public Boolean isFinalizada() {
         boolean finalizada = false;
-        for (Resultado resultado: this.resultados) {
+        for (ResultadoDTO resultado: this.resultados) {
             if (resultado.isFinalizada())
                 finalizada = true;
         }
@@ -167,7 +168,7 @@ public class Peticion {
 
     public Boolean isCritica() {
         boolean critico = false;
-        for (Resultado resultado: this.resultados) {
+        for (ResultadoDTO resultado: this.resultados) {
             Practica practica = getPratica(resultado.getCodigoPractica());
             if (practica != null && practica.isValorCritico(resultado.getValor()))
                 critico = true;

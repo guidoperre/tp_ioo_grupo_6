@@ -13,6 +13,8 @@ import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
+import ui.resultados.controlador.ResultadosController;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -34,20 +36,21 @@ public class AgregarResultado implements Screen {
     private JTextField resultadoValorTextField;
 
     private PeticionDTO peticion;
-    private final Resultado resultado;
+    private ResultadoDTO resultado;
+    private final ResultadosController controller;
     final private PeticionController peticionController;
 
     public AgregarResultado() {
         peticionController = new PeticionController();
-        this.resultado = new Resultado();
+        this.controller = new ResultadosController();
         addListener();
     }
 
-    public AgregarResultado(Resultado resultado) {
+    public AgregarResultado(ResultadoDTO resultado) {
         peticionController = new PeticionController();
+        this.controller = new ResultadosController();
         this.resultado = resultado;
         this.peticion = getPeticion();
-
         addListener();
         initResultado();
     }
@@ -59,13 +62,13 @@ public class AgregarResultado implements Screen {
 
     private PeticionDTO getPeticion() {
         List<PeticionDTO> peticions = peticionController.getAllPeticiones();
-        for (PeticionDTO p: peticions) {
-            for (Resultado resultado: p.getResultados()) {
-                if (resultado.getId().equals(this.resultado.getId())) {
-                    return p;
-                }
-            }
-        }
+//        for (PeticionDTO p: peticions) {
+//            for (ResultadoDTO resultado: p.getResultados()) {
+//                if (resultado.getId().equals(resultado.getId(resultado))) {
+//                    return p;
+//                }
+//            }
+//        }
         return null;
     }
 
@@ -127,7 +130,7 @@ public class AgregarResultado implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                Resultado resultadoViejo = resultado;
+                ResultadoDTO resultadoViejo = resultado;
                 PeticionDTO peticion = this.peticion;
 
                 try {
@@ -205,7 +208,7 @@ public class AgregarResultado implements Screen {
                     List<Practica> practicasPendientes = new ArrayList<>();
                     for (Practica p: peticion.getPracticas()) {
                         boolean pendiente = true;
-                        for (Resultado r: peticion.getResultados()) {
+                        for (ResultadoDTO r: peticion.getResultados()) {
                             if (r.getCodigoPractica() == p.getCodigo()) {
                                 pendiente = false;
                                 break;

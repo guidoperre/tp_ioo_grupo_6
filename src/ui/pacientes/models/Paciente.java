@@ -5,6 +5,8 @@ import models.Sexo;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
+import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.Sucursal;
 import ui.usuarios.model.Usuario;
 
@@ -65,6 +67,14 @@ public class Paciente extends PersonaDTO {
     public List<Peticion> getPeticionesFinalizadas() {
         List<Peticion> peticiones = new ArrayList<>();
         for (PeticionDTO peticionDTO: PeticionesTable.getAllPeticiones()) {
+            ArrayList<Resultado> resultados = new ArrayList<>();
+            for (ResultadoDTO resultadoDTO: peticionDTO.getResultados()) {
+                resultados.add(new Resultado(
+                        resultadoDTO.getValor(),
+                        resultadoDTO.getEstado(),
+                        resultadoDTO.getCodigoPractica()
+                ));
+            }
             Peticion peticion = new Peticion(
                     new Paciente(
                             peticionDTO.getPaciente().getNombre(),
@@ -90,7 +100,8 @@ public class Paciente extends PersonaDTO {
                     peticionDTO.getFechaCarga(),
                     peticionDTO.getFechaEntrega(),
                     peticionDTO.getPracticas(),
-                    peticionDTO.getResultados()
+                    resultados
+
             );
             if (peticion.getPaciente().getId() == this.getId()) {
                 if (peticion.isFinalizada())

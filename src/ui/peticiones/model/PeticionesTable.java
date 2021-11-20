@@ -2,6 +2,8 @@ package ui.peticiones.model;
 
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
+import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.Sucursal;
 import ui.usuarios.model.Usuario;
 
@@ -35,6 +37,14 @@ public class PeticionesTable {
     public static List<PeticionDTO> getPeticionesCriticas() {
         List<PeticionDTO> aux = new ArrayList<>();
         for (PeticionDTO peticion: peticiones) {
+            ArrayList<Resultado> resultados = new ArrayList<>();
+            for (ResultadoDTO resultadoDTO: peticion.getResultados()) {
+                resultados.add(new Resultado(
+                        resultadoDTO.getValor(),
+                        resultadoDTO.getEstado(),
+                        resultadoDTO.getCodigoPractica()
+                ));
+            }
             if (new Peticion(
                     new Paciente(peticion.getPaciente().getNombre(), peticion.getPaciente().getDni(), peticion.getPaciente().getDomicilio(), peticion.getPaciente().getMail(), peticion.getPaciente().getEdad(), peticion.getPaciente().getSexo()),
                     peticion.getObraSocial(),
@@ -54,7 +64,7 @@ public class PeticionesTable {
                     peticion.getFechaCarga(),
                     peticion.getFechaEntrega(),
                     peticion.getPracticas(),
-                    peticion.getResultados()
+                    resultados
             ).isCritica()) {
                 aux.add(peticion);
             }

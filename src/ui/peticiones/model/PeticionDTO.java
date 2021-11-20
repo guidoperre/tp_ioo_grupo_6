@@ -4,6 +4,7 @@ import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.practicas.model.Practica;
 import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalDTO;
 
@@ -20,14 +21,14 @@ public class PeticionDTO {
     private Date fechaCarga;
     private Date fechaEntrega;
     private List<Practica> practicas; // Change to DTO
-    private List<Resultado> resultados; // Change to DTO
+    private List<ResultadoDTO> resultados; // Change to DTO
 
     public PeticionDTO() {
         this.practicas = new ArrayList<>();
         this.resultados = new ArrayList<>();
     }
 
-    public PeticionDTO(PacienteDTO paciente, String obraSocial, SucursalDTO sucursal, Date fechaCarga, Date fechaEntrega, List<Practica> practicas, List<Resultado> resultados) {
+    public PeticionDTO(PacienteDTO paciente, String obraSocial, SucursalDTO sucursal, Date fechaCarga, Date fechaEntrega, List<Practica> practicas, List<ResultadoDTO> resultados) {
         this.paciente = paciente;
         this.obraSocial = obraSocial;
         this.fechaCarga = fechaCarga;
@@ -121,19 +122,19 @@ public class PeticionDTO {
         this.practicas.remove(practica);
     }
 
-    public List<Resultado> getResultados() {
+    public List<ResultadoDTO> getResultados() {
         return resultados;
     }
 
-    public void setResultados(List<Resultado> resultados) {
+    public void setResultados(List<ResultadoDTO> resultados) {
         this.resultados = resultados;
     }
 
-    public void removeResultado(Resultado resultado) {
+    public void removeResultado(ResultadoDTO resultado) {
         this.resultados.remove(resultado);
     }
 
-    public void addResultado(Resultado resultado) {
+    public void addResultado(ResultadoDTO resultado) {
         this.resultados.add(resultado);
     }
 

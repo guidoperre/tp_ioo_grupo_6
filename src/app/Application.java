@@ -11,6 +11,7 @@ import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalDTO;
 import ui.usuarios.model.Usuario;
@@ -209,9 +210,9 @@ public class Application {
         List<PacienteDTO> pacientes = PacientesTable.getAllPacientes();
         SucursalDTO sucursal = SucursalesTable.getAllSucursales().get(0);
 
-        List<Resultado> resultados1 = new ArrayList<>();
+        List<ResultadoDTO> resultados1 = new ArrayList<>();
         resultados1.add(
-                new Resultado(
+                new ResultadoDTO(
                         1F,
                         EstadoResultado.PENDIENTE,
                         1
@@ -236,9 +237,9 @@ public class Application {
         List<Practica> PracticaPeticion2 = new ArrayList<>();
         PracticaPeticion2.addAll(practias);
 
-        List<Resultado> resultados2 = new ArrayList<>();
+        List<ResultadoDTO> resultados2 = new ArrayList<>();
         resultados2.add(
-                new Resultado(
+                new ResultadoDTO(
                         1F,
                         EstadoResultado.FINALIZADO,
                         2
@@ -259,9 +260,9 @@ public class Application {
         List<Practica> PracticaPeticion3 = new ArrayList<>();
         PracticaPeticion3.addAll(practias);
 
-        List<Resultado> resultados3 = new ArrayList<>();
+        List<ResultadoDTO> resultados3 = new ArrayList<>();
         resultados3.add(
-            new Resultado(
+            new ResultadoDTO(
                 1F,
                 EstadoResultado.PENDIENTE,
                 3

@@ -9,6 +9,8 @@ import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
+import ui.resultados.model.Resultado;
+import ui.resultados.model.ResultadoDTO;
 
 public class PacienteControler {
     public PacienteControler() {
@@ -29,7 +31,15 @@ public class PacienteControler {
                 paciente.getSexo()).getPeticionesFinalizadas();
 
         for (Peticion peticion: peticiones) {
-            res.add(new PeticionDTO(paciente, peticion.getObraSocial(), peticion.getSucursal(), peticion.getFechaCarga(), peticion.getFechaEntrega(), peticion.getPracticas(), peticion.getResultados()));
+            ArrayList<ResultadoDTO> resultados = new ArrayList<>();
+            for (Resultado resultado: peticion.getResultados()) {
+                resultados.add(new ResultadoDTO(
+                        resultado.getValor(),
+                        resultado.getEstado(),
+                        resultado.getCodigoPractica()
+                ));
+            }
+            res.add(new PeticionDTO(paciente, peticion.getObraSocial(), peticion.getSucursal(), peticion.getFechaCarga(), peticion.getFechaEntrega(), peticion.getPracticas(), resultados));
         }
         return res;
     }
