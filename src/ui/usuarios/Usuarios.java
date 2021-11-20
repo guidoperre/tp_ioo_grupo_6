@@ -55,7 +55,7 @@ public class Usuarios implements Screen {
             @Override
             public void mouseClicked(MouseEvent e) {
                 controller.setUsuario(null);
-                Application.manager.navigateTo(new AgregarUsuario(controller));
+                Application.manager.navigateTo(new AgregarUsuario());
             }
         });
     }
@@ -78,7 +78,7 @@ public class Usuarios implements Screen {
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
                     controller.setUsuario((UsuarioDTO) target.getModel().getElementAt(index));
-                    Application.manager.navigateTo(new AgregarUsuario(controller));
+                    Application.manager.navigateTo(new AgregarUsuario());
                 }
             }
         });

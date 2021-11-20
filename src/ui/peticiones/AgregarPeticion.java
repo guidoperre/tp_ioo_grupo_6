@@ -2,14 +2,12 @@ package ui.peticiones;
 
 import app.Application;
 import navigation.Screen;
-import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.controlador.PeticionController;
-import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
-import ui.practicas.model.Practica;
+import ui.practicas.controlador.PracticaController;
 import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
 import ui.sucursales.model.Sucursal;
@@ -34,26 +32,15 @@ public class AgregarPeticion implements Screen {
     private JList<PracticaDTO> practicasList;
     private JLabel addPractica;
     private JComboBox<PacienteDTO> pacientesSpinner;
-    private JComboBox<Sucursal> sucursalSpinner;
+    private JComboBox<SucursalDTO> sucursalSpinner;
     private JComboBox<PracticaDTO> practicasSpinner;
     private JLabel removePractica;
 
-    private final PeticionDTO peticion;
-    final private PeticionController controller;
+    private final PeticionController peticionController = PeticionController.getInstance();
 
     public AgregarPeticion() {
-        controller = new PeticionController();
-        this.peticion = new PeticionDTO();
         addListener();
-        practicasList.setModel(getPracticas(peticion.getPracticas()));
-    }
-
-    public AgregarPeticion(PeticionDTO peticion) {
-        controller = new PeticionController();
-        this.peticion = peticion;
-        practicasList.setModel(getPracticas(peticion.getPracticas()));
-        addListener();
-        initUsuario();
+        initPeticion();
     }
 
     @Override
@@ -61,22 +48,29 @@ public class AgregarPeticion implements Screen {
         return panel;
     }
 
-    private void initUsuario() {
-        title.setText("Editar peticion");
-        addButton.setText("Editar");
-        deleteButton.setVisible(true);
+    private void initPeticion() {
+        PeticionDTO peticion = peticionController.getPeticion();
 
-        pacientesSpinner.setSelectedItem(peticion.getPaciente());
-        obraSocialTextField.setText(peticion.getObraSocial());
-        sucursalSpinner.setSelectedItem(peticion.getSucursal());
+        if (peticion != null) {
+            title.setText("Editar peticion");
+            addButton.setText("Editar");
+            deleteButton.setVisible(true);
 
-        deleteListener();
+            pacientesSpinner.setSelectedItem(peticion.getPaciente());
+            obraSocialTextField.setText(peticion.getObraSocial());
+            sucursalSpinner.setSelectedItem(peticion.getSucursal());
+            deleteListener();
+        } else {
+            title.setText("Agregar peticion");
+            addButton.setText("Agregar");
+            deleteButton.setVisible(false);
+        }
     }
 
     private void createUIComponents() {
         addBackListener();
         setPaciente();
-//        setSucursal();
+        setSucursal();
 
         setPracticasSpinner();
         addPractica();
@@ -131,7 +125,7 @@ public class AgregarPeticion implements Screen {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            PeticionesTable.deletePeticiones(peticion);
+            peticionController.deletePeticion();
             Application.manager.navigateTo(new Peticiones());
         });
     }
@@ -140,6 +134,7 @@ public class AgregarPeticion implements Screen {
         practicasList = new JList<>();
         practicasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         practicasList.setLayoutOrientation(JList.VERTICAL);
+        practicasList.setModel(getPracticas(peticionController.get()));
         practicasList.setSize(300,300);
     }
 
@@ -219,11 +214,11 @@ public class AgregarPeticion implements Screen {
         pacientesSpinner.setModel(pacientesItem);
     }
 
-//    private void setSucursal() {
-//        sucursalSpinner = new JComboBox<>();
-//        List<SucursalDTO> sucursales = SucursalesTable.getAllSucursales();
-//        DefaultComboBoxModel<Sucursal> sucursalItem = new DefaultComboBoxModel<>();
-//        sucursalItem.addAll(sucursales);
-//        sucursalSpinner.setModel(sucursalItem);
-//    }
+    private void setSucursal() {
+        sucursalSpinner = new JComboBox<>();
+        List<SucursalDTO> sucursales = SucursalesTable.getAllSucursales();
+        DefaultComboBoxModel<SucursalDTO> sucursalItem = new DefaultComboBoxModel<>();
+        sucursalItem.addAll(sucursales);
+        sucursalSpinner.setModel(sucursalItem);
+    }
 }
