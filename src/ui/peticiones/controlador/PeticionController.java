@@ -8,9 +8,11 @@ import ui.peticiones.model.PeticionesTable;
 import java.util.Date;
 import java.util.List;
 
-public class PeticionControler {
-    public PeticionControler() {
+public class PeticionController {
+
+    public PeticionController() {
         // no-op
+        Boolean a = true;
     }
 
     public List<PeticionDTO> getPeticionesCriticas(){

@@ -5,7 +5,7 @@ import navigation.Screen;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
-import ui.peticiones.controlador.PeticionControler;
+import ui.peticiones.controlador.PeticionController;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
@@ -38,17 +38,17 @@ public class AgregarPeticion implements Screen {
     private JLabel removePractica;
 
     private final PeticionDTO peticion;
-    final private PeticionControler controller;
+    final private PeticionController controller;
 
     public AgregarPeticion() {
-        controller = new PeticionControler();
+        controller = new PeticionController();
         this.peticion = new PeticionDTO();
         addListener();
         practicasList.setModel(getPracticas(peticion.getPracticas()));
     }
 
     public AgregarPeticion(PeticionDTO peticion) {
-        controller = new PeticionControler();
+        controller = new PeticionController();
         this.peticion = peticion;
         practicasList.setModel(getPracticas(peticion.getPracticas()));
         addListener();

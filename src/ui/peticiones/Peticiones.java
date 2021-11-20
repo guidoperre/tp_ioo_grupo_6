@@ -3,11 +3,8 @@ package ui.peticiones;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
-import ui.pacientes.controlador.PacienteControler;
-import ui.peticiones.controlador.PeticionControler;
-import ui.peticiones.model.Peticion;
+import ui.peticiones.controlador.PeticionController;
 import ui.peticiones.model.PeticionDTO;
-import ui.peticiones.model.PeticionesTable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +22,10 @@ public class Peticiones implements Screen {
     private JCheckBox criticosCheckBox;
     private JList<PeticionDTO> list;
 
-    final private PeticionControler controllerPeticion = new PeticionControler();
+    final private PeticionController controllerPeticion;
 
     public Peticiones() {
+        controllerPeticion = new PeticionController();
     }
 
     @Override

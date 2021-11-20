@@ -6,7 +6,7 @@ import navigation.Screen;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
-import ui.peticiones.controlador.PeticionControler;
+import ui.peticiones.controlador.PeticionController;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
@@ -35,16 +35,16 @@ public class AgregarResultado implements Screen {
 
     private PeticionDTO peticion;
     private final Resultado resultado;
-    final private PeticionControler peticionController;
+    final private PeticionController peticionController;
 
     public AgregarResultado() {
-        peticionController = new PeticionControler();
+        peticionController = new PeticionController();
         this.resultado = new Resultado();
         addListener();
     }
 
     public AgregarResultado(Resultado resultado) {
-        peticionController = new PeticionControler();
+        peticionController = new PeticionController();
         this.resultado = resultado;
         this.peticion = getPeticion();
 
