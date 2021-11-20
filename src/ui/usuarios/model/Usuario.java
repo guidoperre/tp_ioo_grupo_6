@@ -13,7 +13,7 @@ public class Usuario extends UsuarioDTO {
     public static UsuarioDTO login(String username, String password) {
         List<UsuarioDTO> usuarios = UsuariosTable.getAllUsuarios();
         for (UsuarioDTO usuario: usuarios) {
-            if (usuario.getUsername().equals(username) && usuario.getUsername().equals(password))
+            if (usuario.getUsername().equals(username) && usuario.getPassword().equals(password))
                 return usuario;
         }
         return null;
