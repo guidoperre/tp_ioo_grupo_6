@@ -1,13 +1,17 @@
 package ui.peticiones.controlador;
 
+import models.EstadoResultado;
 import models.Rol;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
+import ui.practicas.model.PracticaDTO;
+import ui.resultados.model.ResultadoDTO;
 import ui.sucursales.model.SucursalDTO;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 
@@ -57,8 +61,29 @@ public class PeticionController {
         }
     }
 
-    public void modifyPeticion(PeticionDTO peticion) {
-        PeticionesTable.modifyPeticiones(peticion);
+    public void modifyPeticion(
+        ResultadoDTO resultado,
+        PeticionDTO peticion,
+        float valor,
+        int codigo,
+        EstadoResultado estado
+    ) {
+        ResultadoDTO resultadoNuevo = resultado;
+
+        resultadoNuevo.setValor(valor);
+        resultadoNuevo.setCodigoPractica(codigo);
+        resultadoNuevo.setEstado(estado);
+
+        if (this.peticion != null) {
+            this.peticion.removeResultado(resultado);
+            this.peticion.addResultado(resultadoNuevo);
+            PeticionesTable.modifyPeticiones(this.peticion);
+        } else {
+            if (peticion != null) {
+                peticion.addResultado(resultadoNuevo);
+                PeticionesTable.modifyPeticiones(peticion);
+            }
+        }
     }
 
     public List<PeticionDTO> getAllPeticionesPaciente(PacienteDTO paciente) {

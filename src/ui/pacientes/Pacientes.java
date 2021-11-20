@@ -90,7 +90,7 @@ public class Pacientes implements Screen {
     }
 
     private ListModel<PacienteDTO> getPacientes() {
-        List<PacienteDTO> pacientes = controller.getPacientes();
+        List<PacienteDTO> pacientes = controller.getAllPacientes();
         DefaultListModel<PacienteDTO> pacientesModel = new DefaultListModel<>();
         pacientesModel.addAll(pacientes);
         return pacientesModel;

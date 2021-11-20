@@ -3,19 +3,15 @@ package ui.resultados;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
-import ui.pacientes.models.Paciente;
+import ui.pacientes.controlador.PacienteControler;
 import ui.pacientes.models.PacienteDTO;
-import ui.pacientes.models.PacientesTable;
-import ui.peticiones.model.Peticion;
+import ui.peticiones.controlador.PeticionController;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
-import ui.practicas.model.Practica;
 import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
-import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
 import ui.resultados.controlador.ResultadosController;
-import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,10 +29,11 @@ public class Resultados implements Screen {
     private JComboBox<PacienteDTO> pacienteSpinner;
     private JList<ResultadoDTO> list;
 
-    final private ResultadosController controller;
+    private ResultadosController resultadosController = ResultadosController.getInstance();
+    private PacienteControler pacienteController = PacienteControler.getInstance();
+    private PeticionController peticionController = PeticionController.getInstance();
 
     public Resultados() {
-        controller = ResultadosController.getInstance();
     }
 
     @Override
@@ -45,6 +42,10 @@ public class Resultados implements Screen {
     }
 
     private void createUIComponents() {
+        resultadosController = ResultadosController.getInstance();
+        pacienteController = PacienteControler.getInstance();
+        peticionController = PeticionController.getInstance();
+
         addBackListener();
         addPeticionesListener();
         showResultados();
@@ -66,6 +67,7 @@ public class Resultados implements Screen {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                resultadosController.setResultado(new ResultadoDTO());
                 Application.manager.navigateTo(new AgregarResultado());
             }
         });
@@ -73,7 +75,7 @@ public class Resultados implements Screen {
 
     private void setPacientesSpinner() {
         pacienteSpinner = new JComboBox<>();
-        List<PacienteDTO> pacientes = ResultadosController.getAllPacientes();
+        List<PacienteDTO> pacientes = pacienteController.getAllPacientes();
         DefaultComboBoxModel<PacienteDTO> pacientesItem = new DefaultComboBoxModel<>();
         pacientesItem.addAll(pacientes);
         pacienteSpinner.setModel(pacientesItem);
@@ -114,6 +116,7 @@ public class Resultados implements Screen {
                                     JOptionPane.WARNING_MESSAGE
                             );
                         } else {
+                            resultadosController.setResultado(resultado);
                             Application.manager.navigateTo(
                                 new AgregarResultado()
                             );
@@ -125,7 +128,7 @@ public class Resultados implements Screen {
     }
 
     private ListModel<ResultadoDTO> getResultados(PacienteDTO paciente) {
-        List<PeticionDTO> peticiones = PeticionesTable.getAllPeticionesPaciente(paciente);
+        List<PeticionDTO> peticiones = peticionController.getAllPeticionesPaciente(paciente);
         List<ResultadoDTO> resultados = new ArrayList<>();
         for (PeticionDTO p: peticiones) {
             resultados.addAll(p.getResultados());

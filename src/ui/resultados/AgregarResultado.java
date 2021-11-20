@@ -36,24 +36,10 @@ public class AgregarResultado implements Screen {
     private JComboBox<EstadoResultado> estadoSpinner;
     private JTextField resultadoValorTextField;
 
-    private PeticionDTO peticion;
-    private ResultadoDTO resultado;
-    private final ResultadosController controller;
-    final private PeticionController peticionController;
+    private final ResultadosController resultadosController = ResultadosController.getInstance();
+    private final PeticionController peticionController = PeticionController.getInstance();
 
     public AgregarResultado() {
-        peticionController = PeticionController.getInstance();
-        this.controller = ResultadosController.getInstance();
-
-        addListener();
-    }
-
-    public AgregarResultado(ResultadoDTO resultado) {
-        peticionController = PeticionController.getInstance();
-        this.controller = ResultadosController.getInstance();
-
-        this.resultado = resultado;
-        this.peticion = getPeticion();
         addListener();
         initResultado();
     }
@@ -63,36 +49,50 @@ public class AgregarResultado implements Screen {
         return panel;
     }
 
-    private PeticionDTO getPeticion() {
+    private PeticionDTO getPeticion(ResultadoDTO resultado) {
         List<PeticionDTO> peticions = peticionController.getAllPeticiones();
-//        for (PeticionDTO p: peticions) {
-//            for (ResultadoDTO resultado: p.getResultados()) {
-//                if (resultado.getId().equals(resultado.getId(resultado))) {
-//                    return p;
-//                }
-//            }
-//        }
+        for (PeticionDTO p: peticions) {
+            for (ResultadoDTO r: p.getResultados()) {
+                if (r.getId().equals(resultado.getId())) {
+                    return p;
+                }
+            }
+        }
         return null;
     }
 
     private void initResultado() {
-        title.setText("Editar resultado");
-        addButton.setText("Editar");
-        deleteButton.setVisible(true);
+        ResultadoDTO resultado = resultadosController.getResultado();
 
-        if (peticion != null) {
-            pacientesSpinner.setSelectedItem(peticion.getPaciente());
-            pacientesSpinner.setEnabled(false);
-            peticionesSpinner.setSelectedItem(peticion);
-            peticionesSpinner.setEnabled(false);
-            practicasSpinner.setSelectedItem(PracticasTable.getPracticas(resultado.getCodigoPractica()));
-            practicasSpinner.setEnabled(false);
+        if (resultado.getEstado() != null) {
+            PeticionDTO peticion = getPeticion(resultado);
+
+            title.setText("Editar resultado");
+            addButton.setText("Editar");
+            deleteButton.setVisible(true);
+
+            if (peticion != null) {
+                peticionController.setPeticion(peticion);
+                pacientesSpinner.setSelectedItem(peticion.getPaciente());
+                pacientesSpinner.setEnabled(false);
+                peticionesSpinner.setSelectedItem(peticion);
+                peticionesSpinner.setEnabled(false);
+                practicasSpinner.setSelectedItem(PracticasTable.getPracticas(resultado.getCodigoPractica()));
+                practicasSpinner.setEnabled(false);
+            } else {
+                peticionController.setPeticion(null);
+            }
+
+            estadoSpinner.setSelectedItem(resultado.getEstado());
+            resultadoValorTextField.setText(String.valueOf(resultado.getValor()));
+
+            deleteListener();
+        } else {
+            peticionController.setPeticion(null);
+            title.setText("Agregar resultado");
+            addButton.setText("Agregar");
+            deleteButton.setVisible(false);
         }
-
-        estadoSpinner.setSelectedItem(resultado.getEstado());
-        resultadoValorTextField.setText(String.valueOf(resultado.getValor()));
-
-        deleteListener();
     }
 
     private void createUIComponents() {
@@ -133,11 +133,9 @@ public class AgregarResultado implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                ResultadoDTO resultadoViejo = resultado;
-                PeticionDTO peticion = this.peticion;
-
+                float valor;
                 try {
-                    resultado.setValor(Float.parseFloat(resultadoValorTextField.getText()));
+                    valor = Float.parseFloat(resultadoValorTextField.getText());
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(
                             panel,
@@ -147,27 +145,14 @@ public class AgregarResultado implements Screen {
                     );
                     return;
                 }
-                resultado.setCodigoPractica(((PracticaDTO) practicasSpinner.getSelectedItem()).getCodigo());
-                resultado.setEstado((EstadoResultado) estadoSpinner.getSelectedItem());
 
-                if (peticion != null) {
-                    peticion.removeResultado(resultadoViejo);
-                    peticion.addResultado(resultado);
-                    peticionController.modifyPeticion(peticion);
-                } else {
-                    PeticionDTO aux = (PeticionDTO) peticionesSpinner.getSelectedItem();
-                    if (aux != null) {
-                        aux.addResultado(resultado);
-                        peticionController.modifyPeticion(aux);
-                    } else {
-                        JOptionPane.showMessageDialog(
-                                panel,
-                                "OCURRIO UN ERROR DESCONOCIDO",
-                                "ERROR",
-                                JOptionPane.WARNING_MESSAGE
-                        );
-                    }
-                }
+                peticionController.modifyPeticion(
+                        resultadosController.getResultado(),
+                        (PeticionDTO) peticionesSpinner.getSelectedItem(),
+                        valor,
+                        ((PracticaDTO) practicasSpinner.getSelectedItem()).getCodigo(),
+                        (EstadoResultado) estadoSpinner.getSelectedItem()
+                );
                 Application.manager.navigateTo(new Resultados());
             }
         });
@@ -175,8 +160,8 @@ public class AgregarResultado implements Screen {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            peticion.removeResultado(resultado);
-            peticionController.modifyPeticion(peticion);
+            peticionController.getPeticion().removeResultado(resultadosController.getResultado());
+            PeticionesTable.modifyPeticiones(peticionController.getPeticion());
             Application.manager.navigateTo(new Resultados());
         });
     }
@@ -202,7 +187,7 @@ public class AgregarResultado implements Screen {
         peticionesSpinner = new JComboBox<>();
         peticionesSpinner.addItemListener(e -> {
             PeticionDTO peticion = (PeticionDTO) e.getItem();
-            if (this.peticion != null) {
+            if (peticionController.getPeticion() != null) {
                 DefaultComboBoxModel<PracticaDTO> practicasPeticionItem = new DefaultComboBoxModel<>();
                 practicasPeticionItem.addAll(PracticasTable.getAllPracticas());
                 practicasSpinner.setModel(practicasPeticionItem);

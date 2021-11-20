@@ -40,8 +40,8 @@ public class PacienteControler {
         return paciente;
     }
 
-    public static List<PacienteDTO> getPacientes(){
-        return  PacientesTable.getAllPacientes();
+    public List<PacienteDTO> getAllPacientes(){
+        return PacientesTable.getAllPacientes();
     }
 
     public List<PeticionDTO> getPeticionesFinalizadas() {
