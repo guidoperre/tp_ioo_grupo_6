@@ -225,7 +225,7 @@ public class Application {
 
         PeticionesTable.addPeticiones(
             new PeticionDTO(
-                    new PacienteDTO(pacientes.get(0).getNombre(), pacientes.get(0).getDni(), pacientes.get(0).getDomicilio(), pacientes.get(0).getMail(), pacientes.get(0).getEdad(), pacientes.get(0).getSexo()),
+                    pacientes.get(0),
                     "OSDE 310",
                     sucursal,
                     new Date(),
@@ -248,7 +248,7 @@ public class Application {
         );
         PeticionesTable.addPeticiones(
                 new PeticionDTO(
-                        new PacienteDTO(pacientes.get(0).getNombre(), pacientes.get(0).getDni(), pacientes.get(0).getDomicilio(), pacientes.get(0).getMail(), pacientes.get(0).getEdad(), pacientes.get(0).getSexo()),
+                        pacientes.get(1),
                         "OSDE 410",
                         sucursal,
                         new Date(),
@@ -271,7 +271,7 @@ public class Application {
         );
         PeticionesTable.addPeticiones(
                 new PeticionDTO(
-                        new PacienteDTO(pacientes.get(0).getNombre(), pacientes.get(0).getDni(), pacientes.get(0).getDomicilio(), pacientes.get(0).getMail(), pacientes.get(0).getEdad(), pacientes.get(0).getSexo()),
+                        pacientes.get(2),
                         "OSDE 510",
                         sucursal,
                         new Date(),
