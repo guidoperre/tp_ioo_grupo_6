@@ -3,6 +3,7 @@ package ui.pacientes.models;
 import models.PersonaDTO;
 import models.Sexo;
 import ui.peticiones.model.Peticion;
+import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 
 import java.util.ArrayList;
@@ -61,7 +62,22 @@ public class Paciente extends PersonaDTO {
 
     public List<Peticion> getPeticionesFinalizadas() {
         List<Peticion> peticiones = new ArrayList<>();
-        for (Peticion peticion: PeticionesTable.getAllPeticiones()) {
+        for (PeticionDTO peticionDTO: PeticionesTable.getAllPeticiones()) {
+            Peticion peticion = new Peticion(
+                    new Paciente(
+                            peticionDTO.getPaciente().getNombre(),
+                            peticionDTO.getPaciente().getDni(),
+                            peticionDTO.getPaciente().getDomicilio(),
+                            peticionDTO.getPaciente().getMail(),
+                            peticionDTO.getPaciente().getEdad(),
+                            peticionDTO.getPaciente().getSexo()),
+                    peticionDTO.getObraSocial(),
+                    peticionDTO.getSucursal(),
+                    peticionDTO.getFechaCarga(),
+                    peticionDTO.getFechaEntrega(),
+                    peticionDTO.getPracticas(),
+                    peticionDTO.getResultados()
+            );
             if (peticion.getPaciente().getId() == this.getId()) {
                 if (peticion.isFinalizada())
                     peticiones.add(peticion);

@@ -1,37 +1,35 @@
 package ui.peticiones.controlador;
 
-import ui.pacientes.models.Paciente;
-import ui.peticiones.model.Peticion;
+import ui.pacientes.models.PacienteDTO;
+import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
-import ui.practicas.model.Practica;
-import ui.resultados.model.Resultado;
-import ui.sucursales.model.Sucursal;
+
 
 import java.util.Date;
 import java.util.List;
 
-public class PeticionControler extends Peticion {
-    public PeticionControler(Paciente paciente, String obraSocial, Sucursal sucursal, Date fechaCarga, Date fechaEntrega, List<Practica> practicas, List<Resultado> resultados) {
-        super(paciente, obraSocial, sucursal, fechaCarga, fechaEntrega, practicas, resultados);
+public class PeticionControler {
+    public PeticionControler() {
+        // no-op
     }
 
-    public static List<Peticion> getPeticionesCriticas(){
+    public static List<PeticionDTO> getPeticionesCriticas(){
         return PeticionesTable.getPeticionesCriticas();
     }
 
-    public static List<Peticion> getPeticiones(){
+    public static List<PeticionDTO> getPeticiones(){
         return PeticionesTable.getAllPeticiones();
     }
 
-    public static List<Peticion> getAllPeticiones() {
+    public static List<PeticionDTO> getAllPeticiones() {
         return getPeticiones();
     }
 
-    public static void modifyPeticiones(Peticion peticion) {
+    public static void modifyPeticiones(PeticionDTO peticion) {
         PeticionesTable.modifyPeticiones(peticion);
     }
 
-    public static List<Peticion> getAllPeticionesPaciente(Paciente paciente) {
+    public static List<PeticionDTO> getAllPeticionesPaciente(PacienteDTO paciente) {
         return PeticionesTable.getAllPeticionesPaciente(paciente);
     }
 }

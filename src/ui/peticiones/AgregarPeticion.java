@@ -3,8 +3,11 @@ package ui.peticiones;
 import app.Application;
 import navigation.Screen;
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
+import ui.peticiones.controlador.PeticionControler;
 import ui.peticiones.model.Peticion;
+import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
@@ -28,20 +31,23 @@ public class AgregarPeticion implements Screen {
     private JTextField obraSocialTextField;
     private JList<Practica> practicasList;
     private JLabel addPractica;
-    private JComboBox<Paciente> pacientesSpinner;
+    private JComboBox<PacienteDTO> pacientesSpinner;
     private JComboBox<Sucursal> sucursalSpinner;
     private JComboBox<Practica> practicasSpinner;
     private JLabel removePractica;
 
-    private final Peticion peticion;
+    private final PeticionDTO peticion;
+    final private PeticionControler controller;
 
     public AgregarPeticion() {
-        this.peticion = new Peticion();
+        controller = new PeticionControler();
+        this.peticion = new PeticionDTO();
         addListener();
         practicasList.setModel(getPracticas(peticion.getPracticas()));
     }
 
-    public AgregarPeticion(Peticion peticion) {
+    public AgregarPeticion(PeticionDTO peticion) {
+        controller = new PeticionControler();
         this.peticion = peticion;
         practicasList.setModel(getPracticas(peticion.getPracticas()));
         addListener();
@@ -105,7 +111,7 @@ public class AgregarPeticion implements Screen {
         addButton.addActionListener(e -> {
             if (checkFields()) {
                 peticion.setObraSocial(obraSocialTextField.getText());
-                peticion.setPaciente((Paciente) pacientesSpinner.getSelectedItem());
+                peticion.setPaciente((PacienteDTO) pacientesSpinner.getSelectedItem());
                 peticion.setSucursal((Sucursal) sucursalSpinner.getSelectedItem());
 
                 if (peticion.getId() != null) {
@@ -205,8 +211,8 @@ public class AgregarPeticion implements Screen {
 
     private void setPaciente() {
         pacientesSpinner = new JComboBox<>();
-        List<Paciente> pacientes = PacientesTable.getAllPacientes();
-        DefaultComboBoxModel<Paciente> pacientesItem = new DefaultComboBoxModel<>();
+        List<PacienteDTO> pacientes = PacientesTable.getAllPacientes();
+        DefaultComboBoxModel<PacienteDTO> pacientesItem = new DefaultComboBoxModel<>();
         pacientesItem.addAll(pacientes);
         pacientesSpinner.setModel(pacientesItem);
     }

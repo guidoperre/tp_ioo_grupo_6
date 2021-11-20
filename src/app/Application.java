@@ -4,12 +4,15 @@ import models.EstadoResultado;
 import models.Rol;
 import models.Sexo;
 import navigation.NavigationManager;
+import ui.pacientes.models.PacienteDTO;
 import ui.peticiones.model.Peticion;
+import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
 import ui.sucursales.model.Sucursal;
+import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuarioDTO;
 import ui.usuarios.model.UsuariosTable;
 import ui.login.Login;
@@ -63,7 +66,7 @@ public class Application {
         createUsuarios();
         createPacientes();
         createPracticas();
-        /*createSucursales();*/
+        createSucursales();
         createPeticiones();
     }
 
@@ -143,7 +146,7 @@ public class Application {
 
     private static void createPacientes() {
         PacientesTable.addPaciente(
-                new Paciente(
+                new PacienteDTO(
                         "Guido Perre",
                         42341208,
                         "Siempre viva 742",
@@ -153,7 +156,7 @@ public class Application {
                 )
         );
         PacientesTable.addPaciente(
-                new Paciente(
+                new PacienteDTO(
                         "Tomas Canzoniero",
                         42341208,
                         "Siempre viva 742",
@@ -163,7 +166,7 @@ public class Application {
                 )
         );
         PacientesTable.addPaciente(
-                new Paciente(
+                new PacienteDTO(
                         "Agustin Maio",
                         42341208,
                         "Siempre viva 742",
@@ -174,34 +177,34 @@ public class Application {
         );
     }
 
-    /*private static void createSucursales() {
-        Usuario usuario = UsuariosTable.getAllUsuarios().get(0);
+    private static void createSucursales() {
+        UsuarioDTO usuario = UsuariosTable.getAllUsuarios().get(0);
         SucursalesTable.addSucursal(
             new Sucursal(
                 "Peribebuy 7032",
-                usuario,
+                new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
                 new ArrayList<>()
             )
         );
         SucursalesTable.addSucursal(
                 new Sucursal(
                         "Lisandro de la torre 111",
-                        usuario,
+                        new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
                         new ArrayList<>()
                 )
         );
         SucursalesTable.addSucursal(
                 new Sucursal(
                         "Timoteo gordillo 713",
-                        usuario,
+                        new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
                         new ArrayList<>()
                 )
         );
-    }*/
+    }
 
     private static void createPeticiones() {
         List<Practica> practias = PracticasTable.getAllPracticas();
-        List<Paciente> pacientes = PacientesTable.getAllPacientes();
+        List<PacienteDTO> pacientes = PacientesTable.getAllPacientes();
         Sucursal sucursal = SucursalesTable.getAllSucursales().get(0);
 
         List<Resultado> resultados1 = new ArrayList<>();
@@ -217,8 +220,8 @@ public class Application {
         PracticaPeticion1.addAll(practias);
 
         PeticionesTable.addPeticiones(
-            new Peticion(
-                    pacientes.get(0),
+            new PeticionDTO(
+                    new PacienteDTO(pacientes.get(0).getNombre(), pacientes.get(0).getDni(), pacientes.get(0).getDomicilio(), pacientes.get(0).getMail(), pacientes.get(0).getEdad(), pacientes.get(0).getSexo()),
                     "OSDE 310",
                     sucursal,
                     new Date(),
@@ -240,8 +243,8 @@ public class Application {
                 )
         );
         PeticionesTable.addPeticiones(
-                new Peticion(
-                        pacientes.get(1),
+                new PeticionDTO(
+                        new PacienteDTO(pacientes.get(0).getNombre(), pacientes.get(0).getDni(), pacientes.get(0).getDomicilio(), pacientes.get(0).getMail(), pacientes.get(0).getEdad(), pacientes.get(0).getSexo()),
                         "OSDE 410",
                         sucursal,
                         new Date(),
@@ -263,8 +266,8 @@ public class Application {
             )
         );
         PeticionesTable.addPeticiones(
-                new Peticion(
-                        pacientes.get(2),
+                new PeticionDTO(
+                        new PacienteDTO(pacientes.get(0).getNombre(), pacientes.get(0).getDni(), pacientes.get(0).getDomicilio(), pacientes.get(0).getMail(), pacientes.get(0).getEdad(), pacientes.get(0).getSexo()),
                         "OSDE 510",
                         sucursal,
                         new Date(),

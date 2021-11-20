@@ -1,6 +1,7 @@
 package ui.pacientes;
 
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ public class PacientesItem {
         return pacienteItem;
     }
 
-    public void setComponents(Paciente paciente) {
+    public void setComponents(PacienteDTO paciente) {
         nombrePaciente.setText(paciente.getNombre());
         documentoPaciente.setText(String.valueOf(paciente.getDni()));
         domicilioPaciente.setText(paciente.getDomicilio());

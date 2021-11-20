@@ -5,7 +5,9 @@ import navigation.Screen;
 import ui.home.Home;
 import ui.pacientes.controlador.PacienteControler;
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
+import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,13 +22,15 @@ public class Pacientes implements Screen {
     private JPanel panel;
     private JPanel listPanel;
 
+    final private PacienteControler controller;
+
     @Override
     public JPanel getPanel() {
         return panel;
     }
 
     public Pacientes() {
-
+        controller = new PacienteControler();
     }
 
     private void createUIComponents() {
@@ -57,9 +61,9 @@ public class Pacientes implements Screen {
 
     private void showPacientes() {
         listPanel = new JPanel();
-        ListModel<Paciente> pacientes = getPacientes();
+        ListModel<PacienteDTO> pacientes = getPacientes();
 
-        JList<Paciente> list = new JList<>();
+        JList<PacienteDTO> list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setCellRenderer(new PacienteViewHolder());
@@ -70,34 +74,34 @@ public class Pacientes implements Screen {
         listPanel.add(list);
     }
 
-    private void listListener(JList<Paciente> list) {
+    private void listListener(JList<PacienteDTO> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarPaciente((Paciente) target.getModel().getElementAt(index)));
+                    Application.manager.navigateTo(new AgregarPaciente((PacienteDTO) target.getModel().getElementAt(index)));
                 }
             }
         });
     }
 
-    private ListModel<Paciente> getPacientes() {
-        List<Paciente> pacientes = PacienteControler.getPacientes();
-        DefaultListModel<Paciente> pacientesModel = new DefaultListModel<>();
+    private ListModel<PacienteDTO> getPacientes() {
+        List<PacienteDTO> pacientes = controller.getPacientes();
+        DefaultListModel<PacienteDTO> pacientesModel = new DefaultListModel<>();
         pacientesModel.addAll(pacientes);
         return pacientesModel;
     }
 
-    static class PacienteViewHolder extends JPanel implements ListCellRenderer<Paciente> {
+    static class PacienteViewHolder extends JPanel implements ListCellRenderer<PacienteDTO> {
 
         public PacienteViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Paciente> list,
-            Paciente value,
+            JList<? extends PacienteDTO> list,
+            PacienteDTO value,
             int index,
             boolean isSelected,
             boolean cellHasFocus

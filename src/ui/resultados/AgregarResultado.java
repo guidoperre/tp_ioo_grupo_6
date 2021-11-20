@@ -4,9 +4,11 @@ import app.Application;
 import models.EstadoResultado;
 import navigation.Screen;
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.controlador.PeticionControler;
 import ui.peticiones.model.Peticion;
+import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
@@ -25,21 +27,24 @@ public class AgregarResultado implements Screen {
     private JPanel panel;
     private JButton addButton;
     private JButton deleteButton;
-    private JComboBox<Paciente> pacientesSpinner;
-    private JComboBox<Peticion> peticionesSpinner;
+    private JComboBox<PacienteDTO> pacientesSpinner;
+    private JComboBox<PeticionDTO> peticionesSpinner;
     private JComboBox<Practica> practicasSpinner;
     private JComboBox<EstadoResultado> estadoSpinner;
     private JTextField resultadoValorTextField;
 
-    private Peticion peticion;
+    private PeticionDTO peticion;
     private final Resultado resultado;
+    final private PeticionControler peticionController;
 
     public AgregarResultado() {
+        peticionController = new PeticionControler();
         this.resultado = new Resultado();
         addListener();
     }
 
     public AgregarResultado(Resultado resultado) {
+        peticionController = new PeticionControler();
         this.resultado = resultado;
         this.peticion = getPeticion();
 
@@ -52,9 +57,9 @@ public class AgregarResultado implements Screen {
         return panel;
     }
 
-    private Peticion getPeticion() {
-        List<Peticion> peticions = PeticionControler.getAllPeticiones();
-        for (Peticion p: peticions) {
+    private PeticionDTO getPeticion() {
+        List<PeticionDTO> peticions = PeticionControler.getAllPeticiones();
+        for (PeticionDTO p: peticions) {
             for (Resultado resultado: p.getResultados()) {
                 if (resultado.getId().equals(this.resultado.getId())) {
                     return p;
@@ -123,7 +128,7 @@ public class AgregarResultado implements Screen {
         addButton.addActionListener(e -> {
             if (checkFields()) {
                 Resultado resultadoViejo = resultado;
-                Peticion peticion = this.peticion;
+                PeticionDTO peticion = this.peticion;
 
                 try {
                     resultado.setValor(Float.parseFloat(resultadoValorTextField.getText()));
@@ -142,12 +147,12 @@ public class AgregarResultado implements Screen {
                 if (peticion != null) {
                     peticion.removeResultado(resultadoViejo);
                     peticion.addResultado(resultado);
-                    PeticionControler.modifyPeticiones(peticion);
+                    peticionController.modifyPeticiones(peticion);
                 } else {
-                    Peticion aux = (Peticion) peticionesSpinner.getSelectedItem();
+                    PeticionDTO aux = (PeticionDTO) peticionesSpinner.getSelectedItem();
                     if (aux != null) {
                         aux.addResultado(resultado);
-                        PeticionControler.modifyPeticiones(aux);
+                        peticionController.modifyPeticiones(aux);
                     } else {
                         JOptionPane.showMessageDialog(
                                 panel,
@@ -172,15 +177,15 @@ public class AgregarResultado implements Screen {
 
     private void setPacientesSpinner() {
         pacientesSpinner = new JComboBox<>();
-        List<Paciente> pacientes = PacientesTable.getAllPacientes();
-        DefaultComboBoxModel<Paciente> pacientesItem = new DefaultComboBoxModel<>();
+        List<PacienteDTO> pacientes = PacientesTable.getAllPacientes();
+        DefaultComboBoxModel<PacienteDTO> pacientesItem = new DefaultComboBoxModel<>();
         pacientesItem.addAll(pacientes);
         pacientesSpinner.setModel(pacientesItem);
 
         pacientesSpinner.addItemListener(e -> {
-            Paciente paciente = (Paciente) e.getItem();
-            List<Peticion> peticionesPaciente = PeticionControler.getAllPeticionesPaciente(paciente);
-            DefaultComboBoxModel<Peticion> peticionesPacienteItem = new DefaultComboBoxModel<>();
+            PacienteDTO paciente = (PacienteDTO) e.getItem();
+            List<PeticionDTO> peticionesPaciente = PeticionControler.getAllPeticionesPaciente(paciente);
+            DefaultComboBoxModel<PeticionDTO> peticionesPacienteItem = new DefaultComboBoxModel<>();
             peticionesPacienteItem.addAll(peticionesPaciente);
             peticionesSpinner.setModel(peticionesPacienteItem);
             practicasSpinner.setSelectedItem(null);
@@ -190,7 +195,7 @@ public class AgregarResultado implements Screen {
     private void setPeticionSpinner() {
         peticionesSpinner = new JComboBox<>();
         peticionesSpinner.addItemListener(e -> {
-            Peticion peticion = (Peticion) e.getItem();
+            PeticionDTO peticion = (PeticionDTO) e.getItem();
             if (this.peticion != null) {
                 DefaultComboBoxModel<Practica> practicasPeticionItem = new DefaultComboBoxModel<>();
                 practicasPeticionItem.addAll(PracticasTable.getAllPracticas());

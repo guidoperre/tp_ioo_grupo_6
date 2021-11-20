@@ -4,8 +4,10 @@ import app.Application;
 import navigation.Screen;
 import ui.home.Home;
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
+import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
@@ -25,7 +27,7 @@ public class Resultados implements Screen {
     private JLabel addPaciente;
     private JPanel panel;
     private JPanel listPanel;
-    private JComboBox<Paciente> pacienteSpinner;
+    private JComboBox<PacienteDTO> pacienteSpinner;
     private JList<Resultado> list;
 
     public Resultados() {
@@ -66,13 +68,13 @@ public class Resultados implements Screen {
 
     private void setPacientesSpinner() {
         pacienteSpinner = new JComboBox<>();
-        List<Paciente> pacientes = ResultadosController.getAllPacientes();
-        DefaultComboBoxModel<Paciente> pacientesItem = new DefaultComboBoxModel<>();
+        List<PacienteDTO> pacientes = ResultadosController.getAllPacientes();
+        DefaultComboBoxModel<PacienteDTO> pacientesItem = new DefaultComboBoxModel<>();
         pacientesItem.addAll(pacientes);
         pacienteSpinner.setModel(pacientesItem);
 
         pacienteSpinner.addItemListener(e -> {
-            Paciente paciente = (Paciente) e.getItem();
+            PacienteDTO paciente = (PacienteDTO) e.getItem();
             list.setModel(getResultados(paciente));
         });
     }
@@ -117,10 +119,10 @@ public class Resultados implements Screen {
         });
     }
 
-    private ListModel<Resultado> getResultados(Paciente paciente) {
-        List<Peticion> peticiones = PeticionesTable.getAllPeticionesPaciente(paciente);
+    private ListModel<Resultado> getResultados(PacienteDTO paciente) {
+        List<PeticionDTO> peticiones = PeticionesTable.getAllPeticionesPaciente(paciente);
         List<Resultado> resultados = new ArrayList<>();
-        for (Peticion p: peticiones) {
+        for (PeticionDTO p: peticiones) {
             resultados.addAll(p.getResultados());
         }
 
