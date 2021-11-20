@@ -32,12 +32,12 @@ public class AgregarPaciente implements Screen {
     final private PacienteControler controller;
 
     public AgregarPaciente() {
-        controller = new PacienteControler();
+        controller = PacienteControler.getInstance();
         addListener();
     }
 
     public AgregarPaciente(PacienteDTO paciente) {
-        controller = new PacienteControler();
+        controller = PacienteControler.getInstance();
         this.paciente = paciente;
         addListener();
         initPaciente();
