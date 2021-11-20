@@ -99,23 +99,9 @@ public class AgregarSucursal implements Screen {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            if (sucursal.getPeticionesFinalizadas().size() > 0) {
+           boolean eliminado = sucursalesController.deleteSucursal();
+            if (!eliminado) {
                 JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else {
-                Boolean movido = false;
-                for (SucursalDTO sucursalItem: sucursalesController.getAllSucursales()) {
-                    if (sucursalItem.getId() != sucursalesController.getId(sucursal)) {
-                        sucursalesController.movePeticiones(sucursalItem);
-                        movido = true;
-                        sucursalesController.deleteSucursal(sucursal);
-                        JOptionPane.showMessageDialog(panel, "LAS PETICIONES ACTIVAS SE HAN MOVIDO A LA SUCURSAL: Sucursal " + sucursalItem.getId(), "CORRECTO", JOptionPane.PLAIN_MESSAGE);
-                        break;
-                    }
-                }
-
-                if (!movido) {
-                    JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE NO HAY SUCURSALES DISPONIBLES PARA TRANSFERIR LAS PETICIONES", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }
             }
             Application.manager.navigateTo(new Sucursales());
         });

@@ -4,6 +4,7 @@ import ui.sucursales.model.SucursalDTO;
 import ui.sucursales.model.SucursalesTable;
 import ui.usuarios.model.UsuarioDTO;
 
+import javax.swing.*;
 import java.util.List;
 
 public class SucursalesController {
@@ -71,7 +72,21 @@ public class SucursalesController {
         sucursal.movePeticiones(sucursalItem);
     }
 
-    public static void deleteSucursal(SucursalDTO sucursal) {
+    public boolean deleteSucursal() {
+        if(sucursal.getPeticionesFinalizadas().size() > 0){
+            return false;
+        }
+        Boolean movido = false;
+        for (SucursalDTO sucursalItem: this.getAllSucursales()) {
+            if (sucursalItem.getId() != sucursal.getId()) {
+                sucursal.movePeticiones(sucursalItem);
+                movido = true;
+                SucursalesTable.deleteSucursal(sucursal);
+                break;
+            }
+            return true;
+        }
         SucursalesTable.deleteSucursal(sucursal);
+        return true;
     }
 }
