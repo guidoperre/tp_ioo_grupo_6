@@ -6,11 +6,16 @@ import ui.pacientes.models.Paciente;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
+import ui.usuarios.model.UsuarioDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PracticaController {
     private static PracticaController instance;
+
+    PracticaDTO practica;
+
     private PracticaController() {
         // no-op
     }
@@ -52,5 +57,19 @@ public class PracticaController {
 
     public void setValoresCriticos(PracticaDTO practica, List<Regla> valoresCriticos) {
        practica.setValoresCriticos(valoresCriticos);
+    }
+
+    public void addPractica(String nombre, int horas, boolean activo){
+        if(practica.getId() != null){
+            practica.setNombre(nombre);
+            practica.setHoras(horas);
+            practica.setActivo(activo);
+        } else {
+            PracticasTable.addPractica(
+                    new PracticaDTO(
+                            0, activo, nombre, horas, new ArrayList<>(), new ArrayList<>()
+                    )
+                );
+        }
     }
 }

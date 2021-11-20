@@ -115,18 +115,9 @@ public class AgregarPractica implements Screen {
         addButton.addActionListener(e -> {
             if (checkFields()) {
                 if (checkFields()) {
-                    practica.setNombre(nombreTextField.getText());
-                    practica.setHoras(Integer.parseInt(horasTextField.getText()));
-                    practica.setActivo(activoCheckBox.isSelected());
-
-                    if (practica.getId() != null) {
-                        PracticasTable.modifyPractica(practica);
-                    } else {
-                        PracticasTable.addPractica(practica);
-                    }
-
-                    Application.manager.navigateTo(new Practicas());
+                    controller.addPractica(nombreTextField.getText(), Integer.parseInt(horasTextField.getText()), activoCheckBox.isSelected());
                 }
+                Application.manager.navigateTo(new Practicas());
             }
         });
     }
