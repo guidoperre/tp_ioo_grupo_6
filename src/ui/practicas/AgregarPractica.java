@@ -51,7 +51,7 @@ public class AgregarPractica implements Screen {
     }
 
     public AgregarPractica() {
-        this.controller = new PracticaController();
+        this.controller = PracticaController.getInstance();
         this.practica = new PracticaDTO();
         addListener();
         valoresReservadosList.setModel(getValores(controller.getValoresReservados(practica)));
@@ -59,7 +59,7 @@ public class AgregarPractica implements Screen {
     }
 
     public AgregarPractica(PracticaDTO practica) {
-        this.controller = new PracticaController();
+        this.controller = PracticaController.getInstance();
         this.practica = practica;
         initPractica();
         addListener();

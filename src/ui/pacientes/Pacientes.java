@@ -30,7 +30,7 @@ public class Pacientes implements Screen {
     }
 
     public Pacientes() {
-        controller = new PacienteControler();
+        controller = PacienteControler.getInstance();
     }
 
     private void createUIComponents() {

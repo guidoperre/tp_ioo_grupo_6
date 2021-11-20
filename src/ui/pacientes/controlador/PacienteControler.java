@@ -8,16 +8,25 @@ import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
-import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticaDTO;
 import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
 
 public class PacienteControler {
-    public PacienteControler() {
+    private static PacienteControler instance;
+
+    private PacienteControler() {
         // no-op
     }
+
+    public static PacienteControler getInstance() {
+        if (instance == null) {
+            instance = new PacienteControler();
+        }
+        return instance;
+    }
+
     public static List<PacienteDTO> getPacientes(){
         return  PacientesTable.getAllPacientes();
     }

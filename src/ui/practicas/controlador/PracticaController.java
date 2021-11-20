@@ -1,14 +1,23 @@
 package ui.practicas.controlador;
 
 import models.Regla;
+import ui.pacientes.controlador.PacienteControler;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticaDTO;
 
 import java.util.List;
 
 public class PracticaController {
-    public PracticaController() {
+    private static PracticaController instance;
+    private PracticaController() {
         // no-op
+    }
+
+    public static PracticaController getInstance() {
+        if (instance == null) {
+            instance = new PracticaController();
+        }
+        return instance;
     }
 
     public List<Regla> getValoresReservados(PracticaDTO practica) {

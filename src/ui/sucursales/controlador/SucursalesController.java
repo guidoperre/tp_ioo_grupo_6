@@ -7,11 +7,18 @@ import ui.usuarios.model.UsuarioDTO;
 import java.util.List;
 
 public class SucursalesController {
-
+    private static SucursalesController instance;
     SucursalDTO sucursal;
 
     public SucursalesController(){
         // no-op
+    }
+
+    public static SucursalesController getInstance() {
+        if (instance == null) {
+            instance = new SucursalesController();
+        }
+        return instance;
     }
 
     public List<SucursalDTO> getAllSucursales() {
