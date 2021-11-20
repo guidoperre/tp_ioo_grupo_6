@@ -36,7 +36,7 @@ public class Resultados implements Screen {
     final private ResultadosController controller;
 
     public Resultados() {
-        controller = new ResultadosController();
+        controller = ResultadosController.getInstance();
     }
 
     @Override

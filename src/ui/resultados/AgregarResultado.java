@@ -43,13 +43,13 @@ public class AgregarResultado implements Screen {
 
     public AgregarResultado() {
         peticionController = new PeticionController();
-        this.controller = new ResultadosController();
+        this.controller = ResultadosController.getInstance();
         addListener();
     }
 
     public AgregarResultado(ResultadoDTO resultado) {
         peticionController = new PeticionController();
-        this.controller = new ResultadosController();
+        this.controller = ResultadosController.getInstance();
         this.resultado = resultado;
         this.peticion = getPeticion();
         addListener();
