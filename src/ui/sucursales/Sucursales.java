@@ -4,7 +4,10 @@ import app.Application;
 import navigation.Screen;
 import ui.sucursales.model.Sucursal;
 import ui.home.Home;
+import ui.sucursales.model.SucursalDTO;
 import ui.sucursales.controlador.SucursalesController;
+import ui.usuarios.controlador.UsuarioController;
+import ui.usuarios.model.UsuarioDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +21,9 @@ public class Sucursales implements Screen {
     private JLabel addPaciente;
     private JPanel panel;
     private JPanel listPanel;
+    private JList<SucursalDTO> sucursalesList;
+
+    final private SucursalesController controller;
 
     @Override
     public JPanel getPanel() {
@@ -25,7 +31,8 @@ public class Sucursales implements Screen {
     }
 
     public Sucursales() {
-
+        controller = new SucursalesController();
+        sucursalesList.setModel(getSucursales());
     }
 
     private void createUIComponents() {
@@ -56,47 +63,44 @@ public class Sucursales implements Screen {
 
     private void showSucursales() {
         listPanel = new JPanel();
-        ListModel<Sucursal> sucursales = getSucursales();
-
-        JList<Sucursal> list = new JList<>();
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setLayoutOrientation(JList.VERTICAL);
-        list.setCellRenderer(new SucursalViewHolder());
-        list.setModel(sucursales);
-        list.setSize(300,300);
-        listListener(list);
-
-        listPanel.add(list);
+        sucursalesList = new JList<>();
+        sucursalesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        sucursalesList.setLayoutOrientation(JList.VERTICAL);
+        sucursalesList.setCellRenderer(new SucursalViewHolder());
+        sucursalesList.setSize(300,300);
+        listListener(sucursalesList);
+        listPanel.add(sucursalesList);
     }
 
-    private void listListener(JList<Sucursal> list) {
+    private void listListener(JList<SucursalDTO> list) {
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarSucursal((Sucursal) target.getModel().getElementAt(index)));
+                    controller.setSucursal((SucursalDTO) target.getModel().getElementAt(index));
+                    Application.manager.navigateTo(new AgregarSucursal(controller));
                 }
             }
         });
     }
 
-    private ListModel<Sucursal> getSucursales() {
-        List<Sucursal> sucursales = SucursalesController.getAllSucursales();
-        DefaultListModel<Sucursal> sucursalesModel = new DefaultListModel<>();
+    private ListModel<SucursalDTO> getSucursales() {
+        List<SucursalDTO> sucursales = controller.getAllSucursales();
+        DefaultListModel<SucursalDTO> sucursalesModel = new DefaultListModel<>();
         sucursalesModel.addAll(sucursales);
         return sucursalesModel;
     }
 
-    static class SucursalViewHolder extends JPanel implements ListCellRenderer<Sucursal> {
+    static class SucursalViewHolder extends JPanel implements ListCellRenderer<SucursalDTO> {
 
         public SucursalViewHolder() {
             setOpaque(true);
         }
 
         public Component getListCellRendererComponent(
-            JList<? extends Sucursal> list,
-            Sucursal value,
+            JList<? extends SucursalDTO> list,
+            SucursalDTO value,
             int index,
             boolean isSelected,
             boolean cellHasFocus

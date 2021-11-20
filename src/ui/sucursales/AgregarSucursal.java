@@ -2,11 +2,15 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
+import ui.sucursales.model.SucursalDTO;
 import ui.usuarios.model.UsuarioDTO;
 import ui.usuarios.model.Usuario;
 import ui.sucursales.controlador.SucursalesController;
 import ui.usuarios.controlador.UsuarioController;
 import ui.sucursales.model.Sucursal;
+import ui.sucursales.model.SucursalesTable;
+import ui.usuarios.model.UsuariosTable;
+import utils.DataUtils;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -25,17 +29,20 @@ public class AgregarSucursal implements Screen {
 
     private Sucursal sucursal;
     private final UsuarioController usuarioController;
+    private final SucursalesController sucursalesController;
 
     public AgregarSucursal() {
-        usuarioController = new UsuarioController();
+        this.usuarioController = new UsuarioController();
+        this.sucursalesController = new SucursalesController();
         addListener();
     }
 
-    public AgregarSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
+    public AgregarSucursal(SucursalesController sucursalesController) {
+        this.sucursalesController = sucursalesController;
         usuarioController = new UsuarioController();
         addListener();
         initSucursal();
+
     }
 
     @Override
@@ -44,6 +51,7 @@ public class AgregarSucursal implements Screen {
     }
 
     private void initSucursal() {
+        SucursalDTO sucursal = sucursalesController.getSucursal();
         title.setText("Editar sucursal");
         addButton.setText("Editar");
         deleteButton.setVisible(true);
@@ -83,16 +91,8 @@ public class AgregarSucursal implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                if (sucursal != null) {
-                    SucursalesController.setDireccion(sucursal, direccionTextField.getText());
-                    SucursalesController.setResponsable(sucursal, (Usuario) responsableSpinner.getSelectedItem());
-                    SucursalesController.modifySucursal(sucursal);
-                } else {
-                    SucursalesController.addSucursal(new Sucursal(
-                            direccionTextField.getText(),
-                            (Usuario) responsableSpinner.getSelectedItem()
-                    ));
-                }
+                    sucursalesController.addSucursal(direccionTextField.getText(), (UsuarioDTO) responsableSpinner.getSelectedItem());
+
                 Application.manager.navigateTo(new Sucursales());
             }
         });
@@ -104,11 +104,11 @@ public class AgregarSucursal implements Screen {
                 JOptionPane.showMessageDialog(panel, "ESTA SUCURSAL NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 Boolean movido = false;
-                for (Sucursal sucursalItem: SucursalesController.getAllSucursales()) {
-                    if (sucursalItem.getId() != SucursalesController.getId(sucursal)) {
-                        SucursalesController.movePeticiones(sucursal, sucursalItem);
+                for (SucursalDTO sucursalItem: sucursalesController.getAllSucursales()) {
+                    if (sucursalItem.getId() != sucursalesController.getId(sucursal)) {
+                        sucursalesController.movePeticiones(sucursalItem);
                         movido = true;
-                        SucursalesController.deleteSucursal(sucursal);
+                        sucursalesController.deleteSucursal(sucursal);
                         JOptionPane.showMessageDialog(panel, "LAS PETICIONES ACTIVAS SE HAN MOVIDO A LA SUCURSAL: Sucursal " + sucursalItem.getId(), "CORRECTO", JOptionPane.PLAIN_MESSAGE);
                         break;
                     }
@@ -124,7 +124,7 @@ public class AgregarSucursal implements Screen {
 
     private void setResponsable() {
         responsableSpinner = new JComboBox<>();
-        List<UsuarioDTO> usuarios = usuarioController.getAllUsuarios();
+        List<UsuarioDTO> usuarios = UsuariosTable.getAllUsuarios();
         DefaultComboBoxModel<UsuarioDTO> usuarioSpinner = new DefaultComboBoxModel<>();
         usuarioSpinner.addAll(usuarios);
         responsableSpinner.setModel(usuarioSpinner);
