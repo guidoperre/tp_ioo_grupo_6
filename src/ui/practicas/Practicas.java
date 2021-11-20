@@ -56,7 +56,7 @@ public class Practicas implements Screen {
         addPractica.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                controller.setPractica(null);
+                controller.setPractica(new PracticaDTO());
                 Application.manager.navigateTo(new AgregarPractica());
             }
         });
