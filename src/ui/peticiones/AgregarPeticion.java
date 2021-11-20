@@ -3,6 +3,7 @@ package ui.peticiones;
 import app.Application;
 import navigation.Screen;
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
@@ -28,7 +29,7 @@ public class AgregarPeticion implements Screen {
     private JTextField obraSocialTextField;
     private JList<Practica> practicasList;
     private JLabel addPractica;
-    private JComboBox<Paciente> pacientesSpinner;
+    private JComboBox<PacienteDTO> pacientesSpinner;
     private JComboBox<Sucursal> sucursalSpinner;
     private JComboBox<Practica> practicasSpinner;
     private JLabel removePractica;
@@ -205,8 +206,8 @@ public class AgregarPeticion implements Screen {
 
     private void setPaciente() {
         pacientesSpinner = new JComboBox<>();
-        List<Paciente> pacientes = PacientesTable.getAllPacientes();
-        DefaultComboBoxModel<Paciente> pacientesItem = new DefaultComboBoxModel<>();
+        List<PacienteDTO> pacientes = PacientesTable.getAllPacientes();
+        DefaultComboBoxModel<PacienteDTO> pacientesItem = new DefaultComboBoxModel<>();
         pacientesItem.addAll(pacientes);
         pacientesSpinner.setModel(pacientesItem);
     }

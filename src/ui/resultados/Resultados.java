@@ -4,6 +4,7 @@ import app.Application;
 import navigation.Screen;
 import ui.home.Home;
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionesTable;
@@ -25,7 +26,7 @@ public class Resultados implements Screen {
     private JLabel addPaciente;
     private JPanel panel;
     private JPanel listPanel;
-    private JComboBox<Paciente> pacienteSpinner;
+    private JComboBox<PacienteDTO> pacienteSpinner;
     private JList<Resultado> list;
 
     public Resultados() {
@@ -66,8 +67,8 @@ public class Resultados implements Screen {
 
     private void setPacientesSpinner() {
         pacienteSpinner = new JComboBox<>();
-        List<Paciente> pacientes = ResultadosController.getAllPacientes();
-        DefaultComboBoxModel<Paciente> pacientesItem = new DefaultComboBoxModel<>();
+        List<PacienteDTO> pacientes = ResultadosController.getAllPacientes();
+        DefaultComboBoxModel<PacienteDTO> pacientesItem = new DefaultComboBoxModel<>();
         pacientesItem.addAll(pacientes);
         pacienteSpinner.setModel(pacientesItem);
 

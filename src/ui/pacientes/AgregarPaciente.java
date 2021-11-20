@@ -3,7 +3,9 @@ package ui.pacientes;
 import app.Application;
 import models.Sexo;
 import navigation.Screen;
+import ui.pacientes.controlador.PacienteControler;
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 
 import javax.swing.*;
@@ -25,13 +27,17 @@ public class AgregarPaciente implements Screen {
     private JTextField edadTextField;
     private JTextField emailTextField;
 
-    private Paciente paciente;
+    private PacienteDTO paciente;
+
+    final private PacienteControler controller;
 
     public AgregarPaciente() {
+        controller = new PacienteControler();
         addListener();
     }
 
-    public AgregarPaciente(Paciente paciente) {
+    public AgregarPaciente(PacienteDTO paciente) {
+        controller = new PacienteControler();
         this.paciente = paciente;
         addListener();
         initPaciente();
@@ -99,7 +105,7 @@ public class AgregarPaciente implements Screen {
                     paciente.setMail(emailTextField.getText());
                     PacientesTable.modifyPaciente(paciente);
                 } else {
-                    PacientesTable.addPaciente(new Paciente(
+                    PacientesTable.addPaciente(new PacienteDTO(
                             nombreTextField.getText(),
                             Integer.parseInt(dniTextField.getText()),
                             domicilioTextField.getText(),
@@ -116,7 +122,7 @@ public class AgregarPaciente implements Screen {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            if (paciente.getPeticionesFinalizadas().size() > 0) {
+            if (controller.getPeticionesFinalizadas(paciente).size() > 0) {
                 JOptionPane.showMessageDialog(panel, "ESTE PACIENTE NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 PacientesTable.deletePaciente(paciente);
