@@ -1,15 +1,9 @@
 package ui.sucursales.controlador;
 
-import models.GrupoPractica;
-import models.Rol;
-import ui.sucursales.Sucursales;
 import ui.sucursales.model.SucursalDTO;
 import ui.sucursales.model.SucursalesTable;
-import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuarioDTO;
-import ui.usuarios.model.UsuariosTable;
 
-import java.util.Date;
 import java.util.List;
 
 public class SucursalesController {

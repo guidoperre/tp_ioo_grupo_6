@@ -1,7 +1,5 @@
 package ui.sucursales;
 
-import ui.sucursales.model.Sucursal;
-import ui.sucursales.controlador.SucursalesController;
 import ui.sucursales.model.SucursalDTO;
 
 import javax.swing.*;

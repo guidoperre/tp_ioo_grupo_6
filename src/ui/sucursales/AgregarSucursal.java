@@ -91,8 +91,7 @@ public class AgregarSucursal implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                    sucursalesController.addSucursal(direccionTextField.getText(), (UsuarioDTO) responsableSpinner.getSelectedItem());
-
+                sucursalesController.addSucursal(direccionTextField.getText(), (UsuarioDTO) responsableSpinner.getSelectedItem());
                 Application.manager.navigateTo(new Sucursales());
             }
         });

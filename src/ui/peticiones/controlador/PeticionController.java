@@ -3,16 +3,33 @@ package ui.peticiones.controlador;
 import ui.pacientes.models.PacienteDTO;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
+import ui.usuarios.model.UsuarioDTO;
 
-
-import java.util.Date;
 import java.util.List;
 
 public class PeticionController {
 
-    public PeticionController() {
+    private static PeticionController instance;
+
+    PeticionDTO peticion;
+
+    private PeticionController() {
         // no-op
-        Boolean a = true;
+    }
+
+    public static PeticionController getInstance() {
+        if (instance == null) {
+            instance = new PeticionController();
+        }
+        return instance;
+    }
+
+    public void setPeticion(PeticionDTO peticion) {
+        this.peticion = peticion;
+    }
+
+    public PeticionDTO getPeticion() {
+        return peticion;
     }
 
     public List<PeticionDTO> getPeticionesCriticas(){
@@ -29,5 +46,9 @@ public class PeticionController {
 
     public List<PeticionDTO> getAllPeticionesPaciente(PacienteDTO paciente) {
         return PeticionesTable.getAllPeticionesPaciente(paciente);
+    }
+
+    public void deletePeticion() {
+        PeticionesTable.deletePeticiones(peticion);
     }
 }
