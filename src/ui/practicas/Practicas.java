@@ -3,6 +3,9 @@ package ui.practicas;
 import app.Application;
 import navigation.Screen;
 import ui.home.Home;
+import ui.pacientes.controlador.PacienteControler;
+import ui.pacientes.models.PacienteDTO;
+import ui.practicas.controlador.PracticaController;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
@@ -21,8 +24,10 @@ public class Practicas implements Screen {
     private JPanel panel;
     private JPanel listPanel;
 
-    public Practicas() {
+    private final PracticaController controller;
 
+    public Practicas() {
+        controller = PracticaController.getInstance();
     }
 
     @Override
@@ -51,6 +56,7 @@ public class Practicas implements Screen {
         addPractica.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                controller.setPractica(new PracticaDTO());
                 Application.manager.navigateTo(new AgregarPractica());
             }
         });
@@ -77,7 +83,8 @@ public class Practicas implements Screen {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarPractica((PracticaDTO) target.getModel().getElementAt(index)));
+                    controller.setPractica((PracticaDTO) target.getModel().getElementAt(index));
+                    Application.manager.navigateTo(new AgregarPractica(controller));
                 }
             }
         });

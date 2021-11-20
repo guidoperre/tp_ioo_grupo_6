@@ -3,6 +3,7 @@ package ui.practicas.controlador;
 import models.Regla;
 import ui.pacientes.controlador.PacienteControler;
 import ui.pacientes.models.Paciente;
+import ui.pacientes.models.PacienteDTO;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
@@ -27,35 +28,43 @@ public class PracticaController {
         return instance;
     }
 
+    public void setPractica(PracticaDTO practica) {
+        this.practica = practica;
+    }
+
+    public PracticaDTO getPractica() {
+        return practica;
+    }
+
     public List<PracticaDTO> getAllPracticas() {
         return PracticasTable.getAllPracticas();
     }
 
-    public List<Regla> getValoresReservados(PracticaDTO practica) {
+    public List<Regla> getValoresReservados() {
         return practica.getValoresReservados();
     }
 
-    public List<Regla> getValoresCriticos(PracticaDTO practica) {
+    public List<Regla> getValoresCriticos() {
         return practica.getValoresCriticos();
     }
 
-    public void addValorReservado(PracticaDTO practica, Regla valorReservado) {
+    public void addValorReservado(Regla valorReservado) {
         practica.addValorReservado(valorReservado);
     }
 
-    public void removeValorReservado(PracticaDTO practica, Regla valorReservado) {
+    public void removeValorReservado(Regla valorReservado) {
         practica.removeValorReservado(valorReservado);
     }
 
-    public void addValorCritico(PracticaDTO practica, Regla valorCritico) {
+    public void addValorCritico(Regla valorCritico) {
         practica.addValorCritico(valorCritico);
     }
 
-    public void removeValorCritico(PracticaDTO practica, Regla valorCritico) {
+    public void removeValorCritico(Regla valorCritico) {
         practica.removeValorCritico(valorCritico);
     }
 
-    public void setValoresCriticos(PracticaDTO practica, List<Regla> valoresCriticos) {
+    public void setValoresCriticos(List<Regla> valoresCriticos) {
        practica.setValoresCriticos(valoresCriticos);
     }
 
