@@ -3,17 +3,13 @@ package ui.resultados;
 import app.Application;
 import models.EstadoResultado;
 import navigation.Screen;
-import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.controlador.PeticionController;
-import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
-import ui.practicas.model.Practica;
 import ui.practicas.model.PracticaDTO;
 import ui.practicas.model.PracticasTable;
-import ui.resultados.model.Resultado;
 import ui.resultados.model.ResultadoDTO;
 import ui.resultados.controlador.ResultadosController;
 
