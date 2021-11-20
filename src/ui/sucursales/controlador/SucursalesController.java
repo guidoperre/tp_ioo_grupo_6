@@ -56,7 +56,6 @@ public class SucursalesController {
         sucursal.setDireccion(direccion);
     }
 
-
     public void setResponsable(SucursalDTO sucursal, UsuarioDTO usuario) {
         sucursal.setResponsable(usuario);
     }

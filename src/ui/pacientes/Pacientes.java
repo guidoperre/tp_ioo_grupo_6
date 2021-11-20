@@ -7,6 +7,7 @@ import ui.pacientes.controlador.PacienteControler;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
+import ui.sucursales.model.SucursalDTO;
 import ui.usuarios.controlador.UsuarioController;
 
 import javax.swing.*;
@@ -54,6 +55,7 @@ public class Pacientes implements Screen {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                controller.setPaciente(null);
                 Application.manager.navigateTo(new AgregarPaciente());
             }
         });
@@ -80,7 +82,8 @@ public class Pacientes implements Screen {
                 JList target = (JList) me.getSource();
                 int index = target.locationToIndex(me.getPoint());
                 if (index >= 0) {
-                    Application.manager.navigateTo(new AgregarPaciente((PacienteDTO) target.getModel().getElementAt(index)));
+                    controller.setPaciente((PacienteDTO) target.getModel().getElementAt(index));
+                    Application.manager.navigateTo(new AgregarPaciente(controller));
                 }
             }
         });

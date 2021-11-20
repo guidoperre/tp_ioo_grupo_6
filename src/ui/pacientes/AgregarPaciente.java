@@ -7,6 +7,8 @@ import ui.pacientes.controlador.PacienteControler;
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
+import ui.usuarios.model.UsuarioDTO;
+import ui.usuarios.model.UsuariosTable;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -27,8 +29,6 @@ public class AgregarPaciente implements Screen {
     private JTextField edadTextField;
     private JTextField emailTextField;
 
-    private PacienteDTO paciente;
-
     final private PacienteControler controller;
 
     public AgregarPaciente() {
@@ -36,9 +36,8 @@ public class AgregarPaciente implements Screen {
         addListener();
     }
 
-    public AgregarPaciente(PacienteDTO paciente) {
-        controller = PacienteControler.getInstance();
-        this.paciente = paciente;
+    public AgregarPaciente(PacienteControler controller) {
+        this.controller = controller;
         addListener();
         initPaciente();
     }
@@ -49,6 +48,8 @@ public class AgregarPaciente implements Screen {
     }
 
     private void initPaciente() {
+        PacienteDTO paciente = controller.getPaciente();
+
         title.setText("Editar paciente");
         addButton.setText("Editar");
         deleteButton.setVisible(true);
@@ -96,25 +97,14 @@ public class AgregarPaciente implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                if (paciente != null) {
-                    paciente.setNombre(nombreTextField.getText());
-                    paciente.setDni(Integer.parseInt(dniTextField.getText()));
-                    paciente.setDomicilio(domicilioTextField.getText());
-                    paciente.setSexo((Sexo) sexoSpinner.getSelectedItem());
-                    paciente.setEdad(Integer.parseInt(edadTextField.getText()));
-                    paciente.setMail(emailTextField.getText());
-                    PacientesTable.modifyPaciente(paciente);
-                } else {
-                    PacientesTable.addPaciente(new PacienteDTO(
-                            nombreTextField.getText(),
-                            Integer.parseInt(dniTextField.getText()),
-                            domicilioTextField.getText(),
-                            emailTextField.getText(),
-                            Integer.parseInt(edadTextField.getText()),
-                            (Sexo) sexoSpinner.getSelectedItem()
-
-                    ));
-                }
+                controller.addPaciente(
+                        nombreTextField.getText(),
+                        Integer.parseInt(dniTextField.getText()),
+                        domicilioTextField.getText(),
+                        emailTextField.getText(),
+                        Integer.parseInt(edadTextField.getText()),
+                        (Sexo) sexoSpinner.getSelectedItem()
+                );
                 Application.manager.navigateTo(new Pacientes());
             }
         });
@@ -122,10 +112,10 @@ public class AgregarPaciente implements Screen {
 
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
-            if (controller.getPeticionesFinalizadas(paciente).size() > 0) {
+            if (controller.getPeticionesFinalizadas().size() > 0) {
                 JOptionPane.showMessageDialog(panel, "ESTE PACIENTE NO PUEDE ELMINARSE PORQUE POSEE PETICIONES CON RESULTADOS FINALIZADOS", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                PacientesTable.deletePaciente(paciente);
+                controller.deletePaciente();
             }
             Application.manager.navigateTo(new Pacientes());
         });
