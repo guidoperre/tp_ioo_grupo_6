@@ -12,6 +12,7 @@ import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.resultados.model.Resultado;
 import ui.sucursales.model.Sucursal;
+import ui.sucursales.model.SucursalDTO;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuarioDTO;
 import ui.usuarios.model.UsuariosTable;
@@ -179,22 +180,23 @@ public class Application {
 
     private static void createSucursales() {
         UsuarioDTO usuario = UsuariosTable.getAllUsuarios().get(0);
+
         SucursalesTable.addSucursal(
-            new Sucursal(
+            new SucursalDTO(
                 "Peribebuy 7032",
                 new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
                 new ArrayList<>()
             )
         );
         SucursalesTable.addSucursal(
-                new Sucursal(
+                new SucursalDTO(
                         "Lisandro de la torre 111",
                         new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
                         new ArrayList<>()
                 )
         );
         SucursalesTable.addSucursal(
-                new Sucursal(
+                new SucursalDTO(
                         "Timoteo gordillo 713",
                         new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
                         new ArrayList<>()
@@ -205,7 +207,7 @@ public class Application {
     private static void createPeticiones() {
         List<Practica> practias = PracticasTable.getAllPracticas();
         List<PacienteDTO> pacientes = PacientesTable.getAllPacientes();
-        Sucursal sucursal = SucursalesTable.getAllSucursales().get(0);
+        SucursalDTO sucursal = SucursalesTable.getAllSucursales().get(0);
 
         List<Resultado> resultados1 = new ArrayList<>();
         resultados1.add(

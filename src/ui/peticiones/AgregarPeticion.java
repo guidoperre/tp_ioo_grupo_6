@@ -12,6 +12,7 @@ import ui.peticiones.model.PeticionesTable;
 import ui.practicas.model.Practica;
 import ui.practicas.model.PracticasTable;
 import ui.sucursales.model.Sucursal;
+import ui.sucursales.model.SucursalDTO;
 import ui.sucursales.model.SucursalesTable;
 
 import javax.swing.*;
@@ -74,7 +75,7 @@ public class AgregarPeticion implements Screen {
     private void createUIComponents() {
         addBackListener();
         setPaciente();
-        setSucursal();
+//        setSucursal();
 
         setPracticasSpinner();
         addPractica();
@@ -217,11 +218,11 @@ public class AgregarPeticion implements Screen {
         pacientesSpinner.setModel(pacientesItem);
     }
 
-    private void setSucursal() {
-        sucursalSpinner = new JComboBox<>();
-        List<Sucursal> sucursales = SucursalesTable.getAllSucursales();
-        DefaultComboBoxModel<Sucursal> sucursalItem = new DefaultComboBoxModel<>();
-        sucursalItem.addAll(sucursales);
-        sucursalSpinner.setModel(sucursalItem);
-    }
+//    private void setSucursal() {
+//        sucursalSpinner = new JComboBox<>();
+//        List<SucursalDTO> sucursales = SucursalesTable.getAllSucursales();
+//        DefaultComboBoxModel<Sucursal> sucursalItem = new DefaultComboBoxModel<>();
+//        sucursalItem.addAll(sucursales);
+//        sucursalSpinner.setModel(sucursalItem);
+//    }
 }

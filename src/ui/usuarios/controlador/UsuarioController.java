@@ -9,7 +9,7 @@ import utils.DataUtils;
 import java.util.Date;
 import java.util.List;
 
-public class UsuarioController {
+public class  UsuarioController {
 
     UsuarioDTO usuario;
 
