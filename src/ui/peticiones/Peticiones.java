@@ -26,6 +26,7 @@ public class Peticiones implements Screen {
 
     public Peticiones() {
         controllerPeticion = new PeticionController();
+        list.setModel(getPeticiones());
     }
 
     @Override
@@ -75,13 +76,11 @@ public class Peticiones implements Screen {
 
     private void showPeticiones() {
         listPanel = new JPanel();
-        ListModel<PeticionDTO> peticiones = getPeticiones();
 
         list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setCellRenderer(new PeticionesViewHolder());
-        list.setModel(peticiones);
         list.setSize(300,300);
         listListener(list);
 
@@ -101,7 +100,7 @@ public class Peticiones implements Screen {
     }
 
     private ListModel<PeticionDTO> getPeticiones() {
-        List<PeticionDTO> peticiones = controllerPeticion.getPeticiones();
+        List<PeticionDTO> peticiones = controllerPeticion.getAllPeticiones();
         DefaultListModel<PeticionDTO> peticionesModel = new DefaultListModel<>();
         peticionesModel.addAll(peticiones);
         return peticionesModel;
