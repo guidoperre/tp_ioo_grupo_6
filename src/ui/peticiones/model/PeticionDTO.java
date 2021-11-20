@@ -5,6 +5,7 @@ import ui.pacientes.models.PacienteDTO;
 import ui.practicas.model.Practica;
 import ui.resultados.model.Resultado;
 import ui.sucursales.model.Sucursal;
+import ui.sucursales.model.SucursalDTO;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,7 +16,7 @@ public class PeticionDTO {
     private Long id;
     private PacienteDTO paciente;
     private String obraSocial;
-    private Sucursal sucursal;
+    private SucursalDTO sucursal;
     private Date fechaCarga;
     private Date fechaEntrega;
     private List<Practica> practicas; // Change to DTO
@@ -26,7 +27,7 @@ public class PeticionDTO {
         this.resultados = new ArrayList<>();
     }
 
-    public PeticionDTO(PacienteDTO paciente, String obraSocial, Sucursal sucursal, Date fechaCarga, Date fechaEntrega, List<Practica> practicas, List<Resultado> resultados) {
+    public PeticionDTO(PacienteDTO paciente, String obraSocial, SucursalDTO sucursal, Date fechaCarga, Date fechaEntrega, List<Practica> practicas, List<Resultado> resultados) {
         this.paciente = paciente;
         this.obraSocial = obraSocial;
         this.fechaCarga = fechaCarga;
@@ -36,7 +37,7 @@ public class PeticionDTO {
         this.resultados = resultados;
     }
 
-    public PeticionDTO(PacienteDTO paciente, String obraSocial, Sucursal sucursal, Date fechaCarga, Date fechaEntrega) {
+    public PeticionDTO(PacienteDTO paciente, String obraSocial, SucursalDTO sucursal, Date fechaCarga, Date fechaEntrega) {
         this.paciente = paciente;
         this.obraSocial = obraSocial;
         this.fechaCarga = fechaCarga;
@@ -70,7 +71,7 @@ public class PeticionDTO {
         this.obraSocial = obraSocial;
     }
 
-    public Sucursal getSucursal() {
+    public SucursalDTO getSucursal() {
         return sucursal;
     }
 

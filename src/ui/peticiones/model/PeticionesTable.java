@@ -2,6 +2,8 @@ package ui.peticiones.model;
 
 import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
+import ui.sucursales.model.Sucursal;
+import ui.usuarios.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,19 @@ public class PeticionesTable {
             if (new Peticion(
                     new Paciente(peticion.getPaciente().getNombre(), peticion.getPaciente().getDni(), peticion.getPaciente().getDomicilio(), peticion.getPaciente().getMail(), peticion.getPaciente().getEdad(), peticion.getPaciente().getSexo()),
                     peticion.getObraSocial(),
-                    peticion.getSucursal(),
+                    new Sucursal(
+                            peticion.getSucursal().getDireccion(),
+                            new Usuario(
+                                    peticion.getSucursal().getResponsable().getNombre(),
+                                    peticion.getSucursal().getResponsable().getDni(),
+                                    peticion.getSucursal().getResponsable().getDomicilio(),
+                                    peticion.getSucursal().getResponsable().getMail(),
+                                    peticion.getSucursal().getResponsable().getUsername(),
+                                    peticion.getSucursal().getResponsable().getPassword(),
+                                    peticion.getSucursal().getResponsable().getFechaNacimiento(),
+                                    peticion.getSucursal().getResponsable().getRol()
+                            )
+                    ),
                     peticion.getFechaCarga(),
                     peticion.getFechaEntrega(),
                     peticion.getPracticas(),

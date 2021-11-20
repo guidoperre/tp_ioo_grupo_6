@@ -13,23 +13,23 @@ public class PeticionControler {
         // no-op
     }
 
-    public static List<PeticionDTO> getPeticionesCriticas(){
+    public List<PeticionDTO> getPeticionesCriticas(){
         return PeticionesTable.getPeticionesCriticas();
     }
 
-    public static List<PeticionDTO> getPeticiones(){
+    public List<PeticionDTO> getPeticiones(){
         return PeticionesTable.getAllPeticiones();
     }
 
-    public static List<PeticionDTO> getAllPeticiones() {
+    public List<PeticionDTO> getAllPeticiones() {
         return getPeticiones();
     }
 
-    public static void modifyPeticiones(PeticionDTO peticion) {
+    public void modifyPeticiones(PeticionDTO peticion) {
         PeticionesTable.modifyPeticiones(peticion);
     }
 
-    public static List<PeticionDTO> getAllPeticionesPaciente(PacienteDTO paciente) {
+    public List<PeticionDTO> getAllPeticionesPaciente(PacienteDTO paciente) {
         return PeticionesTable.getAllPeticionesPaciente(paciente);
     }
 }

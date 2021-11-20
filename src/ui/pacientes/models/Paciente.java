@@ -5,6 +5,8 @@ import models.Sexo;
 import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
+import ui.sucursales.model.Sucursal;
+import ui.usuarios.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +74,19 @@ public class Paciente extends PersonaDTO {
                             peticionDTO.getPaciente().getEdad(),
                             peticionDTO.getPaciente().getSexo()),
                     peticionDTO.getObraSocial(),
-                    peticionDTO.getSucursal(),
+                    new Sucursal(
+                            peticionDTO.getSucursal().getDireccion(),
+                            new Usuario(
+                                    peticionDTO.getSucursal().getResponsable().getNombre(),
+                                    peticionDTO.getSucursal().getResponsable().getDni(),
+                                    peticionDTO.getSucursal().getResponsable().getDomicilio(),
+                                    peticionDTO.getSucursal().getResponsable().getMail(),
+                                    peticionDTO.getSucursal().getResponsable().getUsername(),
+                                    peticionDTO.getSucursal().getResponsable().getPassword(),
+                                    peticionDTO.getSucursal().getResponsable().getFechaNacimiento(),
+                                    peticionDTO.getSucursal().getResponsable().getRol()
+                            )
+                    ),
                     peticionDTO.getFechaCarga(),
                     peticionDTO.getFechaEntrega(),
                     peticionDTO.getPracticas(),

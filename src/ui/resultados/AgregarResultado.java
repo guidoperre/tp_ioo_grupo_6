@@ -58,7 +58,7 @@ public class AgregarResultado implements Screen {
     }
 
     private PeticionDTO getPeticion() {
-        List<PeticionDTO> peticions = PeticionControler.getAllPeticiones();
+        List<PeticionDTO> peticions = peticionController.getAllPeticiones();
         for (PeticionDTO p: peticions) {
             for (Resultado resultado: p.getResultados()) {
                 if (resultado.getId().equals(this.resultado.getId())) {
@@ -170,7 +170,7 @@ public class AgregarResultado implements Screen {
     private void deleteListener() {
         deleteButton.addActionListener(e -> {
             peticion.removeResultado(resultado);
-            PeticionControler.modifyPeticiones(peticion);
+            peticionController.modifyPeticiones(peticion);
             Application.manager.navigateTo(new Resultados());
         });
     }
@@ -184,7 +184,7 @@ public class AgregarResultado implements Screen {
 
         pacientesSpinner.addItemListener(e -> {
             PacienteDTO paciente = (PacienteDTO) e.getItem();
-            List<PeticionDTO> peticionesPaciente = PeticionControler.getAllPeticionesPaciente(paciente);
+            List<PeticionDTO> peticionesPaciente = peticionController.getAllPeticionesPaciente(paciente);
             DefaultComboBoxModel<PeticionDTO> peticionesPacienteItem = new DefaultComboBoxModel<>();
             peticionesPacienteItem.addAll(peticionesPaciente);
             peticionesSpinner.setModel(peticionesPacienteItem);

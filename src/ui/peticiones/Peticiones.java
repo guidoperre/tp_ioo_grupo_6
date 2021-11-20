@@ -25,10 +25,9 @@ public class Peticiones implements Screen {
     private JCheckBox criticosCheckBox;
     private JList<PeticionDTO> list;
 
-    final private PeticionControler controller;
+    final private PeticionControler controllerPeticion = new PeticionControler();
 
     public Peticiones() {
-        controller = new PeticionControler();
     }
 
     @Override
@@ -104,14 +103,14 @@ public class Peticiones implements Screen {
     }
 
     private ListModel<PeticionDTO> getPeticiones() {
-        List<PeticionDTO> peticiones = controller.getPeticiones();
+        List<PeticionDTO> peticiones = controllerPeticion.getPeticiones();
         DefaultListModel<PeticionDTO> peticionesModel = new DefaultListModel<>();
         peticionesModel.addAll(peticiones);
         return peticionesModel;
     }
 
     private ListModel<PeticionDTO> getPeticionesCriticas() {
-        List<PeticionDTO> peticiones = PeticionControler.getPeticionesCriticas();
+        List<PeticionDTO> peticiones = controllerPeticion.getPeticionesCriticas();
         DefaultListModel<PeticionDTO> peticionesModel = new DefaultListModel<>();
         peticionesModel.addAll(peticiones);
         return peticionesModel;
