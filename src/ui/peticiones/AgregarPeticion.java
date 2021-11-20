@@ -6,11 +6,8 @@ import ui.pacientes.models.PacienteDTO;
 import ui.pacientes.models.PacientesTable;
 import ui.peticiones.controlador.PeticionController;
 import ui.peticiones.model.PeticionDTO;
-import ui.peticiones.model.PeticionesTable;
 import ui.practicas.controlador.PracticaController;
 import ui.practicas.model.PracticaDTO;
-import ui.practicas.model.PracticasTable;
-import ui.sucursales.model.Sucursal;
 import ui.sucursales.model.SucursalDTO;
 import ui.sucursales.model.SucursalesTable;
 
@@ -18,7 +15,6 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AgregarPeticion implements Screen {
@@ -36,7 +32,8 @@ public class AgregarPeticion implements Screen {
     private JComboBox<PracticaDTO> practicasSpinner;
     private JLabel removePractica;
 
-    private final PeticionController peticionController = PeticionController.getInstance();
+    private PeticionController peticionController = PeticionController.getInstance();
+    private PracticaController practicaController = PracticaController.getInstance();
 
     public AgregarPeticion() {
         addListener();
@@ -51,7 +48,7 @@ public class AgregarPeticion implements Screen {
     private void initPeticion() {
         PeticionDTO peticion = peticionController.getPeticion();
 
-        if (peticion != null) {
+        if (peticion.getId() != null) {
             title.setText("Editar peticion");
             addButton.setText("Editar");
             deleteButton.setVisible(true);
@@ -68,6 +65,9 @@ public class AgregarPeticion implements Screen {
     }
 
     private void createUIComponents() {
+        peticionController = PeticionController.getInstance();
+        practicaController = PracticaController.getInstance();
+
         addBackListener();
         setPaciente();
         setSucursal();
@@ -106,18 +106,11 @@ public class AgregarPeticion implements Screen {
     private void addListener() {
         addButton.addActionListener(e -> {
             if (checkFields()) {
-                peticion.setObraSocial(obraSocialTextField.getText());
-                peticion.setPaciente((PacienteDTO) pacientesSpinner.getSelectedItem());
-                peticion.setSucursal((Sucursal) sucursalSpinner.getSelectedItem());
-
-                if (peticion.getId() != null) {
-                    PeticionesTable.modifyPeticiones(peticion);
-                } else {
-                    peticion.setFechaCarga(new Date());
-                    peticion.setFechaEntrega(new Date());
-                    PeticionesTable.addPeticiones(peticion);
-                }
-
+                peticionController.addPeticion(
+                        obraSocialTextField.getText(),
+                        (PacienteDTO) pacientesSpinner.getSelectedItem(),
+                        (SucursalDTO) sucursalSpinner.getSelectedItem()
+                );
                 Application.manager.navigateTo(new Peticiones());
             }
         });
@@ -134,7 +127,7 @@ public class AgregarPeticion implements Screen {
         practicasList = new JList<>();
         practicasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         practicasList.setLayoutOrientation(JList.VERTICAL);
-        practicasList.setModel(getPracticas(peticionController.get()));
+        practicasList.setModel(getPracticas(peticionController.getPeticion().getPracticas()));
         practicasList.setSize(300,300);
     }
 
@@ -152,7 +145,7 @@ public class AgregarPeticion implements Screen {
 
     private void setPracticasSpinner() {
         practicasSpinner = new JComboBox<>();
-        List<PracticaDTO> practicas = PracticasTable.getAllPracticas();
+        List<PracticaDTO> practicas = practicaController.getAllPracticas();
         List<PracticaDTO> practicasActivas = new ArrayList<>();
         for (PracticaDTO p: practicas) {
             if (p.getActivo()) {
@@ -171,8 +164,8 @@ public class AgregarPeticion implements Screen {
             public void mouseClicked(MouseEvent e) {
                 PracticaDTO practica = (PracticaDTO) practicasSpinner.getSelectedItem();
                 if (practica != null) {
-                    peticion.addPractica(practica);
-                    practicasList.setModel(getPracticas(peticion.getPracticas()));
+                    peticionController.getPeticion().addPractica(practica);
+                    practicasList.setModel(getPracticas(peticionController.getPeticion().getPracticas()));
                 } else {
                     JOptionPane.showMessageDialog(
                             panel,
@@ -192,8 +185,8 @@ public class AgregarPeticion implements Screen {
             public void mouseClicked(MouseEvent e) {
                 PracticaDTO practica = practicasList.getSelectedValue();
                 if (practica != null) {
-                    peticion.removePractica(practica);
-                    practicasList.setModel(getPracticas(peticion.getPracticas()));
+                    peticionController.getPeticion().removePractica(practica);
+                    practicasList.setModel(getPracticas(peticionController.getPeticion().getPracticas()));
                 } else {
                     JOptionPane.showMessageDialog(
                             panel,

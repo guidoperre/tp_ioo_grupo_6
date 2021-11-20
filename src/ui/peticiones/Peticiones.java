@@ -70,7 +70,7 @@ public class Peticiones implements Screen {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                controllerPeticion.setPeticion(null);
+                controllerPeticion.setPeticion(new PeticionDTO());
                 Application.manager.navigateTo(new AgregarPeticion());
             }
         });

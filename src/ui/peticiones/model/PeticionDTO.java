@@ -77,7 +77,7 @@ public class PeticionDTO {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
+    public void setSucursal(SucursalDTO sucursal) {
         this.sucursal = sucursal;
     }
 

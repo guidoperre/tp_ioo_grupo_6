@@ -121,9 +121,4 @@ public class Practica {
         }
         return reservado;
     }
-
-    @Override
-    public String toString() {
-        return nombre;
-    }
 }

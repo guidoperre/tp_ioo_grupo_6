@@ -1,10 +1,14 @@
 package ui.peticiones.controlador;
 
+import models.Rol;
+import ui.pacientes.models.Paciente;
 import ui.pacientes.models.PacienteDTO;
+import ui.peticiones.model.Peticion;
 import ui.peticiones.model.PeticionDTO;
 import ui.peticiones.model.PeticionesTable;
-import ui.usuarios.model.UsuarioDTO;
+import ui.sucursales.model.SucursalDTO;
 
+import java.util.Date;
 import java.util.List;
 
 public class PeticionController {
@@ -40,7 +44,20 @@ public class PeticionController {
         return PeticionesTable.getAllPeticiones();
     }
 
-    public void modifyPeticiones(PeticionDTO peticion) {
+    public void addPeticion(String obraSocial, PacienteDTO paciente, SucursalDTO sucursal) {
+        peticion.setObraSocial(obraSocial);
+        peticion.setPaciente(paciente);
+        peticion.setSucursal(sucursal);
+        if (peticion.getId() != null) {
+            PeticionesTable.modifyPeticiones(peticion);
+        } else {
+            peticion.setFechaCarga(new Date());
+            peticion.setFechaEntrega(new Date());
+            PeticionesTable.addPeticiones(peticion);
+        }
+    }
+
+    public void modifyPeticion(PeticionDTO peticion) {
         PeticionesTable.modifyPeticiones(peticion);
     }
 
