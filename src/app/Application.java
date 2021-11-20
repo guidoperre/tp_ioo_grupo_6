@@ -78,7 +78,7 @@ public class Application {
         calendar.setTime(DataUtils.getFechaFromString("3/3/2000"));
         UsuariosTable.addUsuario(
                 new UsuarioDTO(
-                        "Admin",
+                        "Quique Admin",
                         12345678,
                         "Calle 123",
                         "mail@mail.com",
@@ -90,7 +90,7 @@ public class Application {
         );
         UsuariosTable.addUsuario(
                 new UsuarioDTO(
-                        "Admin",
+                        "Juan Laboratorio",
                         12345678,
                         "Calle 123",
                         "mail@mail.com",
@@ -102,7 +102,7 @@ public class Application {
         );
         UsuariosTable.addUsuario(
                 new UsuarioDTO(
-                        "Admin",
+                        "Pedro Recepcion",
                         12345678,
                         "Calle 123",
                         "mail@mail.com",
@@ -186,21 +186,21 @@ public class Application {
         SucursalesTable.addSucursal(
             new SucursalDTO(
                 "Peribebuy 7032",
-                new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
+                usuario,
                 new ArrayList<>()
             )
         );
         SucursalesTable.addSucursal(
                 new SucursalDTO(
                         "Lisandro de la torre 111",
-                        new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
+                        usuario,
                         new ArrayList<>()
                 )
         );
         SucursalesTable.addSucursal(
                 new SucursalDTO(
                         "Timoteo gordillo 713",
-                        new Usuario(usuario.getNombre(), usuario.getDni(), usuario.getDomicilio(), usuario.getMail(), usuario.getUsername(), usuario.getPassword(), usuario.getFechaNacimiento(), usuario.getRol()),
+                        usuario,
                         new ArrayList<>()
                 )
         );
