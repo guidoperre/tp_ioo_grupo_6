@@ -294,7 +294,7 @@ public class AgregarPractica implements Screen {
             public void mouseClicked(MouseEvent e) {
                 Regla regla = valoresCriticosList.getSelectedValue();
                 if (regla != null) {
-                    controller.removeValorReservado(practica, regla);
+                    controller.removeValorCritico(practica, regla);
                     valoresCriticosList.setModel(getValores(controller.getValoresCriticos(practica)));
                 } else {
                     JOptionPane.showMessageDialog(
