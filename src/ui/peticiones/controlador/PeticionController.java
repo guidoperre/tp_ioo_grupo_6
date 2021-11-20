@@ -19,12 +19,8 @@ public class PeticionController {
         return PeticionesTable.getPeticionesCriticas();
     }
 
-    public List<PeticionDTO> getPeticiones(){
-        return PeticionesTable.getAllPeticiones();
-    }
-
     public List<PeticionDTO> getAllPeticiones() {
-        return getPeticiones();
+        return PeticionesTable.getAllPeticiones();
     }
 
     public void modifyPeticiones(PeticionDTO peticion) {
