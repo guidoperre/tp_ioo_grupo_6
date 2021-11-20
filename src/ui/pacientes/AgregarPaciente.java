@@ -50,18 +50,23 @@ public class AgregarPaciente implements Screen {
     private void initPaciente() {
         PacienteDTO paciente = controller.getPaciente();
 
-        title.setText("Editar paciente");
-        addButton.setText("Editar");
-        deleteButton.setVisible(true);
+        if (paciente != null) {
+            title.setText("Editar paciente");
+            addButton.setText("Editar");
+            deleteButton.setVisible(true);
 
-        nombreTextField.setText(paciente.getNombre());
-        dniTextField.setText(String.valueOf(paciente.getDni()));
-        domicilioTextField.setText(paciente.getDomicilio());
-        sexoSpinner.setSelectedItem(paciente.getSexo());
-        edadTextField.setText(String.valueOf(paciente.getEdad()));
-        emailTextField.setText(paciente.getMail());
-
-        deleteListener();
+            nombreTextField.setText(paciente.getNombre());
+            dniTextField.setText(String.valueOf(paciente.getDni()));
+            domicilioTextField.setText(paciente.getDomicilio());
+            sexoSpinner.setSelectedItem(paciente.getSexo());
+            edadTextField.setText(String.valueOf(paciente.getEdad()));
+            emailTextField.setText(paciente.getMail());
+            deleteListener();
+        } else {
+            title.setText("Agregar paciente");
+            addButton.setText("Agregar");
+            deleteButton.setVisible(false);
+        }
     }
 
     private void createUIComponents() {
