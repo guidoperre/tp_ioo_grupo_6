@@ -5,6 +5,7 @@ import models.Rol;
 import ui.sucursales.Sucursales;
 import ui.sucursales.model.SucursalDTO;
 import ui.sucursales.model.SucursalesTable;
+import ui.usuarios.controlador.UsuarioController;
 import ui.usuarios.model.Usuario;
 import ui.usuarios.model.UsuarioDTO;
 import ui.usuarios.model.UsuariosTable;
@@ -13,11 +14,18 @@ import java.util.Date;
 import java.util.List;
 
 public class SucursalesController {
-
+    private static SucursalesController instance;
     SucursalDTO sucursal;
 
     public SucursalesController(){
         // no-op
+    }
+
+    public static SucursalesController getInstance() {
+        if (instance == null) {
+            instance = new SucursalesController();
+        }
+        return instance;
     }
 
     public List<SucursalDTO> getAllSucursales() {

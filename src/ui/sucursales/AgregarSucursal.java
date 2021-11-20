@@ -33,7 +33,7 @@ public class AgregarSucursal implements Screen {
 
     public AgregarSucursal() {
         this.usuarioController = UsuarioController.getInstance();
-        this.sucursalesController = new SucursalesController();
+        this.sucursalesController = SucursalesController.getInstance();
         addListener();
     }
 

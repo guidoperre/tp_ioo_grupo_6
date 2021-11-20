@@ -28,7 +28,7 @@ public class Sucursales implements Screen {
     }
 
     public Sucursales() {
-        controller = new SucursalesController();
+        controller = SucursalesController.getInstance();
         sucursalesList.setModel(getSucursales());
     }
 
