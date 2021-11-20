@@ -28,7 +28,7 @@ public class Usuarios implements Screen {
     }
 
     public Usuarios() {
-        controller = new UsuarioController();
+        controller = UsuarioController.getInstance();
         usuariosList.setModel(getUsuarios());
     }
 
@@ -43,6 +43,7 @@ public class Usuarios implements Screen {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                controller.setUsuario(null);
                 Application.manager.navigateTo(new Home());
             }
         });
@@ -53,6 +54,7 @@ public class Usuarios implements Screen {
         addPaciente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                controller.setUsuario(null);
                 Application.manager.navigateTo(new AgregarUsuario(controller));
             }
         });

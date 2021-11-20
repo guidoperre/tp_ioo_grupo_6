@@ -10,11 +10,19 @@ import java.util.Date;
 import java.util.List;
 
 public class  UsuarioController {
+    private static UsuarioController instance;
 
     UsuarioDTO usuario;
 
     public UsuarioController() {
         // no-op
+    }
+
+    public static UsuarioController getInstance() {
+        if (instance == null) {
+            instance = new UsuarioController();
+        }
+        return instance;
     }
 
     public void setUsuario(UsuarioDTO usuario) {

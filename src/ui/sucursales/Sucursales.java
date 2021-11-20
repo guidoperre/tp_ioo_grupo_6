@@ -2,12 +2,9 @@ package ui.sucursales;
 
 import app.Application;
 import navigation.Screen;
-import ui.sucursales.model.Sucursal;
 import ui.home.Home;
 import ui.sucursales.model.SucursalDTO;
 import ui.sucursales.controlador.SucursalesController;
-import ui.usuarios.controlador.UsuarioController;
-import ui.usuarios.model.UsuarioDTO;
 
 import javax.swing.*;
 import java.awt.*;
